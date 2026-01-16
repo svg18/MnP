@@ -1,0 +1,254 @@
+# Prueba de Independencia
+
+## Datos
+
+Una muestra aleatoria de tamaño $N$. Las observaciones en la muestra aleatoria son clasificados de acuerdo a dos criterios, usando el primer criterio cada observación es asociada con uno de los $r$ renglones, y usando el segundo criterio cada observación es asociada con una de las $C$ columnas. 
+Sea $O_{ij}$ el número de observaciones asociadas con el renglón $i$ y la columna $j$ simultáneamente; el número total de observaciones en el renglón $i$ es designado por $R_{i}$, (en lugar de $n_{i}$ como la prueba anterior, para enfatizar que los totales de las filas ahora son aleatorios en lugar de fijos), y en la columna $j$ por $C_{j}$. La suma de los números en todas las celdas es $N$.
+
+
+Los datos se organizan en la siguiente tabla de contingencia:
+
+$$
+\begin{array}{|c|c|c|c|c|c|} 
+\hline
+&\textbf{Columna 1} &\textbf{Columna 2} &\ldots&\textbf{Columna c}&\textbf{Totales}\\
+\hline
+\textbf{Renglón 1} &O_{11} &O_{12} &\ldots&O_{1c}&R_1\\
+\hline
+\textbf{Renglón 2} &O_{21} &O_{22} &\ldots&O_{2c}&R_2\\
+\hline
+\vdots& \vdots& \vdots& \ddots&\vdots& \vdots\\
+\textbf{Renglón r}&O_{r1} &O_{r2} &\ldots&O_{rc}&R_r\\
+\hline
+\textbf{Totales}&C_1&C_2&\ldots&C_c&N\\
+\hline
+\end {array}
+$$
+
+## Supuestos
+
+* La muestra de $N$ observaciones es una muestra aleatoria. (Cada observación tiene la misma probabilidad como cualquier otra observación de ser clasificada en el renglón $i$ y la columna $j$ independientemente de las otras observaciones).
+
+* Cada observación puede ser clasificada en una de las $r$ diferentes categorías de acuerdo al primer criterio y en una de las $C$ diferentes categorías de acuerdo al segundo criterio.
+
+## Estadístico de Prueba
+
+El estadístico de prueba $T$ es obtenido de la siguiente manera:
+
+$$T=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}, \ \ \ Donde\ \ E_{ij}=\frac{R_{j}C_{j}}{N}$$
+
+
+Una expresión equivalente para $T$, mas adecuado para el uso de su calculadora es:
+
+$$T=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{O_{ij}^{2}}{E_{ij}}-N$$
+
+**Distribución de T**
+
+La distribución nula de T es obtenida aproximadamente por la Distribución $\chi^2$ con $(r-1)\times(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+Es decir,
+
+$$T\sim \chi^2_{(r-1)(c-1)}$$
+
+## Hipótesis 
+
+$$\textbf{H}_0: \ \mbox{El evento} \  "una\ observación\ está\ en\ la\ fila\ i"\ \mbox{es independiente}$$
+$$\mbox{del evento} \ "esa\ misma\ observación\ está\ en\ la\ columna\ j"\ \mbox{para todos} \ \ i,\ j.$$
+
+$$es \ decir,$$
+
+$$\textbf{H}_0: \mathbf{P}[\ \ renglón\ \ i\ ,\ \ columna\ \ j\ \ ]= \mathbf{P}[\ \ renglón\ \ i \ \ ]*\mathbf{P}[\ \ columna\ \ j\ \ ]\ \ \ \ \forall \  \ i,\ j.$$
+
+$$vs$$
+
+$$\textbf{H}_a:\mathbf{P}[\ \ renglón\ \ i\ ,\ columna\ \ j\ \ ]\ \  \neq \ \mathbf{P}[ \ \ renglón\ i\ \ ]*P[\ \ columna\ j\ \  ]\ \ \ \ ; \ para\ alguna\ \ i \ , \ j. \ $$
+
+#### Regla de decisión {-}
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ con $(r-1)\times(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+Ahora un ejercicio:
+
+## Ejercicio
+
+Se especula que la preferencia del cereal ToastyOs está asociada con el nivel educativo de las
+personas. Si esto resulta cierto, Tabisco Food, la distribuidora del producto, siente que debería
+aprovechar este mercado dando un mayor empuje de su campaña de marketing a este segmento
+de la población. Sin embargo, antes de comprometerse a esta tarea se decidió realizar un análisis
+objetivo que verifiquen las especulaciones. Para esto se tomó una muestra aleatoria de 500
+individuos que han probado el producto con los siguientes resultados: 
+
+$$
+\begin{array}{|c|c|c|c|} 
+\hline
+\mbox{Preferencia}& \mbox{Sin Universidad}&\mbox{Nivel de Estudios Truncados}&\mbox{Graduados}\\
+\hline
+\mbox{Gusta}& 75&90&135\\
+\hline
+\mbox{Neutral/No les gusta}& 25&60&115\\
+\hline
+\end {array}
+$$
+
+**Paso 1** Prueba a utilizar **Tablas de Contingencia rxc prueba de Independencia**
+
+Es una prueba de independencia ya que sólo tenemos una población. 
+
+**Paso 2** Planteamiento de hipótesis 
+
+$$\textbf{H}_0: \ \mbox{El nivel educativo es independiente de la preferencia hacia el producto.}$$
+
+$$vs$$
+
+$$\textbf{H}_a:\ \mbox{El nivel educativo no es independiente de la preferencia hacia el producto.}$$
+
+
+**Paso 3** Estadístico de Prueba
+
+Para poder calcular el estadístico de prueba no ayudaremos de cierto calculos previos.
+
+$$
+\begin{array}{||c| c| c |c |c||} 
+\hline 
+\mbox{Preferencia}& \mbox{Sin Universidad}&\mbox{Nivel de Estudios Truncados}&\mbox{Graduados} &\mbox{ Totales} \\  
+ \hline
+\mbox{Gusta}&75&90&135&300\\
+ \hline
+\mbox{Neutral/No les gusta}&25&60&115&200\\
+ \hline
+\mbox{Totales}&100&150&250&500\\
+ \hline
+\end{array}
+$$
+
+Ahora:
+
+$P[Guste\ el\ producto]= \frac{300}{500}=.6= 60\ \%\ de\ la\ población\ le\ gusta\ el\ cereal$
+
+$P[No\ Guste\ el\ producto]= \frac{200}{500}=.4= 40\ \%\ de\ la\ población\ no\ le\ gusta\ el\ cereal$
+
+$P[Sin\ universidad]= \frac{100}{500}=.2= 20\ \%\ de\ la\ población\ no\ tiene\ universidad.$
+
+$P[Estudios\ truncados]= \frac{150}{500}=.3= 30\ \%\ de\ la\ población\ tiene\ estudios\ truncados.$
+
+$P[Graduados]= \frac{250}{500}=.5= 50\ \%\ de\ la\ población\ están\ graduados.$
+
+
+Bajo $H_0$ el nivel educativo y la preferencia por el cereal son independientes:
+
+Ahora:
+
+$P[Guste\ el\ producto\ y\ sin\ universidad]=$
+$P[Guste\ el\ producto]*P[sin\ universidad]=.6*.2=.12$
+
+$P[Guste\ el\ producto\ y\ Estudios\ truncados]=$
+$P[Guste\ el\ producto]*P[Estudios\ truncados]=.6*.3=.18$
+
+$P[Guste\ el\ producto\ y\ Graduados]=$
+$P[Guste\ el\ producto]*P[Graduados]=.6*.5=.30$
+
+Análogo para no gustar el producto.
+
+Ahora vamos a calcular los valores esperados:
+
+$$E_{11}=\frac{300*100}{500}=60 \ \ E_{12}=\frac{300*150}{500}=90 \ \  E_{13}=\frac{300*250}{500}=150$$ 
+$$E_{21}=\frac{200*100}{500}=40 \ \  E_{22}=\frac{200*150}{500}=60 \ \ E_{23}=\frac{200*250}{500}=100$$ 
+
+
+
+Regresando al Estadístico de Prueba:
+
+$$T=\sum_{i=1}^{2}\sum_{j=1}^{3}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}= \frac{(75-60)^2}{60}+\frac{(90-90)^2}{90}+\frac{(135-150)^2}{150}+$$
+$$\frac{(25-40)^2}{40}+\frac{(60-60)^2}{60}+\frac{(115-100)^2}{100}=13.125$$
+
+**Paso 4** Procedimiento completo 
+
+Utilizaremos un $\alpha=0.05$ 
+
+Entonces tenemos $\chi^2_{(.95,(2-1)*(3-1))}=\chi^2_{(.95,2)}=5.99$
+
+**Paso 5** Regla de decisión 
+
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ con $(r-1)\times(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+como $\chi^2=5.99 < T=13.125$
+
+$\therefore$ Rechazo $H_0$.
+
+**Paso 6** Conclusión
+
+Existe evidencia suficiente para suponer que hay una relación entre la preferencia del cereal y el nivel educativo.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+Preferencia=c("Gusta","Neutral/No les gusta")
+Sin_Universidad=c(75,25)
+Nivel_Truncado=c(90,60)
+Graduados=c(135,115)
+datos=data.frame(Preferencia,Sin_Universidad,Nivel_Truncado,Graduados)
+datos
+
+#ahora, vamos a calcular los totales y adjuntarlos a la tabla
+Preferencia=c(Preferencia,"Totales")
+Sin_Universidad=c(Sin_Universidad, sum(Sin_Universidad))
+Nivel_Truncado=c(Nivel_Truncado, sum(Nivel_Truncado))
+Graduados=c(Graduados,sum(Graduados))
+Totales=c(Sin_Universidad[1]+Nivel_Truncado[1]+Graduados[1],Sin_Universidad[2]+Nivel_Truncado[2]+Graduados[2],
+           Sin_Universidad[1]+Nivel_Truncado[1]+Graduados[1]+Sin_Universidad[2]+Nivel_Truncado[2]+Graduados[2])
+datos=data.frame(Preferencia,Sin_Universidad,Nivel_Truncado,Graduados,Totales)
+datos
+
+#ESTADÍSTICO DE PRUEBA
+#Primero calcularemos los valores esperados
+Esperados=matrix(nrow = 2,ncol = 3)
+for (i in 1:2) {
+  for (j in 1:3) {
+    Esperados[i,j]=(datos$Totales[i]*datos[3,j+1])/datos$Totales[3]
+  }  
+}
+#Ahora sí, vamos a calcular el estadístico completo
+Totales=matrix(nrow = 2,ncol = 3)
+for (i in 1:2) {
+  for (j in 1:3) {
+    Totales[i,j]=(datos[i,j+1]^2)/(Esperados[i,j])
+  }  
+}
+T1=sum(Totales)-datos$Totales[3]
+print(c("Estadístico T1 = ", T1))
+
+alpha=.05
+#Ahora vamos a calcular nuestro cuantil
+cuantil=qchisq(1-alpha,2)
+print(c("Cuantil Ji-cuadrado con 2 grados de libertad  = ", cuantil))
+
+
+if(T1>cuantil){
+  print("Se rechaza $H_0$")
+  print(c("Estadístico T1 = ", T1))
+  print(c("Cuantil Ji-cuadrado con 2 grados de libertad  = ", cuantil))
+}
+
+
+```
+Observamos que la estadística de prueba tiene un valor de 13.125 y su correspondiente p-value es menor a 0.05, por lo tanto con $\alpha=5\%$ rechazaremos $H_0$ y concluimos existe evidencia suficiente para suponer que hay una relación entre la preferencia del cereal y el nivel
+educativo.
+
+Ahora podemos utilizar la prueba en R:
+
+```{r}
+tabla<-matrix(c(75,90,135,25,60,115),ncol=3,byrow=TRUE)
+dimnames(tabla)<- list(Preferencia=c("Gustar","Neutral o no les gusta"), Nivel=c("Sin universidad","Estudios truncados",
+                      "Graduados"))
+
+
+tabla
+chisq.test(tabla)
+
+```
+
+
+

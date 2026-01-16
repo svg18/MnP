@@ -1,0 +1,273 @@
+# Prueba de Cuantiles 
+
+Lo que nos interesa en ésta prueba binomial es hacer inferencia sobre los cuantiles de una variable aleatoria. Por ejemplo, muchos examinamos una muestra aleatoria de valores de alguna variable x para ver si la mediana de x es igual a 17 (por ejemplo).
+
+La escala de medición suele ser al menos ordinal para ésta prueba de hipótesis, aunque la prueba binomial solo require la escala nominal que es más débil para su medición. Esto se debe a que los cuantiles tienen poco significado con las mediciones de escala nominal. 
+
+**Recordatorio** 
+
+El cuantil de valor $p$ de una variable aleatoria $X$
+es un número $x$ tal que:
+ 
+
+$$ \mathbf{P}[X < x]\leq p$$ 
+
+
+* En el caso de una variable aleatoria continua se da la igualdad.
+ 
+ 
+## Datos
+
+Los datos consisten en una muestra 
+
+$$X_{1},X_{2},X_{3},\cdots,X_{n}  \  \ \mbox{ una muestra aleatoria de tamaño} \ n \  \mbox{de la población}$$
+ 
+
+## Supuestos
+ 
+1) Los datos a los que se les aplica esta prueba son una muestra aleatoria independiente e idénticamente distribuida.
+
+2) La escala de medida de las $X_{i}s$ es al menos ordinal.
+
+
+## Estadístico de Prueba
+
+$$T_{1}$$
+El  número de observaciones en la muestra que son **menores o iguales**  al valor $x^*$ sobre el que se va a hacer la hipótesis.
+
+$$T_{2}$$
+El número de observaciones en la muestra que son **estrictamente menores**  a $x^*$.
+
+Cuando $n\leq 20$ la distribución nula de éstos estadísticos es $Bin(n,p=p^*)$ con $n$ el tamaño de la muestra y $p^*$ dada en la hipótesis nula (recuerde que queremos hacer pruebas relacionadas con el cuantil $x_{p}$ de la $v.a.$ en cuestión).
+
+
+Por otro lado, si $n>20$ puede resultar más sencillo utilizar una aproximación normal para realizar la prueba, en dicho caso se puede  utilizar el cuantil:
+
+$$
+t=np+Z_{q}\sqrt{np(1-p)}
+$$
+
+Donde $Z_{q}$ es el cuantil de una distribución normal estándar que se puede obtener en la tabla correspondiente. 
+
+Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis:
+
+
+## Hipótesis
+
+### Caso A (Prueba de dos colas) {-}
+
+$$\textbf{H}_{o}: x_{p} = x^* \ \ \mbox{es equivalente  decir}: \ \ \mathbf{P}[X \leq x^*]= p^*$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: x_{p} \neq x^* \ \ \mbox{es equivalente  decir}: \ \ \mathbf{P}[X \leq x^*]\neq p^*$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+
+$$T_{1}\leq t_{1} \ \ \ \ \  o   \ \ \ \ \ T_{2}>t_{2}$$ 
+
+
+Elegimos $\alpha_{1},\alpha_{2}\geq 0$, tales que $\alpha_{1}+\alpha_{2}=\alpha$ el tamaño de la prueba y debemos encontrar $t_{1}$ y $t_{2}$ tales que: 
+
+$$\mathbf{P}[Y \leq t_{1}]=\alpha_{1} \ \ \ \ \  y  \ \ \ \ \ \mathbf{P}[Y \leq t_{2}]=1-\alpha_{2}$$
+
+Donde $Y \sim Bin (n,p^*)$.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=2*min \{ \mathbf{P}[Y\leq T_{1}],\mathbf{P}[Y \geq T_{2}] \}$$
+
+Sugerimos que si $n > 20$ ,el $p-value$ puede obtenerse usando:
+
+$$\mathbf{P}[Y\leq T_{1}] \thickapprox \mathcal{N}\left(\frac{T_{1}-np^*+0.5}{\sqrt{np^*(1-p^*)}}\right)$$
+
+y
+
+$$\mathbf{P}[Y\geq T_{2}] \thickapprox 1-\mathcal{N} \left(\frac{T_{2}-np^*-0.5}{\sqrt{np^*(1-p^*)}}\right)$$
+Con $\mathcal{N}(\cdot)$ la función de distribución de la normal estándar.
+
+
+### Caso B (Prueba de cola inferior) {-}
+
+$$\textbf{H}_0: x_{p} \leq x^* \ \ \mbox{es equivalente a decir:} \ \ \ \mathbf{P}[X < x^*]\geq p^*$$ 
+
+$$vs$$
+
+$$
+\textbf{H}_a: x_{p} > x^* \ \  \mbox{es equivalente a decir}: \ \ \mathbf{P}[X < x^*]< p^*
+$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T_{1} \leq t_{1}$$
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t_{1}$ tal que 
+
+$$\mathbf{P}[Y \leq t_{1}]=\alpha$$
+
+
+Donde $Y \sim Bin (n,p^*)$.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value= \mathbf{P}[Y\leq T_{1}]$$
+
+Sugerimos que si $n > 20$, el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\leq T_{1}] \thickapprox \mathcal{N} \left(\frac{T_{1}-np^*+0.5}{\sqrt{np^*(1-p^*)}}\right)$$
+
+### Caso C (Prueba de cola supeior) {-}
+
+$$\textbf{H}_0: x_{p} \geq x^* \ \ \mbox{es equivalente a decir}: \ \ \mathbf{P}[X < x^*]\leq p^*$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: x_{p} < x^*  \ \ \mbox{es equivalente a decir}: \ \ \mathbf{P}[X < x^*]> p^*$$
+
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+
+$$T_{2} > t_{2}$$
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t_{2}$ tal que 
+
+$$\mathbf{P}[Y \leq t_{2}]=1-\alpha$$\ 
+
+
+Donde $Y \sim Bin (n,p^*)$.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Y\geq T_{2}]$$
+
+Sugerimos que si $n > 20$ ,el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\geq T_{2}] \thickapprox 1- \mathcal{N} \left(\frac{T_{2}-np^*-0.5}{\sqrt{np^*(1-p^*)}}\right)$$
+
+Ahora aplicaremos lo anterior en un ejemplo ilustrativo:
+
+## Ejemplo
+
+El intervalo de tiempo entre las erupciones del geiser Old Faithful se registra 112 veces, de las cuales 8 son menores a 60 minutos y una es exactamente 60 minutos. Se quiere desea verificar que la mediana del intervalo es mayor a 60 minutos.
+
+
+**Paso 1** Escribimos la prueba a utilizar
+
+La prueba a utilizar **Prueba de cuantiles caso B cola inferior**
+
+
+**Paso 2** Formulamos nuestras hipótesis en contexto al problema planteado
+
+$$\textbf{H}_0: \mathbf{P}[X \leq 60]\geq 0.50$$
+
+$$vs$$
+
+$$\textbf{H}_a:  \mathbf{P}[X \leq 60]<0.50$$
+
+
+Donde $X$ es el intervalo de tiempo entre las erupciones, asumiendo que ambos intervalos son independientes e identicamente distribuidas. 
+
+**Paso 3** Estadístico de prueba
+
+
+La estadística de prueba será $T_1=9$ y $T_2=8$. Tomaremos $\alpha=.1$
+
+$$T_{1}=9 \ \mbox{número  de  intervalos que  son menores o iguales  a 60 minutos.}$$
+
+$$T_{2}=8 \ \mbox{número  de  intervalos que  son estrictamente menores a 60 minutos.}$$
+
+$$T_{1}\sim Bin(112,0.50)$$
+
+**Paso 4** Procedimiento completo 
+
+**Supuestos:**
+
+1. Muestra aleatoria de tamaño 112.
+
+* Tomaremos $\alpha = 5% = 0.05$ el nivel de significancia.
+
+* $n = 112$ tamaño de la muestra
+
+* $p^* = 0.50$
+
+**Paso 5** Regla de decisión
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si $T_{1} \leq t_{1}$ y  Rechazo $H_0$ si $p-value<\alpha$
+
+$$T_{1}=9 \leq 47.3=t_{1}$$
+
+
+como $n>20$ puede resultar más sencillo utilizar una aproximación normal para realizar la prueba, en dicho caso se puede  utilizar el estadístico:
+
+$$t_{1}=np+Z_{q}\sqrt{np(1-p)}=(112)(0.5)+(-1.645)\sqrt{112(0.5)(1-0.5)}$$
+
+$$t_{1}=47.3$$
+
+$\therefore$ Rechazamos $H_0$
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value= \mathbf{P}[Y\leq T_{1}]=\mathbf{P}[Y\leq 9]$$
+
+Como $n > 20$, el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\leq 9] \thickapprox \mathcal{P} \left[Z\leq\frac{T_{1}-np^*+0.5}{\sqrt{np^*(1-p^*)}}\right]=$$
+$$\left(Z\leq\frac{9-(112)(0.5)+0.5}{\sqrt{(112)(0.5)(1-0.5)}}\right)=\mathbf{P}[Z\leq -8.7876] < < 0.0001$$
+$\therefore$ Rechazo $H_0$ ya que  $p-value=0.0001<<0.05=\alpha.$ es decir, el $p-value$ es "muy pequeño". 
+
+
+**Paso 6** Conclusión
+ 
+
+Existe información suficiente para decir que la mediana del intervalo de erupciones es mayor a 60 minutos.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+La estadística de prueba será $T_1=9$ y $T_2=8$. Tomaremos $\alpha=.1$
+```{r}
+#Datos
+
+T_1=9         #Observaciones menores/iguales a 60 minutos
+T_2=8         #Observaciones que son menores estrictamente a 60 minutos
+alpha=0.05    #Nivel de significancia
+n=112         #Tamaño de la muestra
+p=0.5         #Cuantil en este caso la mediana 
+```
+
+Según el planteamiento de las hipótesis, este es un Caso B (de cola inferior), por lo que siguiendo la regla de decisión, se rechaza $H_0$ si $T_1\leq t_1$ donde $t_1$ será el cuantil que acumule 10% en la distribución binomial
+
+Podemos graficar la función de distribución:
+
+```{r,echo=FALSE}
+w=0:112
+plot(w,dbinom(w,n,p),type="h",lwd=7, xlab= " ",ylab=" ",col= "deeppink4", main="Función de distribución de una 
+   variable Binomial(112,0.5)")
+```
+
+A continuación calculamos $t_1$ y el $p-value$:
+
+```{r}
+t_1=qbinom(.10,n,p)        #Cuantil a comparar con el estadístico de prueba
+t_1
+pvalue=pbinom(T_1,n,p)     #P-value correspondiente
+pvalue
+```
+Tenemos que como $T_1=9\leq 49 =t_1$, entonces se rechaza $H_0$ y por lo tanto se concluye que hay información suficiente para decir que la mediana de los intervalos de tiempo entre erupciones es mayor a 60 minutos.
+
+Al mismo resultado llegamos si en lugar de buscar $t_1$ calculamos el $p-value$ de la estadística $T_1$ la cual da un valor muy cercano a cero por lo tanto cae en la región de rechazo y se conlcuye que la mediana de los intervalos de tiempo entre erupciones es mayor a 60 minutos.
+
+Finalmente podemos utilizar la función en R.
+
+```{r}
+binom.test(T_1,n,p=0.5,alternative = "less")
+```

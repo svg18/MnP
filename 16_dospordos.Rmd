@@ -1,0 +1,277 @@
+# Tablas de Contingencia de 2x2
+
+En general una tabla de contingencia de $r \times c$ es un arreglo de números naturales que tiene $r$ renglones y $c$ columnas y por lo tanto tiene $rc$ celdas o lugares para los números.
+
+En este caso particular, $r$=2 y $c$=2, llamadas **Tablas de Contingencia de 2x2**.
+
+Una aplicación de las tablas de contingencia de $2 \times 2$ surge cuando $N$ objetos o personas, posiblemente seleccionadas aleatoriamente de alguna población, son clasificadas en una o dos categorías antes de aplicar un tratamiento o se produzca un evento.
+
+Después de aplicar el tratamiento los mismos $N$ objetos son nuevamente examinados y clasificados en las dos categorías. La pregunta a responder es ¿El tratamiento altera significativamente la proporción de objetos en cada una de las dos categorías?
+
+El uso de las tablas de contingencia fue introducido anteriormente, y se vio que el procedimiento estadístico apropiado era una variación de la prueba de signos conocida como **McNemar**.
+
+## Datos
+
+Una muestra aleatoria de $n_{1}$ observaciones se extrae de una población (o antes de aplicar un tratamiento) y cada observación se clasifica en la clase 1 o 2, los números totales en las dos clases son $O_{11}$  y $O_{12}$ respectivamente, donde $O_{11} + O_{12}= n_{1}$.
+
+Una segunda muestra aleatoria de $n_{2}$ observaciones se extrae de una segunda población (o la primera población después de aplicar algún tratamiento) y el número de observaciones en la clase 1 o 2 es $O_{21}$  y $O_{22}$ respectivamente, donde $O_{21} +O_{22}=n_{2}$.
+
+Los datos se organizan en la siguiente tabla de contingencia:
+
+$$
+\begin{array}{c|c|c|c}
+ & \textbf{Clase 1} & \textbf{Clase 2} & \textbf{Total}     \\
+\hline
+\textbf{Población 1} & O_{11} & O_{12} & n_{1}   \\
+\hline
+\textbf{Población 2} & O_{21} & O_{22} & n_{2}\\
+\hline
+\textbf{Total}       & C_{1} & C_{2}   & N=n_{1}+n_{2} \\
+\end{array}
+$$
+
+El número total de observaciones es denotado por $N$.
+
+## Supuestos
+
+1) Cada muestra es una muestra aleatoria.
+
+2) Las dos muestras son mutuamente independientes.
+
+3) Cada observación puede clasificarse en \ $Clase\  1$ \  o \ $Clase\ 2$.
+
+## Estadístico de Prueba
+
+Si alguna columna total es cero, el estadístico de prueba es definido asi:
+
+$$T_{1}=0$$
+
+En otro caso:
+
+$$T_{1}=\frac{\sqrt{N}(O_{11}O_{22}-O_{12}O_{21})}{\sqrt{n_{1}n_{2}C_{1}C_{2}}}\sim N(0,1)$$
+
+
+La distribución exacta de $T_1$ es difícil de array debido a todas las diferentes combinaciones de valores posibles para $O_{11},O_{22},O_{12},O_{21}$.
+
+Por lo tanto, se utiliza la aproximación de muestra grande, que es la distribución normal estándar cuyos cuantiles se dan en la tabla correspondiente.
+
+## Hipótesis
+
+### Caso A Prueba de dos colas {-}
+
+$$\textbf{H}_0: p_{1} = p_{2}$$
+
+$$vs$$
+
+$$\textbf{H}_a: p_{1} \neq p_{2}$$
+
+
+Donde $p_{1}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 1$ y  $p_{2}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 2$.
+
+#### Regla de Decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si:
+
+
+$$T_{1}< Z_\frac{\alpha}{2} \ \ \    o  \ \ \  T_{1} > Z_{1-\frac{\alpha}{2}}$$ 
+
+Donde el cuantil $Z_\frac{\alpha}{2}$ y el cuantil  $Z_{1-\frac{\alpha}{2}}$ se buscan en las tablas correspondientes de la distribución Normal.
+
+Ahora calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=2*min\{ \mathbf{P}[Z<T_{1}],\mathbf{P}[Z>T_{1}]\}$$
+donde $Z$ es una normal estándar.
+
+**NOTA**
+
+Para la hipótesis anterior, también es usual usar $T_{1}^2$ en lugar de $T_{1}$ como estadístico de prueba. Entonces la región de rechazo es la cola superior de la distribución $\chi^2$ con 1 grado de libertad, obtenidos en la tabla de la Distribución $\chi^2$.
+
+
+### Caso B Prueba de cola inferior {-}
+
+$$\textbf{H}_0: p_{1} \geq p_{2}$$
+
+$$vs$$
+
+$$\textbf{H}_a: p_{1} < p_{2}$$
+
+Donde $p_{1}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 1$ y  $p_{2}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 2$.
+
+#### Regla de Decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si:
+
+$$T_{1}< Z_{\alpha}$$ 
+
+
+Donde el cuantil $Z_{\alpha}$ se buscan en las tablas correspondientes de la distribución Normal.
+
+Ahora calcularemos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Z<T_{1}]$$
+donde $Z$ es una normal estándar.
+
+### Caso C Prueba de cola superior {-}
+
+$$\textbf{H}_0: p_{1} \leq p_{2}$$
+
+$$vs$$
+
+$$\textbf{H}_a: p_{1} > p_{2}$$
+
+Donde $p_{1}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 1$ y  $p_{2}$ es la probabilidad de elegir al azar un elemento de la $clase\ 1$ en la $población\ 2$.
+
+
+#### Regla de Decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si:
+
+
+$$T_{1} > Z_{1-\alpha}$$ 
+
+
+Donde el cuantil $Z_{1-\alpha}$ se buscan en las tablas correspondientes de la distribución Normal.
+
+Ahora calcularemos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Z>T_{1}]$$
+donde $Z$ es una normal estándar.
+
+Ahora hagamos un ejercicio:
+
+
+## Ejemplo
+
+En la academia naval se instaló un nuevo sistema de iluminación en las habitaciones guardamarinas. Se informó que el nuevo sistema de iluminación daba como resultado una vista deficiente debido a la tensión continua en los ojos de los guardias marinos. Se consideró un estudio (ficticio).Para probar la siguiente hipótesis nula. Utilizaremos $\alpha$=0.05
+
+$$\textbf{H}_0: \ \mbox{La probabilidad de que un guardia marino tenga 20-20 (buena visión) es mayor o igual}$$
+$$\mbox{bajo el nuevo sistema de luces que con el viejo sistema de luces.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La probabilidad de buena visión es menor con el nuevo sistema de luces que}$$
+$$\mbox{con el viejo sistema de luces.}$$
+
+
+**Paso 1** Prueba a utilizar
+
+Es una prueba **Tablas de contingencia de 2x2**
+
+**Paso 2** Planteamos las hipótesis
+
+Es decir si planteamos nuestra hipótesis quedarían así:
+
+**Caso C** Prueba de cola superior
+
+$$\textbf{H}_0: p_{1} \leq p_{2}$$
+
+$$vs$$
+
+$$\textbf{H}_a: p_{1} > p_{2}$$
+
+
+Donde $p_{1}$ es la probabilidad de elegir al azar un guardia marino con buena visión bajo el viejo sistema de luces y  $p_{2}$ es la probabilidad de elegir al azar un guardia marino con buena visión con el nuevo sistema de luces.
+
+$\textbf{Paso 3}$ La tabla de contingencia, en este caso es:
+
+$$
+\begin{array}{|c|c|c|c|}
+\hline
+ & \textbf{Buena Visión} & \textbf{Mala Visión} & \textbf{Total}   \\
+\hline
+\textbf{Luces viejas} & O_{11}= 714 & O_{12}=111 & n_{1}=825   \\
+\hline
+\textbf{Luces nuevas} & O_{21}=662 & O_{22}=154 & n_{2}=816\\
+\hline
+\textbf{Total}  & C_{1}=1376 & C_{2}=265   & N=n_{1}+n_{2}=1641 \\
+\hline
+\end{array}
+$$
+
+
+**Paso 4** Estadístico de Prueba
+
+$$T_{1}=\frac{\sqrt{N}(O_{11}O_{22}-O_{12}O_{21})}{\sqrt{n_{1}n_{2}C_{1}C_{2}}}$$
+$$T_{1}=\frac{\sqrt{1641}[(714)(154)-(111)(662)]}{\sqrt{(825)(816)(1376)(265)}}$$
+$$T_{1}= 2.9821$$
+
+**Paso 5** Regla de decisión
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si:
+
+
+$$T_{1} > Z_{1-\alpha}$$
+
+$$T_{1}=2.9821 > Z_{0.95}= 1.6449$$
+
+Donde el cuantil  $Z_{1-\alpha}$ se buscan en las tablas correspondientes de la distribución Normal.
+
+$\therefore$ Rechazo $H_0$.
+
+Ahora calculamos el $p-value$ la probabilidad de que Z sea mayor que el valor observado de $T_{1}$, de la tabla de la Distribución Normal.
+
+$$p-value=\mathbf{P}[Z>T_{1}]=\mathbf{P}[Z>2.9821]=1-P[Z\leq2.9821]=0.00143$$
+
+$$\therefore p-value=0.00143 < 0.05=\alpha$$
+$\therefore$ Rechazo $H_0$. Entonces podemos concluir que la probabilidad de buena visión es menor con el nuevo sistema de luces que con el viejo sistema de luces.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+Guardias=c("LucesViejas","LucesNuevas")
+BuenaVision=c(714,662)
+MalaVision=c(111,154)
+datos=data.frame(Guardias,BuenaVision,MalaVision)
+datos
+
+
+Guardias=c(Guardias,"Total")
+BuenaVision=c(BuenaVision, sum(BuenaVision))
+MalaVision=c(MalaVision, sum(MalaVision))
+Totales=c(BuenaVision[1]+MalaVision[1],BuenaVision[2]+MalaVision[2],
+           BuenaVision[1]+MalaVision[1]+BuenaVision[2]+MalaVision[2])
+datos1=data.frame(Guardias,BuenaVision,MalaVision,Totales)
+datos1
+
+
+#Datos
+
+O11=714    #Guardias Buena visión/Luces viejas
+O12=111    #Guardias Mala vision/Luces viejas
+O21=662    #Guardias Buena vision/Luces nuevas
+O22=154    #Guardias Mala vision/Luces nuevas
+
+n1=825      #Total luces viejas         
+n2=816      #Total luces nuevas
+C1=1376     #Total buena vision
+C2=265      #Total Mala vision
+N=n1+n2     #Tamaño total 
+#N
+
+```
+Calcularemos el Estadístico de prueba:
+```{r}
+T_1=(sqrt(N)*(O11*O22-O12*O21))/(sqrt(n1*n2*C1*C2))
+T_1
+```
+
+
+Calculamos el cuantil y el $p-value$:
+
+```{r}
+cuantil=qnorm(0.95)  #Cuantil a comparar
+cuantil
+pvalue=1-pnorm(T_1)  #Calculamos el p-value
+pvalue
+```
+Como el estadístico $T_1=2.98$ es mayor a el cuantil $Z_{1-\alpha}=1.64$ por lo tanto rechazamos $H_0$
+y el $p-value$ es menor a nuestra $\alpha=5\%$; Entonces podemos concluir que la probabilidad de buena visión es menor con el nuevo sistema de luces que con el viejo sistema de luces.
+
+Ahora podemos utilizar la prueba en R:
+```{r}
+tabla<-matrix(c(714,111,825,662,154,816),ncol=3,byrow=TRUE)
+tabla
+chisq.test(tabla)
+```

@@ -1,0 +1,279 @@
+# Prueba de Signos
+
+La prueba de signos merece una consideración especial debido a su versatilidad, su gran utilidad y simplicidad. Ésta es una prueba de proporciones cuando el valor específico $p^*=1/2$ y para los casos de dos colas, cola inferior y cola superior la máxima probabilidad para rechazar la hipótesis nula $H_0$ se da cuando $p = 1/2$. Frecuentemente la prueba de signos también es apropiada para analizar datos de un vector aleatorio $(X,Y)$ y ver si alguna de sus entradas tiene valores más grandes que la otra. De esta manera, si una variable tiende a tener valores mayores que la otra, se puede utilizar la prueba de signos para determinar si las medias de éstas variables son diferentes. 
+
+## Datos
+
+Los datos consisten en observaciones bivariadas aleatorias:  
+
+$$(X_{1},Y_{1}),(X_{2},Y_{2}),(X_{3},Y_{3}),\cdots,(X_{n'},Y_{n'})$$
+
+Dentro de cada par de datos en la muestra se clasificará de la siguiente manera:
+
++ Por un signo $"+"$ cuando $X_{i} < Y_{i}$
++ Por un signo "-" cuando $X_{i} > Y_{i}$ 
++ Se omitirán las parejas cuando $Xi = Yi$. 
+
+El tamaño de la muestra después de quitar los empates será $n$. 
+
+## Supuestos
+
+1) Las variables aleatorias bivariadas $(X_{i},Y_{i})$ son mutuamente independientes.
+
+2) La escala de medida es al menos ordinal dentro de cada par.
+
+## Estadístico de Prueba
+
+$$T=Total\ de\ signos\ "+"$$
+
+La distribución nula de $T$ es una distribución binomial con $n$ el número de parejas de la muestra sin empates y $p=1/2$.
+
+$$T\sim Bin(n,1/2)$$
+
+Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis:
+
+
+## Hipótesis
+
+### Caso A (Prueba de dos colas) {-}
+
+$$\textbf{H}_0: \mathbf{P}[obtener\ +]= \mathbf{P}[obtener\ -]$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[obtener\ +] \neq \mathbf{P}[obtener\ -]$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T \leq t \ \ \  o \ \ \ T>n-t$$  
+
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t$ tal que 
+
+$$\mathbf{P}[Y \leq t]=\alpha/2$$  
+
+Donde $Y \sim Bin (n,1/2)$.
+
+
+Por otro lado, si $n>20$ puede resultar más sencillo utilizar una aproximación normal para realizar la prueba, en dicho caso se puede  utilizar el siguiente cuantil:
+
+$$t=\frac{1}{2}\left(n+z_{\alpha/2}\ \sqrt{n}\right)$$
+
+Donde $z_{\alpha/2}$ es el cuantil de una distribución normal estándar que se puede obtener en la tabla correspondiente.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=2*min\{\mathbf{P}[Y\leq T],\mathbf{P}[Y\geq T]\}$$
+
+Sugerimos que si $n > 20$, el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\leq T] \thickapprox  \mathcal{N}\left(\frac{2T-n+1}{\sqrt{n}}\right)$$
+$$\mathbf{P}[Y\geq T] \thickapprox 1- \mathcal{N} \left(\frac{2T-n-1}{\sqrt{n}}\right)$$
+
+### Caso B (Prueba de cola inferior) {-}
+
+$$\textbf{H}_0: \mathbf{P}[obtener\ +] \geq \mathbf{P}[obtener\ -]$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[obtener\ +] < \mathbf{P}[obtener\ -]$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T \leq t$$
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t$ tal que: 
+
+$$\mathbf{P}[Y \leq t]=\alpha$$
+
+Donde $Y \sim Bin (n,1/2)$.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Y\leq T]$$
+
+Sugerimos que si $n > 20$,el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\leq T] \thickapprox  \mathcal{N} \left(\frac{2T-n+1}{\sqrt{n}}\right)$$
+
+### Caso C (Prueba de cola superior) {-}
+
+$$\textbf{H}_0: \mathbf{P}[obtener\ +] \leq \mathbf{P}[obtener\ -]$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[obtener\ +] > \mathbf{P}[obtener\ -]$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T > n-t$$
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t$ tal que 
+
+$$\mathbf{P}[Y \leq t]=\alpha$$
+
+Donde $Y \sim Bin (n,1/2)$.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Y\geq T]$$
+
+
+Sugerimos que si $n > 20$, el $p-value$ puede obtenerse más sencillo usando la aproximación normal:
+
+$$\mathbf{P}[Y\geq T] \thickapprox 1- \mathcal{N} \left(\frac{2T-n-1}{\sqrt{n}}\right)$$
+
+Ahora aplicaremos lo anterior en un ejemplo ilustrativo:
+
+
+## Ejemplo
+
+Un grupo de 6 amigos se puso a dieta, en un intento para perder peso obtuvieron los siguientes resultados:
+
+$$
+\begin{array}{c c c c } 
+\textbf{Nombre} & \textbf{Peso Antes} & \textbf{Peso Después} \\
+\hline
+Ed    & 174 & 165 \\
+Jim   & 191 & 186 \\
+Max   & 188 & 183 \\
+Ray   & 182 & 178 \\
+Abdul & 201 & 203 \\
+Phil  & 188 & 181 \\
+\end{array} 
+$$
+
+
+El grupo de amigos desea ver si la dieta que están realizando es efectiva.
+
+Recordando que cada par de datos en la muestra se clasificará de la siguiente manera:
+
++ $"+"$ cuando $X_{i} < Y_{i}$
++ $"-"$ cuando $X_{i} > Y_{i}$ 
+
+y se omitirán las parejas cuando $X_i = Y_i$. Y el tamaño de la muestra después de quitar los empates será $n$, haremos lo siguiente:
+
+$$
+\begin{array}{|c |c |c |c c c|}
+\hline
+\textbf{Nombre} & \textbf{Peso Antes} & \textbf{Peso Después} & \textbf{Signo} \\
+ & \textbf{X}_i & \textbf{Y}_i & \\
+ \hline
+Ed    & 174 & 165  &  "-"   \\
+Jim   & 191 & 186  &  "-" \\
+Max   & 188 & 183  &  "-" \\
+Ray   & 182 & 178  &  "-" \\
+Abdul & 201 & 203  &  "+" \\
+Phil  & 188 & 181  &  "-"  \\
+\hline
+\end{array} 
+$$
+
+**Paso 1** Escribimos la prueba a utilizar
+
+La prueba a utilizar **Prueba de signos Caso B cola inferior**
+
+**Paso 2** Formulamos nuestras hipótesis en contexto al problema planteado
+
+$$\textbf{H}_0: \mathbf{P}[obtener\ +] \geq \mathbf{P}[obtener\ -]$$
+
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[obtener\ +] < \mathbf{P}[obtener\ -]$$
+
+es decir,
+
+$$\textbf{H}_0: \mbox{En promedio los pesos antes de la dieta son mayores a los pesos después de la dieta.}$$
+
+$$vs$$
+
+$$\textbf{H}_a:\mbox{ En promedio los pesos después de las dieta son mayores a los pesos antes de la dieta.}$$
+
+
+**Paso 3** Estadístico de prueba
+
+
+Utilizaremos el estadístico
+
+$$T=1 \ \ número \ de \ signos\ "+"$$
+
+$$T\sim Bin(6,1/2)$$
+
+
+**Paso 4** Procedimiento completo 
+
+**Supuestos:**
+
+1. Muestra aleatoria de tamaño 6.
+
+* Tomaremos como "éxito" los que si perdieron peso, en este caso los signos "+"
+
+* Tomaremos $\alpha$= 5% =0.05 el nivel de significancia.
+
+* $n=6$ tamaño de la muestra
+
+* $p$=1/2
+
+**Paso 5** Regla de decisión
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si $T \leq t$ 
+
+$$T=1 \leq 1=t$$
+
+$\therefore$ Rechazamos $H_0$
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Y\leq T]=\mathbf{P}[Y\leq 1]=0.1093$$
+
+$\therefore$ $p-value=0.1093>0.05=\alpha$ entonces no rechazamos $H_0$.
+
+Nos preguntaremos, ¿Cómo es que pasa esto?, bueno esto se debe a que nuestra muestra es muy pequeña (son 6 datos), claro no siempre vamos a tener muestras así. Pero, debemos tener en cuenta que al tener muestras reducidas le estamos reduciendo potencia a la prueba de hipótesis utilizada, ya que la capacidad de detectar diferencias significativas entre los datos disminuye.
+
+**Paso 6** Conclusión
+ 
+Existe evidencia suficiente para decir que los pesos después de la dieta son menores a los pesos antes de la dieta.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+La estadística de prueba será $T=1$. Tomaremos $\alpha=5\%$
+```{r}
+#Datos
+
+T=1              #Número de éxitos (+)
+alpha=0.05       #Nivel de 
+n=6              #Tamaño de la muestra 
+p=0.5            #Para la prueba de signos "p" siempre será 1/2
+```
+Según el planteamiento de las hipótesis, este es un Caso B (de cola inferior), por lo que siguiendo la regla de decisión, se rechazará $H_0$ si $T\leq t$ donde $t$ será en cuantil que acumule 5% en la distribución binomial
+
+Podemos graficar la función de distribución:
+
+```{r,echo=FALSE}
+z=0:6
+plot(z,dbinom(z,6,0.5),type="h",lwd=8,xlab= " ",col= "deeppink4",ylab=" ",main="Función de distribución de una variable Binomial(6,0.5)")
+```
+
+Calculamos t y el $p-value$:
+
+```{r}
+t=qbinom(.05,n,p)         #Valor a comparar con nuestro estadístico
+t
+pvalue=pbinom(T,n,p)       #P-value
+pvalue
+```
+Tenemos que como $T=1\leq 1 =t$, entonces se rechaza $H_0$ y por lo tanto se concluye que hay información suficiente para decir que en promedio los pesos después de la dieta son menores a los pesos antes de la dieta. Por lo tanto la dieta parece funcionar.
+
+Finalmente utilizaremos la función de R:
+
+```{r}
+binom.test(T,n,p=0.5,alternative = "less")
+```

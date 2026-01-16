@@ -1,0 +1,209 @@
+# Prueba de la Ji-cuadrada
+
+## Datos
+
+$$X_{1},\cdots,X_{n} \ \ m.a. \  \mbox{de tamaño} \  "n"\  \mbox{que proviene de una distribución} \  F(x) \  \mbox{desconocida.}$$
+
+Cada una de las variables se pueden acomodar en alguna clase $"k"$ (o categoría)
+
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{Los datos siguen una distribución} \ \  F_{0}(x).$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Los datos no siguen una distribución} \ \ F_{0}(x).$$
+
+* Donde  $F_{0}(x)$ es la distribución que se propone.
+
+**Es decir:**
+
+
+$$\textbf{H}_0: \ \mathbf{P}[\ X \ \mbox{pertenezca a la categoría} \ j \ ] = \mathbf{P}_{j},\ \ \ \mbox{para toda} \ \  j=1,\ldots,k.$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mathbf{P}[ \ X \ \mbox{pertenezca a la categoría} \ j \ ] \  \neq \  \mathbf{P}_{j}, \ \ \ \mbox{para alguna} \ \ j=1,\ldots,k.$$
+
+**Procedimiento**
+
+Vamos a buscar las probabilidades de ocurrencia en cada categoría.
+
+Calcular los valores esperados $e_{j}$;  Donde  $e_{j}=n \times P_{j}$
+
+
+## Estadístico de Prueba
+
+$$Q= \sum_{j=1}^{k}\frac{(f_{j}-e_{j})^2}{e_{j}}, \ \ \ \ \ \ Donde\ \ Q \sim \chi^2_{(k-1)}$$
+
+
+**Observaciones**
+
+* $Q$ es estable cuando el número de observaciones en cada categoría debe ser mayor a 5.
+
+* En caso de que alguna categoría tenga menos de 5 observaciones colapsamos las categorías.
+
+* Si desconocemos los parámetros los estimamos con la muestra $(EMV,\  Momentos)$, con esto se van perdiendo grados de libertad. 
+
+* $Q \sim \chi^2_{(k-1-r)}$  \ Donde $k$=Número de clases o intervalos, \  $r$=Número de parámetros estimados.
+
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ si  $Q$> $q_{teórica}$
+
+* Cuando $Q= \sum_{j=1}^{k}\frac{(f_{j}-e_{j})^2}{e_{j}} > \chi^2_{(k-1)}(1-\alpha)$
+
+
+## Ejemplo
+
+Un gobierno local tiene registros del número de niños y el número de hogares en el área. Se sabe que el número promedio de niños por hogar es 1.40. Se sugiere que el número de niños por hogar se pueda modelar por una distribución Poisson con parámetro 1.40.
+Para probar esta hipótesis se toma una muestra de 1000 hogares; los resultados se muestran en la siguiente tabla:
+
+$$
+\begin{array}{|c |c c c c c c c|}
+\hline
+\textbf{Número de niños} &0 &1 &2& 3&4 &5+& \\
+\hline
+\textbf{Número de hogares} & 273& 361&263 &78 & 21 & 4& \\
+\hline
+\end{array}
+$$
+
+**NOTA:** Como tenemos una categoría con obeservaciones menores a 5 colapsamos la categoría.
+
+$$
+\begin{array}{|c |c c c c c|}
+\hline
+\textbf{  Número de niños} &0 &1 &2& 3&4+  \\
+\hline
+\textbf{Número de hogares} & 273& 361&263 &78 & 25  \\
+\hline
+\end{array}
+$$
+ 
+ 
+**Paso 1** Prueba a utilizar **Prueba Ji-cuadrada**
+
+**Paso 2** Planteamiento de hipótesis:
+
+$$\textbf{H}_0: \ \mbox{El número de niños por hogar sigue una distribución Poisson (1.40)}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{El número de niños por hogar no sige una distribución Poisson (1.40)}$$
+
+Necesitamos buscar la Distribución de una variable aleatoria Poisson, con parámetro $\lambda$= 1.40
+
+**Nota** En R-Studio tenemos dpois(c(0,1,2,3,4),1.40) para la primera categoría.
+
+
+Nos ayudaremos de la siguiente tablita:
+
+
+$$
+\begin{array}{c c c c c}
+\hline
+\textbf{Número de niños} & \textbf{Número de hogares} & P_{i} & e_i=n \times P_i \\
+\hline
+0&273&0.2465&247 \\
+1&361&0.3452&345 \\
+2&263&0.2416&242 \\
+3&78&0.1127&113 \\
+4&25&0.0394&39 \\
+\hline
+&n=1000&.9854\approx1 &9854\approx1000 \\
+\end{array}
+$$
+
+**Paso 3** Estadístico de prueba
+
+
+$$Q=\sum_{j=0}^{k}\frac{(f_{j}-e_{j})^2}{e_{j}}=\sum_{j=0}^{4}\frac{(f_{j}-e_{j})^2}{e_{j}}=$$
+$$=\frac{(273-247)^2}{247}+\frac{(361-345)^2}{345}+\frac{(263-242)^2}{242}+\frac{(78-113)^2}{113}+\frac{(25-39)^2}{39}$$
+$$T=21.4605$$
+
+**Paso 4** Regla de decisión
+
+Rechazamos $H_0$ si  $Q$> $q_{teórica}$
+
+* Cuando $$Q= \sum_{j=1}^{k}\frac{(f_{j}-e_{j})^2}{e_{j}} > \chi^2_{(k-1)}(1-\alpha)$$
+
+Ocuparemos $\alpha=$ 0.05
+
+$\chi^2_{(k-1)}(1-\alpha)=\chi^2_{(5-1)}(1-0.05) =\chi^2_{(4)}(.95)$
+
+
+$$ Q=21.4605 > 9.48= \chi^2_{(4)}(.95)$$
+$\therefore$ Rechazamos $H_0$.
+
+**Paso 5** Conclusión
+
+$\therefore$ Existe evidencia estadística suficiente para decir que el número de niños por hogar no sigue una Distribución Poisson (1.40).
+
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+#Número de hogares
+observados =c(273,361,263,78,21,4) 
+#Matriz de frecuencias observadas
+tabla=matrix(observados,nrow=1)
+#Número de niños
+num_ninos=c("0","1","2","3","4","5+")
+#Asigna nombres a la tabla de cada categoría
+dimnames(tabla)=list(NULL,num_ninos)
+tabla
+
+#Una de las categorías es menor a 5, asi que colapsamos la categoría 5+
+
+#Número de hogares
+observados =c(273,361,263,78,25)
+#Matriz de frecuencias observadas
+tabla=matrix(observados,nrow=1)
+#Número de niños
+num_ninos=c("0","1","2","3","4+")
+#Asigna nombres a la tabla de cada categoría
+dimnames(tabla)=list(NULL,num_ninos)
+tabla
+
+#Total
+N=sum(observados)
+
+#Calculamos las probabilidades
+p=dpois(0:4,1.40)
+p
+
+#Calculamos los valores esperados
+esperados=N*p
+round(esperados,0) #Hacemos esto por que estamos hablando de niños
+
+residuos=round((observados-esperados)^2/esperados,4)
+ji_cal=sum(residuos)
+ji_cal
+
+#En un principio teníamos 6 categorías pero colapsamos una, entonces 
+#tenemos 5 categorías menos una que corresponden a nuestros grados de libertad.
+
+ji_teo=qchisq(0.95,df=4)
+ji_teo
+
+
+#Como Ji-Cal>Ji_teo rechazamos H0.
+
+p_value=pchisq(ji_cal,df=4,lower.tail=FALSE)
+p_value
+```
+
+
+Observamos que la estadística de prueba tiene un valor de 21.46 y su correspondiente p-value es menor a 0.05, por lo tanto con $\alpha=5\%$ rechazaremos $H_0$ y concluimos existe evidencia suficiente para suponer que el número de niños por hogar no sigue una distribución Poisson(1.40).
+
+Ahora podemos utilizar la prueba de R:
+
+```{r}
+chisq.test(c(273,361,263,78,25), p = c(0.2466,0.3452,0.2417,
+                                       0.1128,0.03947), rescale.p=TRUE)
+```

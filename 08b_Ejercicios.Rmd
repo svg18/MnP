@@ -1,0 +1,240 @@
+# Ejercicios
+**1.** Un fabricante de teléfonos móviles afirma que sólo el 5% de todas las unidades que vende sufre una falla durante el primer mes de operación normal. Una organización de consumidores ha pedido a 45 consumidores que han adquirido estos teléfonos móviles, que reporten cualquier mal funcionamiento durante el primer mes. Al final de éste sólo siete consumidores reportaron mal funcionamiento. Si la organización de consumidores cree que la proporción de teléfonos que sufrirán alguna falla es mayor al valor afirmado por el fabricante. ¿Con una $\alpha$ del 10% podría la organización sustentar su creencia?
+
+**2.** Un candidato a través de encuestas propias afirma que el 65% o más de los votantes están a su favor. Sin embargo, a través de una encuesta a 20 personas, 10 están a su favor. Probar que a un nivel de significancia del 5%, la hipótesis de que el candidato a sobrestimado los votos a su favor.
+
+**3.** En una muestra de 150 partidos de básquetbol universitario, el equipo de casa ganó 98 partidos. Realice una prueba para determinar si los datos sustentan la hipótesis de que en el básquetbol universitario el equipo de casa tiene ventaja. ¿A qué conclusión llega con $\alpha= 0.05$?
+
+**4.** Una muestra aleatoria de niños de tercer año de secundaria mostró las siguientes observaciones de peso (kg)
+
+$$
+\begin{array}{|c| |c| |c| |c| |c|} 
+\hline
+64&	60&	44&	54&	61\\
+46&	66&	56&	42&	62\\
+39&	54&	68&	64&	65\\
+75&	38&	53&	58&46\\
+\hline
+\end{array}
+$$
+
+Probar:
+
+a)	La mediana de los pesos es 46kg.
+
+b)	El cuartíl superior es al menos 60kg.
+
+c)	El tercer decil no es mayor a 45kg.
+
+**5.** La siguiente es una muestra de 15 departamentos nuevos de 2 recamaras con estacionamiento en la colonias Roma, Condesa y Escandón. Los datos están en millones de pesos.
+
+$$
+\begin{array}{|c| |c| |c|} 
+\hline
+6.4&	5&	4.2\\
+4.6&	4.4&	5.6\\
+3.5&	3.8&	4.5\\
+7.5&	5.6&	4.2\\
+8.1&	5.8&	6.3\\
+\hline
+\end{array}
+$$
+
+Probar:
+
+a) Cuando menos 50% de las observaciones están por debajo de los 4.3 millones.
+
+b) No mas del 20% de las observaciones tienen un costo mayor a 7 millones.
+
+
+**6.** En una encuesta anual para determinar si los salarios en el sector federal son proporcionales con los pagos en el sector privado, los trabajadores publicos y privados fueron emparejados tan cerca como fue posible (con respecto al tipo de trabajo, formación académica, años de experiencia, etc.) los salarios se ordenaron en parejas.
+
+$$
+\begin{array}{||c| |c| |c||} 
+\hline 
+\textbf{Pareja i}  & \textbf{Privado} & \textbf{Gobierno} \\ 
+\hline
+\hline
+1 &12,500& 11,750 \\
+\hline
+\hline
+2& 22,300 &20,900 \\
+\hline
+\hline
+3 &14,500 &14,800 \\
+\hline
+\hline
+4 &32,300 &29,900 \\
+\hline
+\hline
+5 &20,800 &20,500 \\
+\hline
+\hline
+6 &19,200 &18,400 \\
+\hline
+\hline
+7 &15,800 &14,500 \\
+\hline
+\hline
+8 &17,500 &17,900 \\
+\hline
+\hline
+9 &23,300 &21,400 \\
+\hline
+\hline
+10 &42,100 &43,200 \\
+\hline
+\hline
+11 &16,800 &15,200 \\
+\hline
+\hline
+12& 14,500 &14,200 \\
+\hline
+\hline
+\end{array}
+$$
+
+Probar la hipótesis nula de que los salarios son iguales contra la hipótesis alternativa de que el salario de los trabajadores federales es generalmente menor a la contraparte en el sector privado. Uitiliza $\alpha=0.1$.
+
+**7.** Una oficina tiene dos computadoras : A y B. En un estudio del uso del ordenador, la compañía ha recabado registro de las tasas de uso por 5 semanas. La meta es decidir cual computadora se pone bajo un contrato de servicio porque tiene una tasa alta de uso. Con los datos de las tasas de uso de la siguiente tabla se puede hacer una recomendación preliminar respecto a que computadora contratar?
+
+$$
+\begin{array}{||c| |c| |c||} 
+\hline 
+\textbf{Semanas} & \textbf{Computadora A} & \textbf{Computadora B} \\ 
+\hline
+\hline
+1 &15.7& 32.4 \\
+\hline
+\hline
+2& 10.8 &41.2 \\
+\hline
+\hline
+3 &45   & 35.1 \\
+\hline
+\hline
+4 &12.3& 25 \\
+\hline
+\hline
+5 & 8.2&8.2 \\
+\hline
+\hline
+\end{array}
+$$
+
+
+**8.** Se tienen dos trituradores de alimentos y se tiene la sospecha de que el aparato B es mas eficiente que el aparato A. Para probar dicha sospecha, se probaron en ambos trituradores diferentes alimentos y se registró el tiempo en minutos que le tomaba a cada aparato convertir el alimento en puré. Los resultados fueron los siguientes.
+
+
+$$
+\begin{array}{||c| |c| |c| |c|} 
+\hline 
+\mbox{Alimento} & \mbox{A} & \mbox{B}\\
+ \hline
+1&0.5&0.6\\
+ \hline
+2&1&0.9\\
+ \hline
+3&1.2&1.2\\
+ \hline
+4&0.8&0.9\\
+ \hline
+5&0.4&0.5\\
+ \hline
+6&1.5&1.8\\
+ \hline
+7&0.3&0.4\\
+ \hline
+8&1.2&1.4\\
+ \hline
+9&0.7&0.9\\
+\hline
+\hline
+\end{array}
+$$
+
+Con los datos observados se puede corroborar la sospecha en cuanto a la eficiencia de los trituradores? Use $\alpha=5\%$
+
+**9.** Se toma una muestra aleatoria de 135 ciudadanos de E.U. y se les preguntó su opinión con respecto a cierta política. El estudio registró a 43 ciudadanos que estaban en contra de esa política. Después de varias semanas, durante las cuales los ciudadanos recibieron cartas informativas, se les volvió a preguntar su opinión; 37 estuvieron en contra, y 30 de las 37 originalmente no estaban en contra de la política. ¿Es significativo el cambio en el número de personas en contra de la política?
+
+**10.**  Un investigador intenta determinar si un fármaco tiene un efecto sobre una enfermedad particular. Se cuenta con la información de los individuos en el estudio con el diagnóstico (enfermedad: presente o ausente ) antes del tratamiento, y el diagnóstico después del tratamiento
+
+$$
+\begin{array}{c| c c|c} 
+&\mbox{Después de tratamiento}&&\\
+\hline
+\mbox{Antes de tratamiento}& \textbf{Presente} & \textbf{Ausente} & \mbox{Total} \\  
+\hline
+\textbf{Presente} & 101& 121&222\\
+\hline
+\textbf{Ausente} & 59& 33&92\\
+\hline
+\mbox{Total}&160&154&314\\
+\end{array}
+$$
+
+**11.** Un programa ecológico sobre la contaminación de un río tomó 5 muestras de agua de  diferentes lugares de un río antes y después de dos años, obteniéndose los siguientes resultados. Los números representan la media de la contaminación, donde medidas grandes indican alta contaminación.
+
+$$
+\begin{array}{||c| |c| |c||} 
+\hline 
+\textbf{Numero de Muestras} & \textbf{Medidas iniciales} & \textbf{Medidas después de 2 años}  \\  
+\hline
+\hline
+1 &88.4& 87.1 \\
+\hline
+\hline
+2& 81.3 &79.4 \\
+\hline
+\hline
+3 &68.4 & 69.1 \\
+\hline
+\hline
+4 &100.5& 91.1 \\
+\hline
+\hline
+5 & 93.2&95.3 \\
+\hline
+\hline
+\end{array}
+$$
+
+Se está interesado en saber si el programa de rehabilitación ecológica ha tenido efecto en la reducción de la contaminación. Use $\alpha =1\%$.
+
+**12.** Se presentan a continuación los tipos de cambio MXN-USD de los últimos 30 días.
+
+24.48	,
+24.07	,
+23.66	,
+23.70	,
+23.93	,
+24.34	,
+24.22	,
+23.87	,
+23.96	,
+24.05	,
+23.78	,
+23.74	,
+23.21	,
+22.88	,
+22.74	,
+22.73	,
+22.58	,
+22.21	,
+22.33	,
+22.21	,
+22.17	,
+22.21	,
+22.04	,
+21.79	,
+21.76	,
+21.91	,
+21.58	,
+21.60	,
+21.50	,
+21.91
+
+
+Se desea corroborar la aseveración del presidente respecto a que el peso mexicano esta recuperando fuerza. Use $\alpha=10\%$.
+
+

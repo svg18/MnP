@@ -1,0 +1,10 @@
+# (PART) Introducción  {-}
+
+# Introducción {-}
+
+Los métodos paramétricos tienen la caracteristica de que siempre se trabaja con muestras aleatorias provenientes de cierta distribución conocida. Por otro lado, los métodos no paramétricos suelen requerir suposiciones menos restrictivas acerca del nivel de medición de los datos y sobre la forma de las distribuciones de probabilidad generadas por los datos muestrales, por lo que se pueden usar en situaciones en donde los métodos paramétricos no son aplicables.
+
+Una de las consideraciones para determinar si lo apropiado es un método paramétrico o un método no paramétrico es la escala de medición empleada para generar los datos. Todos los datos son generados por una de las cuatro escalas de medición: nominal, ordinal, de intervalo o de razón. 
+
+
+

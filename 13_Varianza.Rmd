@@ -1,0 +1,391 @@
+# Prueba de Igualdad de Varianzas
+
+Usualmente para comparar varias poblaciones nos basamos en las medias u otras medidas de ubicación de las poblaciones, en algunas situaciones las varianzas podrían ser nuestro campo de interés. Por ejemplo, se ha afirmado que el efecto de sembrar nubes con yoduro de plata podría aumentar la varianza de la lluvia resultante.
+
+## Prueba de Igualdad de Varianzas para 2 poblaciones {-}
+
+## Datos
+
+Consiste en dos muestras aleatorias
+
+
+$$\mbox{Sea} \ \ x_{1},x_{2},x_{3},\cdots,x_{n} \ \ \mbox{una muestra aleatoria de tamaño} \  n  \ \mbox{de la} \ población \ 1.$$
+ 
+$$\mbox{Sea} \ \ y_{1},y_{2},y_{3},\cdots,y_{m} \ \ \mbox{una muestra aleatoria de tamaño} \ m \  \mbox{de la} \ poblacion\ 2.$$
+
+## Supuestos
+
+1) Ambas muestras son aleatorias de su respectiva población.
+
+2) Además de la independencia dentro de cada muestra, existe una independencia mutua entre las dos muestras.
+
+3) La escala de medida es al menos intervalo.
+
+**Asignación de Rangos** 
+
+Modificaremos cada $X_{i}$ y $Y_{j}$ con el valor absoluto de la desviación de la media utilizando :
+
+
+$$U_{i} = |X_{i}-\mu_{1}| \ , \ \ \ i=1,\cdots,n$$
+
+$$y$$
+ 
+$$V_{j} = |Y_{j}-\mu_{2}|\  ,\ \ \ j=1,\cdots,m$$
+
+donde $\mu_{1}$ y $\mu_{2}$ son las medias de las poblaciones 1 y 2 respectivamente.
+
+Si $\mu_{1}$ y $\mu_{2}$ son desconocidas, se usará $\overline{X}$ para $\mu_{1}$ y $\overline{Y}$ para $\mu_{2}$.
+
+
+Asignamos los rangos 1 al $n + m$ a la muestra combinada de $U$ y $V$ de la manera habitual.
+Si varios valores de  $U$ y/o $V$  son exactamente iguales entre sí (empatados), asigne a cada uno el promedio de los rangos que se les habrían asignado si no hubiera habido empates.
+
+Sean $R(U_{i})$ y $R(V_{j})$  los rangos así asignados.
+
+
+## Estadístico de Prueba
+
++ **Si no hay empates**
+
+Si no hay empates de la población $U$ con la población $V$ ocupamos:
+
+
+$$T=\sum_{i=1}^{n}[R(U_{i})]^2$$
+
+La suma de los cuadrados de los rangos asignados a la $población \ 1$.
+
++ **Si  hay empates**
+
+$$T_{1} = \frac{T-n\overline{R^2}}{\left[\frac{nm}{N(N-1)}\sum_{i=1}^{N}R_{i}^4-\frac{nm}{N-1}(\overline{R^2})^2\right]^\frac{1}{2}}$$
+
+Donde $N= n+m$, $\overline{R^2}$ representa el promedio de los cuadrados de los rangos de ambas muestras combinadas:
+
+$$\overline{R^2}= \frac{1}{N}\left(\sum_{i=1}^{n}[R(U_{i})]^2+\sum_{j=1}^{m}[R(V_{j})]^2\right)$$
+y $\sum R_{i}^4$ representa la suma de los rangos elevados a la cuarta potencia:
+
+$$ \sum_{i=1}^{N}R_{i}^4= \sum_{i=1}^{n}[R(U_{i})]^4+\sum_{j=1}^{m}[R(V_{j})]^4$$
+Los cuantiles exactos de la distribución nula de $T$ se obtienen de las tablas correspondientes de la prueba para los casos de no tener empates y $n \leq 10$, $m \leq 10$.
+
+Para muestras de tamaño mayor a 10 utilizamos la siguiente aproximación, basada en la estandarización normal de cuantiles $z_p$, obtenidas de la tabla de la distribución normal, puede ser usado la aproximación obtenida de cuantiles $\omega_p$ para $T$.
+
+$$\omega_p= \frac{n(N+1)(2N+1)}{6}+z_{p}\sqrt{\frac{mn(N+1)(2N+1)(8N+11)}{180}}$$
+Donde $N= n+m$
+
+Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis: 
+
+## Hipótesis
+
+### Caso A Prueba de dos colas {-}
+
+$$\textbf{H}_0: \ X \ \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ Var(x) \neq  Var(Y)$$
+
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si:
+
+$$T>t_{1-\frac{\alpha}{2}} \ \ \   o \ \ \  T<t_{\frac{\alpha}{2}}$$
+
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si $T$ (o $T_1$ en caso de tener empates) es mayor que el cuantil $1-\frac{\alpha}{2}$ o menor  al cuantil $\frac{\alpha}{2}$ encontrados en las tablas correspodientes a la prueba (tablas de rangos al cuadrado). Y en el caso de $T_{1}$ en la tabla de distribución normal estándar.
+
+Y calculamos el $p-value$ 
+
+$$p-value= 2*(el \ menor\ p-value\ de\ una\ cola)$$
+
+donde 
+
+el $p-value$ de la cola inferior es aproximadamente:
+
+$$ p-value=\mathbf{P}\left[Z\leq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]$$
+
+y el $p-value$ de la cola superior es aproximadamente:
+
+$$p-value=\mathbf{P}\left[Z\geq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]$$
+
+### Caso B Prueba de cola inferior {-}
+
+$$\textbf{H}_0: \ X \  \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ Var(x) < Var(Y)$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si:
+
+
+$T<t_\alpha$ (o $T_1$ en caso de tener empates) donde, $t_\alpha$ es el cuantil que se busca en tablas de la prueba.  Y en el caso de $T_{1}$ en la tabla de distribución normal estándar.
+
+y el $p-value$ se calcula:
+
+$$ p-value= \mathbf{P}\left[Z\leq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]$$
+
+### Caso C Prueba de cola superior {-}
+
+$$\textbf{H}_0: \ X \  \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ Var(x) > Var(Y)$$
+
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si:
+
+
+$T>t_{1-\alpha}$(o $T_1$ en caso de tener empates)  donde, $t_{1-\alpha}$ es el cuantil que se busca en tablas de la prueba. Y en el caso de $T_{1}$ en la tabla de distribución normal estándar.
+
+y el $p-value$ se calcula:
+
+
+$$p-value=\mathbf{P}\left[Z\geq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]$$
+
+
+Ahora vamos a resolver un ejemplo:
+
+## Ejemplo
+
+Una cuenca hidrográfica particular se ha construido extensivamente en los últimos años, con desarrollos de vivienda, represas, etc. una muestra aleatoria de las tasas de flujo de la corriente (pies cúbicos por minuto) para una corriente en esa cuenca hidrográfica se compara con una muestra de las tasas de tiempos anteriores para ver si la variabilidad ha cambiado.
+
+$$
+\begin{array}{c c c} 
+\textbf{Tasas Actuales} &  & \textbf{Tasas Pasadas} \\
+32 & & 39 \\
+36 & & 21 \\
+41 & & 58 \\
+27 & & 46 \\
+35 & & 30 \\
+48 & & 22 \\
+31 & & 17 \\
+28 & & 19 \\
+\end{array}
+$$
+
+Es significativa la diferencia en las varianzas? Utiliza $\alpha$=0.05
+
+
+**Paso 1** Prueba a utilizar **Prueba de Igualdad de Varianzas**
+
+
+**Paso 2** Formulamos las hipótesis
+
+$$\textbf{H}_0: \mbox{Las tasas actuales y las tasas pasadas son idénticamente distribuidas.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ Var(\mbox{tasas pasadas}) \ \neq  \ Var(\mbox{tasas actuales})$$
+
+**Paso 4** Procedimiento completo 
+
+Primero como $\mu_{1}$ y $\mu_{2}$ son desconocidas se usará $\overline{X}$ para $\mu_{1}$ y $\overline{Y}$ para $\mu_{2}$.
+
+$$
+\begin{array}{c c c c c c c c }
+\mbox{Medidas} & \mbox{Originales} & \mbox{Desviación} & \mbox{Absoluta} & \mbox{Rangos} & \mbox{Rangos} & \mbox{Rangos} & \mbox{Al Cuadrado} \\
+\mbox{Tasas Actuales} & \mbox{Tasas Pasadas} & \mbox{Actuales} & \mbox{Pasadas} & \mbox{Actuales} & \mbox{Pasadas}& \mbox{Actuales} & \mbox{Pasadas} \\
+\textbf{(X)} & \textbf{(Y)} & \textbf{(U)}   & \textbf{(V)}  &     &               &     &         \\
+32  & 39  & 2.75  & 7.5  &  4  &  8            & 16  &  64         \\
+36  & 21  & 1.25  & 10.5 &  2  &  11           &  4  &  121    \\
+41  & 58  & 6.25  & 26.5 &  6 &   16           & 36  &  256       \\
+27  & 46  & 7.75  & 14.5 &  9  &  14.5(\mbox{Empate})& 81  &  210.25       \\
+35  & 30  & 0.25  & 1.5  &  1  &  3            & 1   &  9     \\
+48  & 22  & 13.25 & 9.5  &  13 &  10           & 169 &  100    \\
+31  & 17  & 3.75  & 14.5 &  5  &  14.5(\mbox{Empate})& 25  &  210.25     \\
+28  & 19  & 6.75  & 12.5 &  7  &  12           & 49  &  144   \\
+\hline
+\overline{X}= 34.75 & \overline{Y}= 31.5 & & & & & T=381
+\end{array}
+$$
+
+
+$T$= Sumas del cuadrado de los rangos (Actuales) = 381
+
+$\overline{R^2}=  \frac{1}{16}\left(16+4+36+\cdots+210.25+144\right)$=93.46
+
+$\sum_{i=1}^{N}R_{i}^4= (16)^2+(4)^2+\cdots+(210.25)^2+(144)^2$= 243217.125
+
+**Paso 3** Estadístico de Prueba
+
+Debido a que encontramos empates utilizaremos el estadístico $T_{1}$:
+
+$$T_{1} = \frac{T-n\overline{R^2}}{\left[\frac{nm}{N(N-1)}\sum_{i=1}^{N}R_{i}^4-\frac{nm}{N-1}(\overline{R^2})^2\right]^\frac{1}{2}}$$
+
+Entonces tenemos:
+
+$$T_{1} = \frac{381-8(93.46)}{\left[\frac{(8)(8)}{16(15)}(243217.125)-\frac{(8)(8)}{15}(93.46)^2\right]^\frac{1}{2}}$$
+
+$$T_{1} = \frac{381-747.68}{\left[\frac{64}{240}(243217.125)-\frac{64}{15}(93.46)^2\right]^\frac{1}{2}}$$
+
+$$T_{1} = \frac{-366.68}{[64857.9-37268.35]^\frac{1}{2}}$$
+
+$$T_{1} = \frac{-366.68}{\sqrt{27589.55}}$$
+$$T_{1} = \frac{-366.68}{166.10}$$
+$$T_{1}= -2.208282$$
+
+**Paso 5** Regla de Decisión
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si:
+
+
+$$T_{1}>t_{1-\frac{\alpha}{2}} \ \ \ \ \  o  \ \ \ \ \ T_{1}<t_{\frac{\alpha}{2}}$$ 
+
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si $T_{1}$ (ya que tuvimos empates) es mayor que el cuantil $1-\frac{\alpha}{2}$ o menor  al cuantil $\frac{\alpha}{2}$ encontrados en las tablas correspodientes a la distribución normal estándar.
+
+Regresando a nuestro ejemplo:
+
+$$T_{1}>t_{0.975} \ \ \ \ \  o \ \ \ \ \ T_{1}<t_{.025}$$
+
+$$-2.2082 \ngtr 1.96  \ \ \ \ \   o  \ \ \ \ \  -2.2082 < -1.96$$ 
+
+$\therefore$ Entonces Rechazo $H_0$.
+
+**Paso 6** Conclusión
+
+Entonces podemos concluir que existe evidencia estadística suficiente para decir que existe diferencia significativa en las varianzas.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+# Datos
+TasasActuales = c(32,36,41,27,35,48,31,28)
+TasasPasadas = c(39,21,58,46,30,22,17,19)
+
+n=length(TasasActuales)  #Tamaño de TasasActuales
+m=length(TasasPasadas)   #Tamaño de TasasPasadas
+N=n+m                    #Tamaño Total
+
+# Matriz de TasasActuales y TasasPasadas
+datos=matrix(c(TasasActuales,TasasPasadas), byrow=FALSE, ncol=2)
+colnames(datos)=c("TasasActuales: X", "TasasPasadas: Y")
+datos
+
+
+alpha=0.05  #Nivel de significancia 
+
+Xbarra=mean(TasasActuales)
+cat("Media muestral de X: ", Xbarra, "\n")
+
+Ybarra=mean(TasasPasadas)
+cat("Media muestral de Y: ", Ybarra, "\n")
+
+# Valores absolutos de la desviacion de la media de X
+desvX= c()
+for(i in 1:n) {
+  desvX[i]=abs(TasasActuales[i] - Xbarra)
+}
+
+# Valores absolutos de la desviacion de la media de Y
+desvY = c()
+for(i in 1:n) {
+  desvY[i] = abs(TasasPasadas[i] - Ybarra)
+}
+
+# Creamos la matriz U, V
+desviacion = matrix(c(desvX,desvY), byrow= FALSE, ncol=2)
+colnames(desviacion) = c("U","V")
+desviacion
+
+# Asignamos los rangos
+rang = rank(desviacion)
+#rang
+
+# Los acomodamos en una nueva matriz U, V
+rangos = matrix(rang, byrow=FALSE, ncol=2)
+colnames(rangos) = c("Rangos U", "Rangos V")
+rangos
+
+# Rangos de U al cuadrado
+rangosU2 = c()
+for(i in 1:n) {
+  rangosU2[i] = (rangos[i,1])^2
+}
+#rangosU2
+
+# Rangos de V al cuadrado
+rangosV2 = c()
+for(i in 1:n) {
+  rangosV2[i] = (rangos[i,2])^2
+}
+#rangosV2
+
+# Suma de los rangos al cuadrado de U
+sumarangosU2 = sum(rangosU2)
+
+# Suma de los rangos al cuadrado de V
+sumarangosV2 = sum(rangosV2)
+
+# Nueva matriz con los rangos^2
+rangos2 = matrix(c(rangosU2,rangosV2), byrow=FALSE, ncol=2)
+colnames(rangos2) = c("Rangos al cuadrado U", "Rangos al cuadrado V")
+rangos2
+
+#Promedio de los rangos^2
+promrangos2 = (sumarangosU2+ sumarangosV2)/N
+
+#Rangos de U^4
+rangosU4 = c()
+for(i in 1:n) {
+  rangosU4[i] = (rangosU2[i])^2
+}
+#rangosU4
+
+#Rangos de V^4
+rangosV4 = c()
+for(i in 1:n) {
+  rangosV4[i] = (rangosV2[i])^2
+}
+#rangosV4
+
+#Nueva matriz con los rangos^4
+rangos4 = matrix(c(rangosU4,rangosV4), byrow=FALSE, ncol=2)
+colnames(rangos4) = c("Rangos a la cuarta U", "Rangos a la cuarta V")
+rangos4
+
+#Suma de los rangos a la cuarta^4
+sumarangos4 = sum(rangosU4) + sum(rangosV4)
+
+#Calculamos el estadístico de prueba T1 porque tenemos empates
+T1=(sumarangosU2 - (n*promrangos2))/(sqrt(((      ((n^2)/(N-1))/N)*sumarangos4 )-(((n^2)/(N-1))*(promrangos2^2))))
+
+cat("T1 = ", T1, "\n")
+
+#Regla de decision
+#cat("Rechazamos H_0 a un nivel de significancia alpha=", alpha, "si T1>t1 o T1<t2, en donde t1 y t2 son #los cuantiles de la Normal estándar \n")
+
+# Calculamos los cuantiles t1 y t2 
+t1 = qnorm(1-(alpha/2),mean=0,sd=1)
+t2 = qnorm(alpha/2,mean=0,sd=1)
+
+#cat("t1 = ", t1, "\n")
+#cat("t2 = ", t2, "\n")
+
+if((T1>t1) || (T1<t2)) {
+  print("Rechazamos H_0")
+} else {
+  print("No rechazamos H_0")
+}
+
+```
+Ya que utilizamos la estadística $T_1$, entonces el cuantil que hay que buscar es en una distribución normal. Con $\alpha=0.05$,hace que $\frac{\alpha}{2}=0.025$ y $1-\frac{\alpha}{2}=0.975$
+
+```{r}
+t1=qnorm(.025,0,1)
+t1
+t2=qnorm(.975,0,1)
+t2
+```
+Como $T_1=-2.21\leq -1.96 =t_1$ entonces se cumple la regla de decisión y rechazamos $H_0$ a un nivel $\alpha=5\%$. Concluimos que existe evidencia suficiente para decir que las varianzas de las tasas de flujo de la corriente son diferentes.
+```{r}
+pvalue=2*min(pnorm(T1,0,1),(1-pnorm(T1,0,1)))
+pvalue
+```

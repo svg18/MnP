@@ -1,0 +1,40 @@
+# Escalas de Medición
+
+Esta sección es una traducción de @conover1998practical.
+
+A continuación se definirán los tipos de escalas que se le asigna a una variable. Hay cuatro escalas básicas las cuales son: **nominal, ordinal, de intervalo y de razón.** A las variables que se consideran con escala ordinal y nominal también se les conoce como **variables categóricas o cualitativas**, mientras que a las variables que se consideran con escala de intervalo y razón se conocen como **variables cuantitativas**.
+
+##  Variables categóricas
+
+### Escala nominal:  
+
+La escala nominal utiliza números simplemente como un medio para separar las propiedades o elementos en diferentes clases o categorías. El número asignado a la observación sirve sólo como un **"nombre"** para la categoría a la que pertenece la observación, de ahí el título **"nominal"**. Por ejemplo, utilizamos la escala nominal de medición cuando definimos una variable aleatoria que equivalía a $1$ si una moneda caía **"sol"**, y $0$ si la moneda caía **"águila"**. Podríamos, igual bien, haber usado los números **7.3** y **3.9** para representar el sol y el águila, respectivamente. Nuestra elección de $1$ y $0$ fue principalmente por conveniencia.
+Otro ejemplo, cuando 12 sujetos se numeran arbitrariamente del 1 al 12, se utiliza una escala de medición nominal y la asignación de los números es una forma de variable aleatoria. Al clasificar objetos según el color, las categorías pueden etiquetarse como 1, 2, 3 o azul, amarillo, rojo o A, B, C. Los números son simplemente nombres de categoría. Los números pueden ser reemplazados por otros números no utilizados, siempre que las categorías permanezcan intactas.
+
+
+### Escala ordinal: 
+
+La escala ordinal se refiere a mediciones en las que sólo son relevantes las comparaciones **"mayor"**,**"menor"** o **"igual"** entre ellas. El valor numérico se usa sólo como un medio para organizar los elementos que se miden en orden, de menor a mayor.
+Ésta capacidad de ordenar los elementos, en función del tamaño relativo de sus medidas, le da el nombre de
+Si algunos de los elementos son iguales entre sí, decimos que existen vínculos. Cuando se le pide a una persona que asigne el número 1 a la más preferida de las tres marcas, el número 3 a la menos preferida y el número 2 a la marca restante, está usando una escala ordinal y está usando los números 1, 2, 3; ésta podría haber usado tres números, digamos 16, 20, 75, siempre y cuando los números se asignen a las marcas de tal manera que el orden relativo del número represente la preferencia relativa de la marca.
+
+
+
+## Variables cuantitativas
+
+### Escala de intervalo: 
+
+La escala de intervalo, considera como información pertinente **no sólo** el orden relativo de las mediciones como en la escala ordinal sino también el **tamaño del intervalo** entre mediciones, es decir, el tamaño de la diferencia (en un sentido de resta) entre dos mediciones. La escala de intervalo implica el concepto de una unidad de distancia, y la distancia entre dos mediciones cualquiera puede expresarse como un cierto número de unidades. Un buen ejemplo es la escala por la cual generalmente representamos la temperatura. El aumento de una unidad (grado) de temperatura se define por un cambio particular en el volumen de mercurio en un termómetro; en consecuencia, la diferencia entre dos temperaturas cualquiera puede medirse en **unidades o grados**. El valor numérico real de la temperatura es simplemente una comparación con un punto arbitrario llamado "cero grados". La escala de intervalo requiere un punto cero y una unidad de distancia (no es posible tener este último sin el primero), pero no es importante cómo se definan los "ceros" y la unidad de distancia.
+
+La temperatura ha sido medida de manera bastante adecuada durante algún tiempo por las escalas Fahrenheit y Celsius, que tienen diferentes temperaturas cero y diferentes definiciones de 1 grado o unidad. El principio de las mediciones de intervalo no se viola por un cambio en la escala o la ubicación o ambos.
+
+### Escala de razón: 
+
+La escala de razón se usa cuando **no sólo el orden y el tamaño del intervalo son importantes**, sino que también la **razón entre dos medidas** es significativa. Si es razonable hablar de que una cantidad es "dos veces" otra cantidad, la escala de proporción es apropiada para la medición, como cuando se miden los rendimientos de cultivos, distancias, pesos, alturas, ingresos, etc. En realidad, la única distinción entre la escala de razón y la escala de intervalo es que la escala de razón tiene una **medida natural** "cero", mientras que la medida de cero se define **arbitrariamente** en la escala de intervalo. Como en la escala de intervalo, la unidad de distancia de la escala de razón se define arbitrariamente.
+
+No existe un acuerdo universal entre los científicos que prefieren usar escalas adicionales, y algunas mediciones no se incluyen claramente en una de las cuatro escalas recién definidas. 
+Por lo tanto, ésta clasificación de escalas de medida puede ser demasiado simplista, pero es suficiente para los propósitos de este curso.
+
+
+La mayoría de los métodos estadísticos paramétricos habituales requieren una escala de medición de intervalo (o más fuerte). La mayoría de los métodos no paramétricos suponen que la escala nominal o la escala ordinal son apropiadas.
+

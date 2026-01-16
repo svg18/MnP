@@ -1,0 +1,330 @@
+# Prueba U-Mann y Witney 
+
+Esta prueba está diseñada para determinar si dos muestras han sido extraídas de la misma población.La prueba también es conocida como Mann-Whitney-Wilcoxon o suma de rangos de Wilcoxon.
+
+A diferencia de las pruebas binomiales bivariadas vistas en la sección anterior, esta no se basa en una muestra por pares. En lugar usa dos muestras independientes, una de cada población a probar. 
+
+## Datos
+
+Se considera que los datos provienen de dos muestras aleatorias: 
+
+
+$$x_{1},x_{2},x_{3},\cdots,x_{n} \ \mbox{una muestra aleatoria de tamaño} \ n \ \mbox{de la población.}$$
+ 
+$$y_{1},y_{2},y_{3},\cdots,y_{m} \ \mbox{una muestra aleatoria de tamaño} \  m \  \mbox{de la poblacion.}$$
+
+ 
+De forma conveniente, tomamos $N=n+m$.
+
+Sea:
+
+
+$$F(t) \ \mbox{la función de distribución de probabilidad de X.}$$
+
+$$G(t) \ \mbox{la función de distribución de probabilidad de Y.}$$
+
+
+## Supuestos
+
+1) Independencia dentro de cada muestra.
+
+2) Independencia entre muestras.
+
+3) La escala de medida es al menos ordinal.
+
+
+
+**Pasos a seguir**
+
+1. Formar una nueva muestra combinada de los $n+m$ datos
+
+2. Ordenar de menor a mayor
+
+3. Asignamos el rango correspondiente
+
+4. Si hay empates entonces asignamos el promedio de los rangos
+
+
+
+## Estadístico de Prueba
+
++ **Si no hay empates**
+
+
+$$T=\sum_{i=1}^{n}R(X_{i})$$
+
++ **Si  hay empates**
+
+$$T_1= \frac{T-n\frac{N+1}{2}}{\sqrt{\frac{nm}{N(N-1)}\sum_{i=1}^{N}R_i^2-\frac{nm(N+1)^2}{4(N-1)}}}$$
+
+$$T_{1}\sim N(0,1)$$
+
+
+Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis:
+
+
+## Hipótesis
+
+### Caso A (Prueba de dos colas) {-}
+
+$$\textbf{H}_0: F(x) = G(x) \ \  \forall\ x, \ \ \  \mbox{alternativo} \ \ \  \textbf{H}_0:\mathbf{E}[X] = \mathbf{E}[Y]$$
+
+$$vs$$
+
+$$\textbf{H}_a: F(x) \neq G(x) \ \ \mbox{para alguna} \ x,  \ \ \mbox{alternativo} \ \ \  \textbf{H}_a:
+\mathbf{E}[X] \neq \mathbf{E}[Y]$$
+
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+
+$$T < t_{\frac{\alpha}{2}} \ \ \   o \ \ \ T > t_{1-\frac{\alpha}{2}}$$ 
+
+Donde $t_\frac{\alpha}{2}$ el cuantil inferior se busca en las tablas correspondientes a nuestra prueba.
+
+Y $t_{1-\frac{\alpha}{2}}$ el cuantil superior se calcula de la siguiente manera:
+
+$$\omega_p= n(n+m+1)-\omega_{1-p}$$
+donde $\omega_{1-p}$ es el cuantil inferior obtenido de la tabla correspondiente a nuestra prueba.
+
+
+Los cuantiles aproximados en el caso de no tener empates, y $n$ o $m$ mayores a 20, se encuentra la aproximacion normal.
+
+
+$$\omega_p= \frac{n(N+1)}{2} + z_p\sqrt{\frac{n m(N+1)}{12}}$$
+
+donde el cuantil $z_p$ se obtiene de la tabla de la distribución normal.
+
+y calculamos el $p-value$de la siguiente manera:
+
+$$p-value = 2*\mathbf{P}\left(Z\leq\frac{T+\frac{1}{2}-n\frac{N+1}{2}}{\sqrt{\frac{nm(N+1)}{12}}}\right)$$
+Donde $Z$ es la variable aleatoria normal estándar.
+
+* Si ocupamos $T_{1}$, rechazamos $H_0$ si: 
+
+$$T_{1} < z_{\frac{\alpha}{2}} \ \ \  o \ \ \  T_{1} > z_{1-\frac{\alpha}{2}}$$
+
+Donde $z_\frac{\alpha}{2}$ y $z_{1-\frac{\alpha}{2}}$ son cuantiles que se buscan en la tabla de una normal estándar.
+
+
+y calculamos el $p-value$de la siguiente manera:
+
+$$p-value=2*min\{\mathbf{P}[Z\leq T_{1}],\mathbf{P}[Z\geq T_{1}]\}$$
+Donde $Z$ es la variable aleatoria normal estándar.
+
+
+### Caso B  (Prueba de cola inferior) {-}
+
+$$\textbf{H}_0: F(x) = G(x) \ \ vs \ \ \textbf{H}_a: F(x) > G(x),  \ \ \mbox{alternativo} \ \ \textbf{H}_a:\mathbf{E}[X]  < \mathbf{E}[Y]$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T < t_{\alpha}$$
+
+
+Donde $t_{\alpha}$ el cuantil inferior se busca en las tablas correspondientes a nuestra prueba.
+
+
+Los cuantiles aproximados en el caso de no tener empates, y $n$ o $m$ mayores a 20, se encuentra la aproximacion normal.
+
+
+$$\omega_p= \frac{n(N+1)}{2} + z_p\sqrt{\frac{n m(N+1)}{12}}$$
+donde el cuantil $z_p$ se obtiene de la tabla de la distribución normal.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value = \mathbf{P}\left(Z\leq\frac{T+\frac{1}{2}-n\frac{N+1}{2}}{\sqrt{\frac{nm(N+1)}{12}}}\right)$$
+* Si ocupamos $T_{1}$, rechazamos $H_0$ si: 
+
+$$T_{1} < z_{\alpha}$$ 
+
+
+Donde $z_{\alpha}$ es el cuantil que se buscan en la tabla de una normal estándar.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Z\leq T_{1}]$$
+Donde $Z$ es la variable aleatoria normal estándar.
+
+### Caso C (Prueba de cola superior) {-}
+
+$$\textbf{H}_0: F(x) = G(x) \ \ vs \ \ \textbf{H}_a: F(x) < G(x), \  \ \mbox{alternativo} \ \ \textbf{H}_a:\mathbf{E}[X]  > \mathbf{E}[Y]$$
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T > t_{1-{\alpha}}$$ 
+Y $t_{1-\alpha}$ el cuantil superior se calcula de la siguiente manera:
+
+$$\omega_p= n(n+m+1)-\omega_{1-p}$$
+donde $\omega_{1-p}$ es el cuantil inferior obtenido de la tabla correspondiente a nuestra prueba.
+
+
+Los cuantiles aproximados en el caso de no tener empates, y $n$ o $m$ mayores a 20, se encuentra la aproximacion normal.
+
+
+$$ \omega_p= \frac{n(N+1)}{2} + z_p\sqrt{\frac{n m(N+1)}{12}}$$
+donde el cuantil $z_p$ se obtiene de la tabla de la distribución normal.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value = \mathbf{P}\left(Z\geq\frac{T+\frac{1}{2}-n\frac{N+1}{2}}{\sqrt{\frac{nm(N+1)}{12}}}\right)$$
+
+* Si ocupamos $T_{1}$, rechazamos $H_0$ si: 
+
+
+$$T_{1} > z_{1-\alpha}$$ 
+
+
+
+Donde $z_{1-\alpha}$ es el cuantil que se buscan en la tabla de una normal estándar.
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=\mathbf{P}[Z\geq T_{1}] \ \ o \ \  \ 1-\mathbf{P}[Z\leq T_{1}]$$
+Donde $Z$ es la variable aleatoria normal estándar.
+
+
+Tal vez es demasiada información que procesar asi que veremos un ejemplo paso por paso:
+
+## Ejemplo
+
+Una agencia publicitaria está investigando a qué tipo de avisos les prestan más atención los adolescentes. Se observan a 11 adolescentes, a 6 de ellos se les muestran anuncios de comida y a los 5 restantes se les muestran anuncios de bebidas; todos los anuncios tienen una duración similar y a continuación se muestra el registro del tiempo de atención (en segundos) de los 11 adolescentes.
+Utilizaremos $\alpha$= 5%.
+
+$$
+\begin{array}{||c| c c c c c c||} 
+\hline
+\textbf{Comida} & 25 & 41 & 42 & 45 & 47 & 50 \\
+\hline\hline
+\textbf{Bebidas}& 23 & 28 & 30 & 35 & 38 &  \\ 
+\hline
+\end{array}
+$$
+
+Podemos ver que m=6 (en este caso comidas) y n= 5 (en este caso bebidas)
+
+**Paso 1** Escribimos la prueba a utilizar
+
+La prueba a utilizar **Prueba U-Mann-Whitney - Caso A - dos colas**
+
+**Paso 2** Formulamos nuestras hipótesis en contexto al problema planteado
+
+$$\textbf{H}_0: \ \mbox{La distribución del tiempo de atención que prestan los adolescentes a los 
+anuncios}$$
+$$\mbox{sobre comida es igual a la distribución de los anuncios de bebidas.}$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La distribución del tiempo de atención que prestan los adolescentes a los anuncios}$$
+$$\mbox{sobre comida es distinta a las distribución de los anuncios de bebidas.}$$
+
+
+**Ordenamos de menor a mayor** 
+ 
+$$
+\begin{array}{ |c| c c c c c c c c c c c| }
+\hline
+ \textbf{Tipo de aviso} & B & C & B & B & B & B & C & C & C & C & C \\ 
+ \hline
+ \textbf{Dato ordenado} & 23 & 25 & 28 & 30 & 35 & 38 & 41 & 42 & 45 & 47 & 50 \\ 
+ \hline
+ \textbf{Rango}         & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ 
+ \hline
+\end{array}
+$$
+
+**Paso 3** Estadístico de prueba
+
+Como no tenemos empates utilizaremos el estadistico T:
+
+$$T=\sum_{i=1}^{n}R(X_{i})$$
+
+**Paso 4** Procedimiento completo 
+
+$$T=\sum_{i=1}^{5}R(X_{i})= 1+3+4+5+6= 19$$
+
+
+**Paso 5** Regla de decisión 
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$=.05 si 
+
+$$T < t_\frac{\alpha}{2} \ \ \  \ \  o  \ \ \ \ \  T > t_{1-\frac{\alpha}{2}}$$           
+
+El valor del cuantil inferior localizado en las tablas es 19, y por otro lado vamos a calcular el cuantil superior:
+
+$$\omega_p= n(n+m+1)-\omega_{1-p}$$
+$$\omega_p= 5(5+6+1)-19$$
+$$\omega_p= 41$$
+
+
+$$19 \nless   19  \ \ \  o \ \ \  19 \ngtr 41$$   
+
+$\therefore$ No rechazo $H_0$
+
+**Calculamos p-value**
+
+$$p-value = 2*\mathbf{P}\left(Z\leq\frac{T+\frac{1}{2}-n\frac{N+1}{2}}{\sqrt{\frac{nm(N+1)}{12}}}\right)$$
+$$p-value = 2*\mathbf{P}\left(Z\leq\frac{19+\frac{1}{2}-5\frac{12}{2}}{\sqrt{\frac{5*6(12)}{12}}}\right)=0.028$$
+$$p-value = 2*0.028$$
+$$p-value = 0.056$$
+
+Ya que  $p-value > \alpha$ 
+
+$\therefore$ No rechazo $H_0$
+
+**Paso 6** Conclusión
+
+$\therefore$ No hay diferencia significativa en el tiempo de atención de los adolescentes en los anuncios de comida y bebidas.
+
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+El primer paso es ordenar los rangos:
+
+```{r}
+R_i=c(1,2,3,4,5,6,7,8.5,8.5,10,11)
+```
+
+El segundo paso es calcular $T$ que corresponde  a la suma de los rangos asignados a los anuncios de "Bebida".   
+
+```{r}
+
+T=1+3+4+5+6  #rangos asignados a los anuncios de bebida
+T
+n=5
+m=6
+N=n+m
+
+```
+Según el planteamiento de las hipótesis, este es un Caso A (de 2 colas), por lo que siguiendo la regla de decisión, se rechazará $H_0$ si $T \leq t_1$ o $T> t_2$, donde $t_1$ es el cuantil que acumula $2.5\%$ de probabilidad en una distribución normal estándar, y $t_2$ es el cuantil que acumula $97.5\%$ en la misma distribución.
+
+```{r}
+t1=19
+t1
+t2=41
+t2
+pvalue=2*0.028
+pvalue
+```
+Observamos que $T \leq t_1$ por lo tanto rechazaremos $H_0$ y concluimos que la distribución del tiempo de atención que prestan los adolescentes a los anuncios sobre comida es distinta a la distribución del tiempo de atención prestada a los anuncios de bebidas.
+
+En R la prueba **"wilcox.test"** también realiza esta prueba con un cálculo ligeramente distinto de la estadística de prueba. En el caso de la prueba de Wilcoxon lo que contaremos es el número de ocasiones que la $x_i>y_j$ para todas las combinaciones de $i=1,...n$ y $j=1,...,m$.
+
+Si las distribuciones son iguales entonces se esperaría que el número de veces que $x_i>y_j$ sea cercano a la mitad de las combinaciones. 
+
+```{r}
+B=c(23, 28, 30, 35, 38)     #Datos de bebidas
+C=c(25, 41, 42, 45, 47, 50) #DAtos de comidas
+m1<-wilcox.test(B,C, na.rm=TRUE, paired=FALSE, exact=FALSE)
+print(m1)
+```
+Con esta prueba se rechaza la hipótesis nula de que ambas distribuciones son iguales. Y se concluye de la misma forma que la prueba de rangos anterior. La distribución del tiempo de atención que prestan los adolescentes a los anuncios sobre comida es distinta a la distribución del tiempo de atención prestada a los anuncios de bebidas.
+

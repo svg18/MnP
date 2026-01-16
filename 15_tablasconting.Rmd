@@ -1,0 +1,45 @@
+# (PART) Tablas de Contingencia {-}
+
+# Introducción {-}
+
+Estas son tablas en las que se muestran las frecuencias de observaciones medidas sobre variables que tienen diferentes clases. El objetivo es observar si dos variables son independientes entre si. Para la realización de esta prueba las frecuencias son anotadas en tablas en las cuales cada observación es categorizada en solo una de las clases.
+
+El uso de las tablas de contingencia fue mencionado previamente en la prueba de signos conocida como **McNemar**.
+
+Una **tabla de contingencia** es un arreglo de números naturales en forma de matriz, donde cada número representa conteos o frecuencias.
+
+Por ejemplo:
+
+$$
+\begin{array}{|c|c|c|c|} 
+\hline
+&\textbf{Fuma} &\textbf{No Fuma} &\textbf{Total}\\
+\hline
+\textbf{Hombre} &11 &18 &29\\
+\hline
+\textbf{Mujer} &22 &13 &35\\
+\hline
+\textbf{Total}& 33& 31 &64\\
+\hline
+\end{array}
+$$
+
+Queremos saber si influye el género en fumar.
+
+Esta prueba nos ayuda para ver si hay alguna asociación entre 2 variables.
+
+Algunos ejemplos:
+
+* La asociación entre el estado nutricional de un estudiante con su desempeño académico.
+
+* Si la preferencia por un refresco es independiente del sexo del consumidor.
+
+* La asociación entre la región geográfica y la inversión financiera.
+
+**NOTA:**
+
+Si no hay asociación entre las variables decimos que son independientes.
+
+En el caso de ser dependientes el valor de una variable nos ayudará a determinar el valor de la otra.
+
+De forma general, una tabla de contingencia se construirá con $r$ renglones y $c$ columnas, y se llamará tabla de contingencia de $r\times c$. Éstas tablas de contingencia pueden usarse para presentar una tabulación de los datos contenidos en varias muestras, donde los datos representan al menos una escala de medición nominal.

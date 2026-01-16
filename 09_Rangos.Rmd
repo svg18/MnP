@@ -1,0 +1,7 @@
+# (PART) Prueba de Rango {-}
+
+# Introducción {-}
+
+Ya nos empapamos de la pruebas binomiales ahora en esta seccion se presentan tres de las pruebas de rangos más utilizadas en modelos no paramétricos, la prueba de Mann y Witney,  la prueba de Kruskal-Wallis y la prueba de Igualdad de Varianzas.
+
+Estas pruebas son otros métodos no paramétrico que se usan para determinar si hay diferencia entre poblaciones. El procedimiento se basa en ordenar las observaciones pertenecientes a muestras aleatorias de cada población, asignarles rangos según sus valores y posteriormente construir la prueba sobre dichos rangos. 

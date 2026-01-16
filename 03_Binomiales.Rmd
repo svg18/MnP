@@ -1,0 +1,5 @@
+# (PART) Pruebas Binomiales {-}
+
+# Introducción {-}
+
+La distribución de probabilidad binomial se introdujo para describir las probabilidades asociadas con el número de caras cuando se lanza una moneda $n$ veces. En su forma más general, cada uno de $n$ ensayos independientes da como resultado $"éxito"$, con probabilidad $p$, o $"fracaso"$, con probabilidad $q = 1-p$. La distribución binomial describe la probabilidad de obtener exactamente $"k"$ éxitos.

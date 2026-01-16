@@ -1,0 +1,216 @@
+# Prueba de la Mediana
+
+La prueba mediana está diseñada para examinar si varias muestras provienen de poblaciones que tienen la misma mediana. En realidad, la prueba de la mediana no es nueva, es simplemente una aplicación especial de la prueba de ji cuadrado con totales marginales fijos. Sin embargo, es una aplicación muy útil y consideramos que vale la pena un trato especial.
+
+Para probar si varias $c$ poblaciones tienen la misma mediana, se extrae una muestra aleatoria de cada población (la escala de medición es al menos ordinal, o el término "mediana" no tendría sentido). Se construye una tabla de contingencia $2\times c$ y las dos entidades en la $i-ésima$ columna son los números de observaciones en la $i-ésima$ muestra que están por encima y por debajo de la gran mediana (la mediana de todas las observaciones combinadas). La prueba de $\chi^2$ habitual se aplica luego a la tabla de contingencia.
+
+## Datos
+
+Para cada una de las poblaciones $c$ se obtiene una muestra aleatoria de tamaño $n_{i}$, $i = 1,2,\ldots, c$. Se determina la mediana de la muestra combinada; es decir, se determina el número que excedió aproximadamente la mitad de las observaciones en toda la muestra $N = n_{1} + n_{2}+ \ldots + n_{c}$. Esto se llama mediana. Sea $O_{1i}$, el número de observaciones en la $i$-ésima muestra que excede la mediana y, sea $O_{2i}$ el número en la $i$-ésima muestra que sea menor o igual a la mediana, organice los conteos de frecuencia en una tabla de contingencia $2\times c$ de la siguiente manera:
+
+$$
+\begin{array}{c|c|c|c|c|c}
+ & \textbf{Muestra 1}  & \textbf{Muestra 2}    & \cdots & \textbf{Muestra c} &\textbf{Totales}     \\
+\hline
+\textbf{> Mediana} & O_{11} & O_{12} & \cdots & O_{1c} & a   \\
+\hline
+\leq \textbf{Mediana} & O_{21} & O_{22} & \cdots & O_{2c} & b\\
+\hline
+\textbf{Totales}    & n_{1}  & n_{2}  & \cdots & n_{c}  & N \\
+\end{array}
+$$
+
+Sea $a$ el número total de observaciones mas grandes a la mediana en todas las muestras, sea $b$ el número total de observaciones menores o iguales a la mediana. Entonces $a+b=N$ es el número total de observaciones.
+
+## Supuestos
+
+* Cada muestra es una muestra aleatoria.
+
+* Las muestras son independientes entre si.
+
+* La escala de medida es al menos ordinal.
+
+* Si todas las poblaciones tienen la misma mediana, todas las poblaciones tienen la misma probabilidad $p$ de que una observación exceda la mediana.
+
+## Estadístico de Prueba
+
+El estadístico de prueba es obtenido por el reordenamiento del estadístico utilizado en la prueba anterior, notando que $O_{2i}=n_{i}-O_{1i}$ en el caso especial con 2 renglones.
+
+$$T=\frac{N^2}{ab}*\sum^{c}_{i=1}\frac{(O_{1i}-\frac{n_{i}a}{N})^2}{n_i}$$
+
+
+Para ahorrarnos algunos cálculos:
+
+$$T=\frac{N^2}{ab}*\sum^{c}_{i=1}\frac{O_{1i}^2}{n_i}-\frac{Na}{b}$$
+
+**NOTA:** 
+
+Si $a$ es exactamente igual a $b$ nuestro estadístico de prueba se simplifica en:
+
+$$T=\sum^{c}_{i=1}\frac{(O_{1i}-O_{2i})^2}{n_i}$$
+
+**Distribución de T**
+
+La distribución nula de $T$ es obtenida aproximadamente por la Distribución $\chi^2$ con $(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+Es decir,
+
+$$T\sim \chi^2_{(c-1)}$$
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{Todas las} \  c \  \mbox{poblaciones tienen la misma mediana.}$$
+
+$$vs$$
+
+$$\textbf{H}_a:\mbox{ Al menos 2 de las poblaciones tienen diferente mediana.}$$
+
+
+#### Regla de decisión {-}
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ con $(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución.
+
+
+## Comparación Múltiple
+
+Si la hipótesis nula es rechazada, se pueden hacer comparaciones múltiples por parejas entre poblaciones utilizando la prueba de mediana repetidamente en tablas de contingencia de $2 \times 2$. En cada comparación se encuentra la mediana de las dos muestras, y el número por encima o por debajo de esa mediana se utiliza en la tabla de contingencia $2 \times 2$. Calculamos el estadístico de prueba T para la prueba y si $T$ es más grande que el cuantil $1-\alpha$ de la distribución $\chi^2$ con 1 grado de libertad encontrado en tablas de dicha distribución, entonces decimos que las medianas de esas 2 poblaciones son iguales.
+
+Aplicaremos nuestros conocimientos en el siguiente ejercicio:
+
+### Ejemplo
+
+Se asignaron al azar cuatro métodos diferentes de cultivo de maíz a un gran número de parcelas diferentes y se calculó el rendimiento por acre para cada parcela. Los datos son los siguientes:
+
+$$
+\begin{array}{ c c c c c } 
+\textbf{Método 1} & \textbf{Método 2} & \textbf{Método 3} & \textbf{Método 4} \\ 
+83 & 91 &101  &78  \\ 
+91 & 90 &100 &82 \\
+94 & 81 &91  &81  \\
+89 & 83 &93  &77  \\
+89 & 84 &96  &79 \\
+96 & 83 &95 &81 \\
+91 & 88 &94  &80 \\
+92 & 91 & & 81 \\
+90 & 89 & &  \\
+   & 84 &  &  \\
+\end{array}
+$$
+
+Para determinar si existe una diferencia en los rendimientos como resultado del método utilizado, se empleó la prueba mediana porque se consideró que una diferencia en las medianas de la población podría interpretarse como una diferencia en el valor del método utilizado.
+
+
+**Paso 1** Prueba a utilizar **Tablas de contingencia, Prueba de la mediana**
+
+**Paso 2** Planteamineto de Hipótesis
+
+$$\textbf{H}_0: \ \mbox{Todos los métodos tienen el mismo rendimiento medio (mediana) por acre.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Al menos dos de los métodos difieren con respecto al rendimiento medio(mediana) por acre.}$$
+
+
+En el conteo rápido revela que hay 34 observaciones en total, por lo que el promedio de las observaciones más pequeñas decimoséptima y decimoctava es la mediana, y se ve que es 89. Luego, para cada método (muestra), el número de valores que exceden 89 y el número que es menor o igual a 89 se registra en la siguiente forma.
+
+$$
+\begin{array}{c|c|c|c|c|c}
+ & \textbf{Método 1} & \textbf{Método 2} & \textbf{Método 3} & \textbf{Método 4}& \textbf{Totales} \\
+\hline
+\textbf{> 89} & 6 & 3 & 7 & 0 & 16  \\
+\hline
+\leq \textbf{89} & 3 & 7 & 0 & 8 & 18\\
+\hline
+\textbf{Totales}  & 9  & 10  & 7 & 8  & 34 \\
+\end{array}
+$$
+
+**Paso 3** Estadístico de Prueba
+
+
+
+$$T=\frac{N^2}{ab}*\sum^{c}_{i=1}\frac{(O_{1i}-\frac{n_{i}a}{N})^2}{n_i}$$
+
+$$T=\frac{(34)^2}{(16)(18)}*\left(\ \frac{\left[6-\frac{(9)(16)}{34}\right]^2}{9}+\frac{\left[3-\frac{(10)(16)}{34}\right]^2}{10}+\frac{\left[7-\frac{(7)(16)}{34}\right]^2}{7}+\frac{\left[0-\frac{(8)(16)}{34}\right]^2}{8} \right)$$
+
+$$T=4.01(0.34+0.29+1.97+1.78) = 17.6$$
+
+
+**Paso 4** Regla de decisión
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ con $(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución.
+
+Tomaremos un $\alpha$=0.05, entonces $\chi^2(.95)$ con 3 grados de libertad es $7.815$, obtenido en las tablas correspondientes a la Distribución $\chi^2$.
+
+Como  $T=17.6 > 7.815=\chi^2(.95)$ rechazamos $H_0$.
+
+**Paso 5** Conclusión 
+
+Como rechazo $H_0$, entonces almenos 2 de los métodos difieren con respecto al rendimiento medio(mediana) por acre.
+
+Como se rechazó $H_0$, se le deja al lector hacer la comparación múltiple.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+#Datos
+Rendimiento=c(83,91,94,89,89,96,91,92,90,91,90,81,83,84,83,88,91,89,84,101,100,91,
+              93,96,95,94,78,82,81,77,79,81,80,81)
+Metodo=c(1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4)
+
+#Calcular la mediana
+mediana=median(Rendimiento)
+mediana
+```
+Después de calcular la mediana, contamos cuantas observaciones hay por método por arriba y por abajo de la mediana y con dichas frecuencias construimos la tabla de contingencia.
+```{r}
+#Construir la tabla de contingencia
+table(Metodo[which(Rendimiento>mediana)])
+table(Metodo[which(Rendimiento<=mediana)])
+Observados=matrix(c(6,3,7,0,3,7,0,8), nrow = 2, ncol = 4, byrow = T)
+rownames(Observados)=c('Mayor_med','MenorIgual_med')
+colnames(Observados)=c('Metodo 1','Metodo 2','Metodo 3','Metodo 4')
+Observados
+```
+
+Ya que se tiene la tabla se le puede aplicar la prueba. En este caso observaremos que la prueba nos advierte sobre el uso de la estadísitca Ji-Cuadrada, lo anterior se debe a que las frecuencias en la tabla de contingencia son pequeñas e incluso cero. La prueba alternativa en estos casos es la prueba exacta de Fisher. 
+```{r}
+#Prueba
+T1 <- chisq.test(Observados)
+T1
+T2 <- fisher.test(Observados)
+T2
+```
+Con ambas pruebas se llega a la conclusión de rechazar $H_0$ con $\alpha=0.01$ y por lo tanto al menos dos de los métodos difieren con respecto al rendimiento medio (mediana) por $m^2$.
+
+Podemos ver los valores esperados con: 
+```{r}
+#Valores de las frecuencias esperadas
+T1$expected
+```
+
+Podemos realizar las comparaciones múltiples. A continuación se presenta la comparación de los métodos 2 y 3.
+```{r}
+#Datos
+Rendimiento=c(91,90,81,83,84,83,88,91,89,84,101,100,91,
+              93,96,95,94)
+Metodo=c(2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3)
+
+#Calcular la mediana
+mediana=median(Rendimiento)
+mediana
+
+table(Metodo[which(Rendimiento>mediana)])
+table(Metodo[which(Rendimiento<=mediana)])
+Observados=matrix(c(0,6,10,1), nrow = 2, ncol = 2, byrow = T)
+rownames(Observados)=c('Mayor_med','MenorIgual_med')
+colnames(Observados)=c('Metodo 2','Metodo 3')
+Observados
+#Prueba
+T2 <- fisher.test(Observados)
+T2
+
+```
+Los métodos 2 y 3 difieren con respecto al rendimiento medio (mediana) por $m^2$.

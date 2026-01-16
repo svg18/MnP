@@ -1,0 +1,214 @@
+# Prueba para más de dos Muestras 
+
+Si hay tres o más muestras, esta prueba se modifica fácilmente para probar la igualdad de varianzas. De cada observación se resta su media poblacional (o su media muestral ($\overline{x}$) cuando $\mu_{i}$ es desconocida) y convertimos el signo de la diferencia resultante a $"+"$, como se acaba de describir para ambas muestras.
+Los rangos se asignan de menor a mayor y asignamos el promedio de los rangos correspondientes en caso de empate. 
+
+Calculamos la suma del cuadrado de los rangos asignados de cada muestra, denotamos por $$S_{1},S_{2},\cdots,S_{k} \  \ \mbox{la suma de los rangos de cada muestra.}$$
+
+## Datos
+
+Se tienen $k$ m.a que pueden tener distintos tamaños, la $j-ésima$ m.a, de tamaño $n_j$ es $$x_{j1},\ x_{j2},\ x_{j3},\ \cdots, \ x_{jn_j}.$$
+
+Así.
+
+$$
+\begin{array}{c c c c c} 
+Muestra \ 1&Muestra\ 2&Muestra\ 3&...& Muestra\ k \\
+x_{11}&x_{21}&x_{31}&...&x_{k1}\\
+x_{12}&x_{22}&x_{32}&...&x_{k2}\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+x_{1n_1}&x_{2n_2}&x_{3n_3}&...&x_{kn_k}\\
+\end{array}
+$$
+
+Sea $N$ el número total de observaciones: 
+
+$$N=\sum_{j=1}^k n_j$$
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{Las} \  k  \ \mbox{poblaciones son identicas, excepto por diferencia en las medias.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \mbox{Algunas de las varianzas de las poblaciones no son idénticas entre sí.}$$
+
+## Estadístico de Prueba
+
++ **Cuando tenemos empates**
+
+$$T_{2}= \frac{1}{D^2}\left[\sum_{j=1}^{k}\frac{S_{j}^2}{n_j}-N(\overline{S})^2\right]$$
+donde:
+
+* $n_{j}$= Número de observaciones en la muestra $j$
+
+* $N= n_{1}+n_{2}+\cdots+n_{k}$
+
+* $S_{j}$= la suma de los cuadrados de los rangos en la muestra $j$
+
+* $\overline{S}= \frac{1}{N}\sum_{j=1}^{k}S_{j}$ Es el promedio de los cuadrados de todos los rangos.
+
+* $D^2=\frac{1}{N-1}\left[\sum_{i=1}^{N}R^4_{j}-N(\overline{S})^2\right]$ y $\sum{R_{i}^4}$ representa la suma de los rangos después de elevarlos a la cuarta potencia.
+
++ **Cuando no tenemos empates**
+
+
+$D^2$ y $\overline{S}$ se simplifican:
+
+
+$$D^2=N(N+1)(2N+1)(8N+11)/180$$
+
+$$\overline{S}=(N+1)(2N+1)/6$$
+
+## Regla de decisión
+
+Rechazamos $H_0$ si:
+
+$$T_{2}>t_{1-\alpha}$$ 
+
+donde $t_{1-\alpha}$ es el cuantil de la distribución $\chi^2$ con $k-1$ grados de libertad donde el cuantil se localiza en las tablas de dicha distribución.
+
+
+y calculamos el $p-value$ 
+
+$$p-value= \mathbf{P}\left[\chi^2>T_{2}\right]$$
+es la probabilidad de una variable aleatoria $\chi^2$  con $k-1$ grados de libertad sea mayor a el  valor observado de $T_2$.
+
+## Comparación múltiple
+
+Si la hipótesis nula es rechazada, podriamos utilizar el siguiente procediemiento para determinar cuales pares de poblaciones tienden a ser diferentes.
+
+Podemos decir que las poblaciones $i$ y $j$ parecen ser diferentes si se satisface la siguiente desigualdad:
+
+$$\left|\frac{Si}{ni}- \frac{Sj}{nj}\right|> t_{1-\alpha/2}\left(D^2\frac{N-1-T_{2}}{N-k}\right)^{1/2}\left(\frac{1}{n_i}+\frac{1}{n_j}\right)^{1/2}$$
+Donde $t_{1-\alpha/2}$ es el cuantil $1-\alpha/2$ de la distribución $t$ obtenido en tablas de dicha distribución con $N-k$ grados de libertad.
+
+
+Ahora resolveremos un ejercicio:
+
+## Ejemplo
+
+Retomando en ejemplo de los 4 métodos de cultivo de maíz, probaremos ahora si las varianzas de la cantidad de cosecha por $m^2$ de tierra de cada terreno son diferentes.
+
+$$
+\begin{array}{c c c c} 
+\textbf{Método 1} & \textbf{Método 2} & \textbf{Método 3} & \textbf{Método 4}\\
+83&91&101&78\\
+91&90&100&82\\
+94&81&91&81\\
+89&83&93&77\\
+89&84&96&79\\
+96&83&95&81\\
+91&88&94&80\\
+92&91&  &81\\
+90&89&  &\\
+  &84&  &\\
+\end{array}
+$$
+
+
+**Paso 1** Prueba a utilizar **Prueba de Igualdad de Varianzas para mas de dos muestras**
+
+
+**Paso 2** Formulamos las hipótesis
+
+$$\textbf{H}_0: \ \mbox{Los 4 métodos son idénticos, excepto por diferencias en las medias.}$$
+$$vs$$
+
+$$\textbf{H}_a:\ \mbox{Al menos alguno de los métodos tiene varianzas distintas}$$
+$$\mbox{a al menos alguno de los otros métodos.}$$
+
+
+**Paso 3** Estadístico de Prueba
+
+**Cuando tenemos empates**
+
+$$T_{2}= \frac{1}{D^2}\left[\sum_{j=1}^{k}\frac{S_{j}^2}{n_j}-N(\overline{S})^2\right]$$
+donde:
+
+* $n_{j}$= Número de observaciones en la muestra $j$
+
+* $N= n_{1}+n_{2}+\cdots+n_{k}$
+
+* $S_{j}$= la suma de los cuadrados de los rangos en la muestra $j$
+
+* $\overline{S}= \frac{1}{N}\sum_{j=1}^{k}S_{j}$ Es el promedio de los cuadrados de todos los rangos.
+
+* $D^2=\frac{1}{N-1}\left[\sum_{i=1}^{N}R^4_{j}-N(\overline{S})^2\right]$ y $\sum{R_{i}^4}$ representa la suma de los rangos después de elevarlos a la cuarta potencia.
+
+
+$$T_{2}=6.006$$
+
+
+**Paso 5** Regla de Decisión
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si:
+
+
+$$T_{2}>t_{1-\alpha}$$ 
+
+donde $t_{1-\alpha}$ es el cuantil de la distribución $\chi^2$ con $k-1$ grados de libertad donde el cuantil se localiza en las tablas de dicha distribución.
+
+Ya que utilizamos la estadística $T_2$, entonces el cuantil que hay que buscar es en una distribución Ji-cuadrada con $k-1=3$ grados de libertad. Consideremos $\alpha=0.01$.
+
+
+$$t_{1-\alpha}=11.334$$
+Como $T_2=6.006 \ngtr 11.344=t_{1-\alpha}$ entonces no se cumple la regla de decisión.
+
+
+$\therefore$Entonces no rechazo $H_0$.
+
+**Paso 6** Conclusión
+
+Conlcuimos que no hay evidencia suficiente para decir que las distribuciones de los rendimientos de los 4 métodos de cultivo no sean idénticos, excepto por diferencias en las medias.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+
+```{r}
+M1=c(83,91,94,89,89,96,91,92,90)
+M2=c(91,90,81,83,84,83,88,91,89,84)
+M3=c(101,100,91,93,96,95,94)
+M4=c(78,82,81,77,79,81,80,81)
+n1=length(M1)
+n2=length(M2)
+n3=length(M3)
+n4=length(M4)
+N=n1+n2+n3+n4
+
+U1=sort(abs(M1-mean(M1)))
+U2=sort(abs(M2-mean(M2)))
+U3=sort(abs(M3-mean(M3)))
+U4=sort(abs(M4-mean(M4)))
+#U=rbind(U1,U2,U3,U4)
+#Asignación de rango
+R1=c(3.5,3.5,5,11,12.5,12.5,25,33,34)
+R2=c(14,18.5,18.5,20,23.5,23.5,26,28.5,28.5,32)
+R3=c(2,6,15,21,27,30,31)
+R4=c(1,7,9,9,9,16,17,22)
+#rangos al cuadrado
+R1s=R1^2
+R2s=R2^2
+R3s=R3^2
+R4s=R4^2
+#suma del cuadrado de los rangos
+S1=sum(R1s)
+S2=sum(R2s)
+S3=sum(R3s)
+S4=sum(R4s)
+
+S=sum(S1,S2,S3,S4)/N
+R4=sum(R1s^2)+sum(R2s^2)+sum(R3s^2)+sum(R4s^2)
+D2=(R4-N*S^2)/(N-1)
+T2=(S1^2/n1+S2^2/n2+S3^2/n3+S4^2/n4-N*S^2)/D2
+T2
+```
+Ya que utilizamos la estadística $T_2$, entonces el cuantil que hay que buscar es en una distribución Ji-cuadrada con $k-1=3$ grados de libertad. Consideremos $\alpha=0.01$.
+```{r}
+t=qchisq(.99,3)
+t
+```
+
+Como $T_2=6.006\ngtr11.344=t_{1-\alpha}$ entonces no se cumple la regla de decisión y no rechazamos $H_0$. Conlcuimos que no hay evidencia suficiente para decir que las distribuciones de los rendimientos de los 4 métodos de cultivo no sean idénticos, excepto por diferencias en las medias.

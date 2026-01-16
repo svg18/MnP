@@ -1,0 +1,31 @@
+# Otras estadísticas
+
+La prueba de Kuiper esta muy relacionada con la prueba Kolmogorov–Smirnov (o prueba K-S). Como la prueba $K-S$, esta prueba utiliza las estadísticas $D^+$ y $D^-$ que representan las diferencias mas positivas y mas negativas entre las distribuciones que se estan comparando. La estadística de prueba de Kuiper es:
+$$V=D^+ + D^-$$
+Con este pequeño cambio, la prueba de Kuiper es tan sensible en las colas como lo es en la mediana de la distribución.
+
+Las pruebas **Anderson–Darling** y **Cramér–von Mises** pertenecen a un grupo llamado **estadísticas EDF cuadráticas**, en donde el término EDF se refiere a que se basan en la función de distribución empírica. 
+
+Este grupo de estadísticas esta definido de la siguiente manera:
+$$n\int_{-\infty}^{\infty}(S(x)-F_0(x))^2w(x)dF_0(x)$$
+En donde la diferencia entre la distribución empírica y la hipótetica está calculada con el término cuadrático y el término $w(x)$ es un peso que se da esas diferencias.
+
+Cuando $w(x)=1$ entonces se tiene la estadística de Cramér–von Mises; cuando $w(x)=[F_0(x)(1-F_0(x))]^{-1}$ entonces se tiene la estadística de Anderson–Darling, la cual por construcción asigna mayores pesos a observaciones en las colas de la distribución.
+
+En R, la libreria "goftest" contiene las pruebas Anderson–Darling y Cramér–von Mises entre otras.
+
+Retomando el ejemplo de las alturas de los pinos, probaremos ahora que las alturas tienen distribución normal y exponencial.
+
+```{r}
+X=Loblolly$height
+meanx=mean(X)
+meanx
+sdx=sd(X)
+sdx
+library(goftest)
+ad.test(X,null = "pnorm",mean=meanx,sd=sdx)
+cvm.test(X,null = "pnorm",mean=meanx,sd=sdx)
+ad.test(X,null = "pexp",rate=1/meanx)
+cvm.test(X,null = "pexp",rate=1/meanx)
+
+```

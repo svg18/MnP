@@ -1,0 +1,323 @@
+# Prueba de Kruskal-Wallis
+
+Se obtienen $k$ $m.a.i.$ de $k$ distintas poblaciones ($k\geq 2$) y queremos probar la hipótesis nula de que todas las poblaciones tienen la misma distribución contra la alternativa de que algunas de las poblaciones tienden a tener distribución distinta.
+Un caso particular, si $k=2$ se tiene la prueba de **Mann-Whitney**.
+
+
+## Datos
+
+Se tienen $k\ \ m.a.$ que pueden tener incluso distintos tamaños, la $i-ésima\ \ m.a.$ de tamaño $n_{i}$ es:
+$$X_{i_1},\ X_{i_2},\ \cdots, \ X_{i_{ni}} \ \ (m.a. \mbox{de la} \ \ i-ésima \ \ \mbox{población.})$$
+
+Así:
+
+$$
+\begin{array}{c c c c c} 
+Muestra \ 1&Muestra\ 2&Muestra\ 3&...&Muestra\ k \\
+x_{11}&x_{21}&x_{31}&...&x_{k1}\\
+x_{12}&x_{22}&x_{32}&...&x_{k2}\\
+\ldots&\ldots&\ldots&\ddots&\ldots\\
+x_{1n_1}&x_{2n_2}&x_{3n_3}&...&x_{kn_k}\\
+\end{array}
+$$
+
+
+sea $N$ el número total de observaciones:
+
+$$ N= \sum_{i=1}^{k} n_{i}$$
+
+
+## Supuestos
+
+
+1) Todas las muestras son muestras aleatorias de sus respectivas poblaciones.
+
+2) Además de la independencia dentro de las muestras, suponemos que hay independencia entre las muestras (es decir, las poblaciones son independientes).
+
+3) Las $k$ poblaciones son idénticas o algunas de las poblaciones tienden a tener valores más grandes que las otras poblaciones.
+
+4) La escala de medida es al menos ordinal.
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{Las funciones de distribución de las} \ \  k \ \ \mbox{poblaciones son idénticas.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Al menos una de las poblaciones tiende a tener valores mayores que}$$
+
+$$\mbox{al menos una de las poblaciones.}$$
+
+$$\mbox{o equivalentemente}:$$
+
+$$\textbf{H}_a: \mbox{Las} \ \ k \ \  \mbox{poblaciones no tienen medias idénticas.}$$ 
+
+**Asignación de Rangos**
+
+* Asignamos el rango $1$ a la observación más pequeña de las $N$ observaciones, el rango $2$ a la $2da$ más pequeña, y así sucesivamente hasta llegar a la observación mayor que recibirá el rango $N$.
+
+* Sea $R(X_{ij})$ el rango asignado a la observación $X_{ij}$
+
+* Sea $R_{i}$ la suma de los rangos asignados a la $i-ésima$ muestra (la $i-ésima$ columna):
+
+
+$$R_{i}=\sum_{j=1}^{n_{i}} R(X_{ij}),  i= 1, 2,\cdots,k$$
+
+**NOTA** 
+
+Se calcula $R_{i}$ para cada muestra, si hay observaciones repetidas, se le asigna el promedio de los rangos de las observaciones repetidas.
+
+$$
+\begin{array}{c c c c c} 
+Rangos & Rangos & Rangos & \cdots  & Rangos \\
+Muestra\ 1 & Muestra \ 2 & Muestra\ 3 & \cdots & Muestra\ k \\
+\hline
+R(X_{11}) &  R(X_{21}) & R(X_{31})  & \cdots & R(X_{k_{1}}) \\ 
+R(X_{12}) &  R(X_{22}) & R(X_{31}) & \cdots & R(X_{k_{2}}) \\  
+\vdots &  \vdots & \vdots  & \cdots &\vdots \\ 
+R(X_{1n_{1}}) &R(X_{2n_{2}})   &R(X_{3n_{3}})   & \cdots &  R(X_{kn_{k}}) \\ 
+\hline
+R_{1} & R_{2} & R_{3} & \cdots&R_{k} \\
+\end{array}
+$$
+
+## Estadístico de prueba
+
+$$T= \frac{1}{S^2}\left(\sum_{i=1}^{k}\frac{R^2_{i}}{n_{i}}-\frac{N(N+1)^2}{4}\right)$$
+donde $N$ y $R_{i}$ son como los definimos anteriormente y donde:
+
+$$ S^2 = \frac{1}{N-1}\left(\sum_{todos\ los\ rangos}R(X_{ij})^2-N\frac{(N+1)^2}{4}\right)$$
+* \textbf{Si no hay empates} $S^2$ se simplifica a $N(N+1)/12$, y la estadística de prueba se reduce a:
+
+$$ T= \frac{12}{N(N+1)}\sum_{i=1}^{k}\frac{R^2_{i}}{n_{i}}-3(N+1) $$
+
+## Regla de decisión
+
+Rechazamos $H_0$ al nivel de significancia $\alpha$ si $T>\omega_{1-\alpha}$, donde $\omega_{1-\alpha}$ se obtiene de la tabla de cuantiles de la distribución de $T$ (tablas Kruskal-Wallis). En caso de no encontrarse en la tabla, los tamaños de muestra correspondientes se utiliza la aproximación Ji-cuadrada con $k-1$ grados de libertad para el estadístico de prueba.
+
+Es decir, rechazamos $H_0$ a un nivel $\alpha$ si $T > \chi^2_{(k-1)}(1-\alpha)$
+
+y calculamos el $p-value$ de la siguiente manera el $p-value$ es aproximadamente la probabilidad de una variable aleatoria chi-cuadrado con $k-1$ grados de libertad que excede el valor observado de $T$.
+
+**Múltiples comparaciones**
+
+Si y sólo si la hipótesis nula es rechazada, podriamos utilizar el siguiente procedimiento para determinar cuales pares de poblaciones tienden a ser diferentes.
+
+Podemos decir que las poblaciones $i$ y $j$ parecen ser diferentes si se satisface la siguiente desigualdad:
+
+$$\left|\frac{Ri}{ni}- \frac{Rj}{nj}\right|> t_{1-\alpha/2}\left(S^2\frac{N-1-T}{N-k}\right)^{1/2}\left(\frac{1}{n_i}+\frac{1}{n_j}\right)^{1/2}$$
+
+Donde $R_i$ y $R_j$ son las sumas de los rangos de las dos muestras, $t_{1-(\frac{\alpha}{2})}$ es el cuantil $1-\frac{\alpha}{2}$ de la distribución $t$ obtenida de las tablas de la distribución con $N-k$ grados de libertad. Este procedimiento es repetido para todas las parejas de poblaciones.
+
+
+Ahora veamos cómo se hace un ejemplo: 
+
+
+## Ejemplo
+
+Se tienen 4 métodos de cultivo de maíz, para ver si hay diferencia entre uno y otro se utilizan terrenos similares y se aplican los distintos métodos y se ve la cantidad de cosecha por $m^2$ de tierra de cada terreno obtenido.
+
+**Paso 1** Prueba a utilizar **Prueba Kruskal-Wallis**
+$$
+\begin{array}{|c| c| c| c|} 
+\hline
+\textbf{Método 1} & \textbf{Método 2} & \textbf{Método 3} & \textbf{Método 4}\\
+\hline
+83&91&101&78\\
+91&90&100&82\\
+94&81&91&81\\
+89&83&93&77\\
+89&84&96&79\\
+96&83&95&81\\
+91&88&94&80\\
+92&91&  &81\\
+90&89&  &\\
+  &84&  &\\
+  \hline
+\end{array}
+$$
+**Paso 2** Planteamiento de hipótesis 
+
+Queremos probar:
+
+**Hipótesis:**
+
+$$\textbf{H}_0: \ \mbox{Las 4 Métodos son idénticos.}$$
+
+$$VS$$
+
+$$\textbf{H}_a: \mbox{Al menos alguno de los métodos tiende a producir cosechas diferentes}$$
+$$\mbox{(mayores o menores) que los otros métodos.}$$
+
+
+**Paso 3** Estadístico de Prueba:
+
+* N = Número total de observaciones 
+
+$$T= \frac{1}{S^2}*\left[\sum_{i=1}^{k}\frac{R_{i}^2}{n_{i}} - \frac{N*(N+1)^2}{4}\right]$$
+
+
+* Donde 
+
+$$ S^2 = \frac{1}{N-1}*\left[\sum_{Todos los rangos}R(X_{i,j})^2 - N*\frac{(N+1)^2}{4}\right] $$
+
+* Si NO hay empates:
+
+$$S^2= \frac{N*(N+1)}{12}$$
+
+
+y  $T$ se reduce a 
+
+$$T= \frac{12}{N*(N+1)}*\sum_{i=1}^{k}\frac{R_{i}^2}{n_{i}} - 3*(N+1)$$
+
+
+ahora regresando al problema:
+
+**Paso 4** Planteamiento completo
+
+$$
+\begin{array}{||c c c c c c c c ||} 
+\hline
+\mbox{Método 1} & \mbox{Rango} & \mbox{Método 2} & \mbox{Rango}  & \mbox{Método 3} & \mbox{Rango} & \mbox{Método 4} & \mbox{Rango} \\  
+\hline
+83 & 11 &91 &23 &101 &34 &78 &2 \\ 
+\hline
+91 & 23 & 90&19.5 &100 &33 &82 &9 \\
+\hline
+94 &28.5  &81 &6.5 &91 &23 &81 &6.5 \\
+\hline
+89 & 17 &83 &11 &93 &27 &77 &1 \\
+\hline
+89 & 17 &84 &13.5 &96 &31.5 &79 &3 \\
+\hline
+96 & 31.5 &83 &11 &95 &30 &81 &6.5 \\
+\hline
+91 & 23 &88 &15 &94 &28.5 &80 &4 \\
+\hline
+92 & 26 &91 &23 & & &81 &6.5 \\
+\hline
+90 & 19.5 &89 &17 & & && \\
+\hline
+& &84 &13.5 & & & & \\
+\hline
+& R_1=196.5 & &R_2=153 & &R_3=207 & &R_4=38.5 \\
+\hline
+\hline
+\end{array}
+$$
+ 
+
+**Supuestos:**
+
+* Muestra aleatoria de tamaño 34
+* k = 4 Número de Métodos
+* $\alpha$ = 0.05  Nivel de significancia
+* $N$  = 34 Tamaño de la muestra
+* $n_{1}$= 9,\ $n_{2}$= 10, \$n_{3}$=7, \$n_{4}$= 8, (número de registros por categoría)
+
+
+Como  hubo empates utilizaremos el estadístico:
+
+$$T= \frac{1}{S^2}\left(\sum_{i=1}^{k}\frac{R^2_{i}}{n_{i}}-\frac{N(N+1)^2}{4}\right)$$
+donde $N$ y $R_{i}$ son como los definimos anteriormente y donde:
+
+$$ S^2 = \frac{1}{N-1}\left(\sum_{todos los rangos}R(X_{ij})^2-N\frac{(N+1)^2}{4}\right)$$
+
+Regresando a nuestro ejemplo:
+
+$$T= \frac{1}{S^2}\left(\sum_{i=1}^{k}\frac{R^2_{i}}{n_{i}}-\frac{N(N+1)^2}{4}\right)$$
+
+* donde $N$ y $R_{i}$ son como los definimos anteriormente y donde:
+
+$$ S^2 = \frac{1}{34-1}\left(\left[(11)^2+(23)^2+(28.5)^2+\ldots+(4)^2+(6.5)^2+\right]-34\frac{(34+1)^2}{4}\right)$$
+$$S^2 = \frac{1}{33}\left[13621.75-34\frac{(35)^2}{4}\right]$$
+
+$$S^2 = 97.25$$
+
+Y nuestro estadístico es:
+
+$$T= \frac{1}{97.25}\left(\left[\frac{196.5^2}{9}+\frac{153^2}{10}+\frac{207}{7}+\frac{38.5^2}{8}\right]-\frac{34(34+1)^2}{4}\right)$$
+$$T= \frac{1}{97.25}\left(12937.71-10412.5\right)$$
+$$T= \frac{1}{97.25}\left(2525.216964\right)$$
+$$T= 25.46$$
+
+**Paso 5** Regla de decisión
+
+
+* Si $k =3$ y $n_{i} \ \leq  \ 5 \cdots \ \forall i$  y NO HAY EMPATES, usar tablas Kruskal-Wallis y rechazo $H_0$ a un nivel de significancia $\alpha$ si $T > \omega^{1-\alpha}$ donde el cuantil se busca en tablas Kruskal-Wallis, en caso de no encontrar el valor se ocupa:
+
+* En general, rechazamos $H_0$ a un nivel de significancia $\alpha$ si $T > \chi_{k-1}^2(1- \alpha)$
+
+Por otro lado calculamos:
+
+$$\chi_{(3)}^2(1-0.05)=7.815$$
+
+
+Por lo que $T=25.46 > 7.815$=$\chi_{(3)}^2(0.95)$, entonces  rechazo $H_0$.
+
+Ahora calculamos el $p-value$: 
+
+$P[X>T]= 1-P[X\leq 25.46]=0.0000123 < \alpha$
+
+Por lo tanto rechazo $H_0$ a un nivel de significancia de $\alpha$ = 0.05, 
+
+**Paso 6** Conclusión
+
+Entonces existe evidencia suficiente para decir que al menos alguno de los métodos tiende a producir cosechas diferentes (mayores o menores) que los otros métodos.
+
+## Ejemplo en R-Studio
+
+Calculamos el estadístico de prueba $T$
+
+```{r}
+##Prueba Kruskal-Wallis
+
+Metod1=c(83,91,94,89,89,96,91,92,90)	
+Metod2=c(91,90,81,83,84,83,88,91,89,84)
+Metod3=c(101,100,91,93,96,95,94)		
+Metod4=c(78,82,81,77,79,81,80,81)
+
+calif=list(g1=Metod1,g2=Metod2,g3=Metod3,g4=Metod4)
+
+n1=length(Metod1)
+n2=length(Metod2)
+n3=length(Metod3)
+n4=length(Metod4)
+N=n1+n2+n3+n4
+rangos=rank(c(Metod1,Metod2,Metod3,Metod4))
+rangos2=rangos^2
+R1=sum(rangos[1:9])
+R2=sum(rangos[10:19])
+R3=sum(rangos[20:26])
+R4=sum(rangos[27:34])
+
+S2=((N*(N+1))/12)
+T=(1/S2)*((R1^2/n1)+(R2^2/n2)+(R3^2/n3)+(R4^2/n4))-3*(N+1)
+T
+```
+
+Comparamos con el cuantil
+
+```{r}
+qchisq(0.950,3)
+
+```
+
+Utilizando la funcion de R
+
+```{r}
+kruskal.test(calif)
+
+```
+El valor de la estadísitca de prueba es 25.62 y su correspondiente $p-value$ es mucho menor a 0.01 ($\alpha=1\%$) por lo tanto se rechaza la hipótesis nula y se concluye que al menos uno de los 4 métodos tiene distribución diferente.
+
+Para determinar que método es el distinto se tendrán que hacer las comparaciones dos a dos.
+
+```{r, warning=FALSE}
+Rendimiento=c(83,91,94,89,89,96,91,92,90,91,90,81,83,84,83,88,91,89,84,101,100,91,
+              93,96,95,94,78,82,81,77,79,81,80,81)
+Metodo=c(1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4)
+pairwise.wilcox.test(Rendimiento,Metodo)
+```
+
+En este caso observamos que todos los $p-value$s de las comparaciones dos a dos son menores a 0.05 por lo tanto con un $\alpha$ del 5% podemos conlcuir que todos los métodos tienen distribuciones de los rendimientos distintas.

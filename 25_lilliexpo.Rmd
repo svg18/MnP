@@ -1,0 +1,182 @@
+# Pueba de Lilliefors Exponencial 
+
+Otro problema importante de bondad de ajuste es la prueba para la distribución exponencial con media no especificada. Este problema es importante porque el supuesto de una distribución exponencial con media desconocida tiene muchas aplicaciones, particularmente donde las variables aleatorias bajo estudio representan el tiempo de espera o el tiempo en que ocurre cierto evento. 
+Lilliefors en 1969 desarrolló una prueba análoga a la prueba de Kolmogorov-Smirnov y dió una tabla de valores críticos basados en simulaciones Monte Carlo. 
+
+## Datos
+
+Los datos consisten en una muestra aleatoria $X_{1},X_{2},\ldots,X_{n}$ de tamaño $n$ que sigue una distribución exponencial con media $\hat{\lambda} = \frac{1}{\overline{X}}$,el cual corresponde al estimador puntual de la media.
+
+Después calcularemos los valores de muestra $Z_{i}$ definidos por:
+
+$$Z_{i}=\frac{X_{i}}{\overline{X}} \ \ \ \ i=1,2,\ldots,n$$
+
+El estadístico de prueba se calcula a partir de $Z_{i}s$ en lugar de a partir de la muestra aleatoria. original.
+
+## Supuestos
+
+1) La muestra es una muestra aleatoria.
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{La muestra aleatoria proviene de una población con distribución exponencial:}$$
+
+$$
+\textbf{F(x)=} \left\{
+\begin{array}{lcc}
+1-e^{-\frac{x}{\lambda}} & si & x > 0 \\
+x & si &  x < 0 \\
+\end{array}
+\right.
+$$
+
+Donde $\lambda$ es un parámetro desconocido.
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La función de distribución de las} \ \  X_{i}s \ \  \mbox{no es exponencial.}$$
+
+
+## Estadistico de Prueba
+
+El estadístico de prueba está dada por la máxima distancia vertical:
+
+$$T_{2}=\underset{x}{sup} \ | \ F^*(x)-S(x) \ |$$
+
+#### Regla de Decisión {-}
+
+Rechazo $H_0$ a un nivel de significancia $\alpha$ si $T_{2}> W_{1-\alpha}$ donde $W_{1-\alpha}$ es el cuantil obtenido en las tablas correspondientes a nuestra prueba.
+
+
+## Ejemplo
+
+Dada la siguiente muestra
+
+$$0.4976,\ 1.2514,\ 0.6619,\ 0.561,\ 1.0026,\ 0.3529,\ 0.8595,\ 1.6254,$$
+$$1.1514,\ 1.5181,\ 0.8642,\ 0.5206,\ 0.4229,\ 0.9825,\ 1.0183.$$
+
+Se desea probar si la muestra sigue una distribución exponencial con parámetro $\lambda$ desconocido.
+
+Realizar la prueba con un nivel de significancia del $95\%$.
+
+
+**Paso 1** Prueba a utilizar **Prueba de Bondad de Ajuste Lilliefors Exponencial**
+
+**Paso 2** Planteamiento de Hipótesis
+
+$$\textbf{H}_0: \ \mbox{La muestra aleatoria proviene de una población con distribución exponencial}$$
+
+$$\mbox{con} \ \  \lambda \ \  \mbox{parámetro desconocido.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La función de distribución de las} \ \  X_{i}s \ \  \mbox{no es exponencial.}$$
+
+
+**Paso 3** Estadístico de Prueba
+
+$$T_{2}=\underset{z}{sup} \ | \ F^*(z)-S(z) \ |$$
+
+**Paso 4** Procedimiento completo para el cálculo del Estadístico de Prueba:
+
+1) Se procede a ordenar nuestras observaciones de menor a mayor.
+
+2) Se obtiene el estimador puntual de la distribución exponencial con los datos de la muestra, por lo que el parámetro $\lambda$ es calculado como:
+
+$$\hat{\lambda}=\frac{1}{\overline{X}}=\frac{1}{0.88602}; \ \ \ \ \ \  \overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}=\frac{1}{15}\sum_{i=1}^{15}X_{i}=0.88602$$
+3) Después calcularemos los valores de muestra $Z_{i}$ definidos por:
+
+$$Z_{i}=\frac{X_{i}}{\overline{X}} \ \ \ \ i=1,2,\ldots,15$$
+
+4) Se calcula la función empírica, como no tenemos ningún valor repetido:
+
+$$S_{n}= \frac{i}{n}=\frac{1}{15},\frac{2}{15}, \ldots, 1. $$
+
+
+5) Se calcula la función empírica menos un valor, es decir,
+
+$$S_{n}= \frac{i-1}{n}=\frac{0}{15},\frac{1}{15}, \ldots, \frac{14}{15}.$$
+
+6) Se calcula $D^+$ que es el resultado de la resta de la distribución conocida menos la  distribución empírica, es decir:
+
+
+$$D^+= max \ \{ \ S_{n}(Z_{i})-F^*(Z_{i}) \ \}$$
+
+
+7) Se calcula $D^-$ que es el resultado de la resta de la distribución empírica menos uno menos la distribución conocida, es decir:
+
+
+$$D^-= max \  \{\ S_{n}(Z_{i-1})-F^*(Z_{i}) \ \}$$
+
+8) Finalmente realizada la tabla, se calcula el máximo de las columnas $D^+$ y $D^-$ de ésta manera, se tiene la siguiente tabla:
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame("$i$" = 1:15, "$X$" = c(0.4976, 1.2514, 0.6619, 0.561, 1.0026, 0.3529, 0.8595, 1.6254,
+1.1514, 1.5181, 0.8642, 0.5206, 0.4229, 0.9825, 1.0183),"$X_i$"=c(0.3529,0.4229,0.4976,0.5206,0.5610, 0.6619,0.8595,0.8642,0.9825,1.0026,1.0183,1.1514,1.2514,1.5181,1.6254),"$Z_i=\\frac{X_i}{\\bar{x}}$"=c(0.3982, 0.4773, 0.5616,0.5875,0.6331,0.7470,0.9700,0.9753,1.1088,1.1315,1.1492,1.2995,1.4123,1.7133,1.8344), "$S_n(Z_i)$"=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1), "$S_n(Z_{i-1})$"=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15),"$F^*(Z_i)$"=c(0.3285,0.3795,0.4297,0.4443,0.4690,0.5262,0.6209,0.6229,0.6700,0.6774,0.6831,0.7273,0.7564,0.8197, 0.8403),"$D^+=S_n(Z_i)-F^*(Z_i)$"=c(-0.2618,-0.2462,-0.2297,-0.1776,-0.1357,-0.1262,-0.1542,-0.0896,-0.0700, -0.0108,0.0501,0.0726,0.1102,0.1135,0.1596),"$D^-=S_n(Z_{i-1})-F^*(Z_i)$"=c(-0.3285,-0.3128,-0.2963,-0.2443, -0.2024,-0.1929,-0.2209,-0.1562,-0.1367,-0.0774,-0.0164,0.0059,0.0435,0.0469,0.0930)) %>% 
+  kable( booktabs = T, align=rep('c')) %>% kable_styling(bootstrap_options = "striped", full_width = F) %>%
+  scroll_box(width = "100%")
+```
+
+9) Entonces 
+
+$$ D^+= max \ \  \{\ S_{n}(Z_{i})-F^*(Z_{i}) \ \}= 0.1596 \ \ \ \ y\ \ \ \ D^-= max\  \{ \ S_{n}(Z_{i-1})-F^*(Z_{i}) \ \}=0.0930 $$
+Por lo tanto:
+
+$$T_{2}=\underset{z}{sup}\ | \ S_{n}(z)-F^*(z) \ |=max \ \{\ D^+,D^- \ \}=max \ \{ \ 0.1596,0.0930 \ \}=0.1596 $$
+
+**Paso 5** Regla de Decisión
+
+Este último resultado se compara con la tabla de valores críticos de la Tabla Lilliefors Exponencial, para un nivel de significancia $\alpha$ = 0.05 $W_{0.05}$=0.2776, de esta manera se tiene que $0.2776 = W_{0.05} > T_{2} = 0.1596$, como el cuantil $W_{0.05}$=0.2776 es mayor a comparación de $T_{2}$=0.2776.
+
+No Rechazamos $H_0$.
+
+**Paso 6** Conclusión
+
+Podemos concluir que a un nivel de significancia $\alpha$=0.05, no existe evidencia estadística suficiente para decir que la muestra no tiene distribución exponencial.
+
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+#Datos
+i=1:15
+X=c(0.4976, 1.2514, 0.6619, 0.561, 1.0026, 0.3529, 0.8595, 1.6254,
+                             1.1514, 1.5181, 0.8642, 0.5206, 0.4229, 0.9825, 1.0183)
+X_i=c(0.3529,0.4229,0.4976,0.5206,0.5610, 0.6619,0.8595,0.8642,0.9825,1.0026,1.0183,
+      1.1514,1.2514,1.5181,1.6254)
+Z_i=c(0.3982, 0.4773, 0.5616,0.5875,0.6331,0.7470,0.9700,0.9753,1.1088,1.1315,1.1492,
+      1.2995,1.4123,1.7133,1.8344) 
+Sn_Zi=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1)
+Sn_Zi_1=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15)
+F_Zi=c(0.3285,0.3795,0.4297,0.4443,0.4690,0.5262,0.6209,0.6229,0.6700,0.6774,0.6831,
+       0.7273,0.7564,0.8197, 0.8403)
+D_mas=c(-0.2618,-0.2462,-0.2297,-0.1776,-0.1357,-0.1262,-0.1542,-0.0896,-0.0700,
+        -0.0108,0.0501,0.0726,0.1102,0.1135,0.1596)
+D_menos=c(-0.3285,-0.3128,-0.2963,-0.2443, -0.2024,-0.1929,-0.2209,-0.1562,
+           -0.1367,-0.0774,-0.0164,0.0059,0.0435,0.0469,0.0930)  
+
+Tabla=cbind(i,X_i,Z_i,Sn_Zi,Sn_Zi_1,F_Zi,D_mas,D_menos)                                                                                                                                                      
+Tabla
+EstPrueba=max(D_mas,D_menos)
+EstPrueba
+           
+
+
+```
+```{r}
+EstdPrueba
+```
+
+El cuantil W que acumula $1-\alpha$ de probabilidad, usando $\alpha=0.05$ es $W = 0.2776$, encontrado en las tablas correspondientes. Por lo tanto tenemos que $T1=0.1596 < W=0.2776$, entonces rechazamos la hipotesis nula. Y concluimos que hay evidencia suficiente para decir que la muestra no proviene de una distribución exponencial.
+
+```{r}
+library(nortest) #prueba lilliefors
+lillie.test(F_Zi) #Ocupamos estos datos ya que debemos recordar que 
+                   #es una distribución exponencial y F_Zi son datos estandarizados 
+```

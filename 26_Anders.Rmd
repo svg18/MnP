@@ -1,0 +1,199 @@
+# Prueba Anderson-Darling 
+
+La prueba de Anderson Darling, al igual que la prueba de Lilliefors sirve para probar la
+hipótesis de que una muestra aleatoria sigue una cierta distribución especificada. 
+
+## Datos
+
+Los datos consisten en una muestra aleatoria $X_{1},X_{2},\ldots,X_{n}$ de tamaño $n$ asociada con alguna función de distribución desconocida, denotada por $F(x)$.
+
+## Supuestos
+
+* La muestra es una muestra aleatoria.
+
+## Hipótesis
+
+### Caso A (Prueba de 2 colas) Solo será este caso {-}
+
+$$\textbf{H}_0: \ F(x)=F^*(x) \ \ \ \ \forall\ \ x\  \mbox{de} \ \ -\infty \ \ \mbox{a} \ \  +\infty$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ F(x) \neq F^*(x) \ \ \ \ \mbox{para al menos un  valor de} \  x.$$
+
+Donde $F^*(x)$ es la distribución teórica que se quiere probar con un nivel de significancia $\alpha$.
+
+Para probar dicha hipótesis Anderson propone examinar las diferencias al cuadrados entre la distribución empírica de los datos $S_{n}(X)$ y la distribución teórica propuesta y completamente
+especificada $F^*(X)$ y luego integrar respecto a la distribución propuesta.
+A este tipo de pruebas se les conoce como funciones de distribución empíricas cuadráticas **(QEDF)** por
+sus siglas en inglés.
+De esta manera la estadística de la prueba **Anderson-Darling** se obtiene de integrar la
+siguiente función **QEDF**:
+
+$$A_n^2=n \int_{-\infty}^{\infty} (Sn(X)-F^*(X))^2 \frac{1}{F^*(X)(1-F^*(X))}$$
+
+
+Una característica importante es que se usa la expresión $\frac{1}{F^*(X)(1-F^*(X))}$
+debido a que se busca que las colas de distribución tengan un peso cuantificablemente mayor, con la finalidad de detectar diferencias en las colas de la distribución.
+
+## Estadístico de Prueba
+
+Resolviendo la integral se obtiene la estadístico de la forma:
+
+
+$$A_n^2=-n-\frac{1}{n}\sum_{i=1}^{n}\left(2i-1\right) \ [ \ ln(F^*(X_{(i)})) +ln(1-F^*(X_{(n-i+1)})) \ ]$$
+
+
+Dado que el estadístico no depende de $F(X)$ y sólo depende de $n$ entonces la distribución
+asintótica de **Anderson-Darling** es la que se muestra a continuación, asimismo se mostrarán algunos
+ajustes a la estadística con la finalidad de que la prueba sea más potente para determinados
+casos:
+
+$$
+\begin{array}{|c c| c c c c|}
+\hline
+\textbf{Caso} & \textbf{Ajuste en el estadístico} &\textbf{0.90} &\textbf{0.95} & \textbf{0.975} & \textbf{0.99} \\
+\hline
+\mbox{Todos los parámetros conocidos} & A_{n}^{2} \ \ para\ n\ \geq 5 & 1.933 & 2.492 & 3.070 & 3.857 \\
+Normal\ con\ N(\overline{X},S^2) & (1+\frac{4}{n}+\frac{25}{n^2})A_{n}^{2} & 0.632 & 0.751 & 0.870 & 1.029 \\
+\mbox{Exponencial con} \ \ exp(\overline{X}) & (1+\frac{0.6}{n})A_{n}^{2} & 1.070 & 1.326 & 1.587 & 1.943 \\
+\mbox{Weibull con} \ \ Weibull(\hat{\alpha},\hat{\beta}) & (1+\frac{0.2}{\sqrt{n}})A_{n}^{2} & 0.637 & 0.757 & 0.877 & 1.038 \\
+\mbox{Log-logística con} \ \ Log-log(\hat{\alpha},\hat{\beta}) & (1+\frac{0.25}{\sqrt{n}})A_{n}^{2} & 0.563 & 0.660 & 0.769 & 0.906 \\
+\hline
+\end{array}
+$$
+
+## Regla de Decisión
+
+Rechazo $H_0$ a un nivel de significancia $\alpha$ si $A_{n}^2> A_{1-\alpha}$ donde $A_{n}^{2}$ ya tiene el ajuste para cada caso mencionado anteriormente y  $A_{1-\alpha}$ es el cuantil obtenido en las tablas correspondientes a nuestra prueba.
+
+Para ejemplificar la prueba de $Anderson-Darling$ veamos el siguiente ejemplo:
+
+
+### Ejemplo
+
+Se desea probar si la siguiente muestra:
+
+$$-4.1302,\ \ 9.315,\ \ 3.9757,\ \ 8.49,\ \ 5.6204,\ \ -6.9098,\ \ -0.1426,\ \ -2.3838,$$
+$$-2.0039,\ \ 1.7349,\ \ 5.7442,\ \ 2.7931,\ \ 6.2938,\ \ 11.7337,\ \ -0.1318.$$
+
+Sigue una distribución Normal, para ello se realizará la prueba de Anderson Darling con un nivel de significancia del $5\%$.
+
+**Paso 1** Prueba a utilizar **Prueba de Bondad de Ajuste Anderson-Darling**
+
+**Paso 2** Planteamiento de Hipótesis 
+
+$$\textbf{H}_0: \ \mbox{La muestra} \ \sim \  N(\mu,\sigma^2).$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La muestra} \ \ \nsim \ \  N(\mu,\sigma^2).$$
+
+**Paso 3** Estadístico de Prueba
+
+$$A_n^2=-n-\frac{1}{n}\sum_{i=1}^{n}\left(2i-1\right)[ \ ln(F^*(X_{(i)})) +ln(1-F^*(X_{(n-i+1)})) \ ]$$
+
+**Paso 4** Procedimiento completo para el cálculo del Estadístico de Prueba:
+
+
+1) Se procede a ordenar nuestras observaciones de menor a mayor.
+
+2) Se obtienen los estimadores puntuales de distribución normal con los datos de la muestra, 
+$\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}= 2.66658$ y                   $s=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^2}=5.313212$
+
+3) Se calcula la distribución propuesta, en este caso una distribución normal con media $\overline{X}$ y varianza $s^2$, es decir,$F^*(X)$, para ello se usa la aproximación a una normal estándar
+
+4) Se calcula el primer sumando $ln(F^*(X_{(i)}))$ el cual se denotará como $L1$, después se calculará el segundo sumando $ln(1-F^*(X_{(n-i+1)}))$ el cual se denotará como $L2$
+
+5) Se realiza el sumando de manera puntal, es decir, calcular:
+
+$$Q_{i}=\left(\frac{2i-1}{n}\right)[ \ ln(F^*(X_{(i)})) +ln(1-F^*(X_{(n-i+1)})) \ ] \ \ \ \mbox{para} \  i=1,\ldots,15.$$
+
+
+6) Y se realiza la  siguiente tabla:
+
+```{r echo=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame("$i$" = 1:15, "$X$" = c(-4.1302, 9.315, 3.9757, 8.49, 5.6204, -6.9098, -0.1426, -2.3838,
+    -2.0039, 1.7349, 5.7442,2.7931,6.2938,11.7337,-0.1318),"$X_i$"=c(-6.9098,-4.1302,-2.3838,-2.0039, -0.1426,-0.1318,1.7349,2.7931,3.9757,5.6204,5.7442,6.2938,8.4900,9.3150,11.7337),"$F*(X_i)$"=c( 0.0357, 0.1004,0.1709,0.1896,0.2985,0.2992,0.4304,0.5094,0.5973,0.7108,0.7187,0.7525,0.8634,0.8945,0.9560),"$L_1=ln(F*(X_i))$"=c( -3.3313,-2.2984,-1.7665,-1.6623,-1.2089,-1.2066,-0.8430,-0.6743,-0.5153,-0.3412,-0.3301,-0.2842,-0.1468,-0.1113,-0.0449),"$L_2=ln(1-F*(X_n-i+1))$"=c(-3.1245,-2.2498,-1.9911,-1.3967,-1.2686,-1.2408,-0.9095,-0.7123,-0.5628,-0.3555,-0.3545,-0.2103,-0.1874,-0.1058,-0.0363),"Qi"=c(-0.4303,-0.9096,-1.2525,-1.4275,-1.4865,-1.7948,-1.5189,-1.3866,-1.2218,-0.8826,-0.9586,-0.7583,-0.5570,-0.3909,-0.1572)) %>% 
+  kable( booktabs = T, align=rep('c')) %>% kable_styling(bootstrap_options = "striped", full_width = F) %>%
+  scroll_box(width = "100%")
+```
+
+
+7) Finalmente se suma todos los $Q_{i}s$ y se construye el estadístico:
+
+$$A_n^2=-n-\sum_{i=1}^{n}Qi=-n-\frac{1}{n}\sum_{i=1}^{n}\left(2i-1\right)[ \ ln(F^*(X_{(i)})) +ln(1-F^*(X_{(n-i+1)})) \ ]$$
+$$A_n^2=-n-\sum_{i=1}^{n}Qi=-15-(-15.1340)=15.1340-15=0.1340$$
+
+$$A_n^2=0.1340$$
+
+8) Aplicando el ajuste de la tabla anterior:
+$$
+\begin{array}{|c c| c c c c|}
+\hline
+\textbf{Caso} & \textbf{Ajuste en el estadístico} &\textbf{0.90} &\textbf{0.95} & \textbf{0.975} & \textbf{0.99} \\
+\hline
+\hline
+Normal\ con\ N(\overline{X},S^2) & (1+\frac{4}{n}+\frac{25}{n^2})A_{n}^{2} & 0.632 & 0.751 & 0.870 & 1.029 \\
+\hline
+\end{array}
+$$
+
+$$ (1+\frac{4}{n}+\frac{25}{n^2})A_{n}^{2}=(1+\frac{4}{15}+\frac{25}{15^2})A_{n}^{2}=0.1846$$
+
+**Paso 5** Regla de Decisión
+
+Este último resultado se compara con la tabla de valores críticos de la Tabla Anderson-Darling para el caso de Normalidad, para un nivel de significancia $\alpha$ = 0.05.
+
+Por lo anterior $A_{0.95}$=0.751, de esta manera se tiene que 0.751 = $A_{0.95} > A_{n}^2=0.1846$, como el valor crítico $A_{0.95}$ es mayor a comparación de $A_{n}^2$=0.1846.
+
+$\therefore$ No Rechazamos $H_0$.
+
+**Paso 6** Conclusión
+
+Podemos concluir que a un nivel de significancia $\alpha=0.05$, no existe evidencia estadística suficiente para decir que la muestra no tiene distribución normal.
+
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+#Datos
+i=1:15
+n=15
+X=c(-4.1302, 9.315, 3.9757, 8.49, 5.6204, -6.9098, -0.1426, -2.3838,
+                            -2.0039, 1.7349, 5.7442,2.7931,6.2938,11.7337,-0.1318)
+X_i=c(-6.9098,-4.1302,-2.3838,-2.0039, -0.1426,-0.1318,1.7349,2.7931,3.9757,5.6204,
+      5.7442,6.2938,8.4900,9.3150,11.7337)
+F_Xi=c( 0.0357, 0.1004,0.1709,0.1896,0.2985,0.2992,0.4304,0.5094,0.5973,0.7108,
+        0.7187,0.7525,0.8634,0.8945,0.9560)
+L1=c( -3.3313,-2.2984,-1.7665,-1.6623,-1.2089,-1.2066,-0.8430,-0.6743,-0.5153,-0.3412,-0.3301,
+      -0.2842,-0.1468,-0.1113,-0.0449)    #ln(F*(Xi))
+L2=c(-3.1245,-2.2498,-1.9911,-1.3967,-1.2686,-1.2408,-0.9095,
+-0.7123,-0.5628,-0.3555,-0.3545,-0.2103,-0.1874,-0.1058,-0.0363)  #ln(1-F*(Xn-i+1))
+Qi=c(-0.4303,-0.9096,-1.2525,-1.4275,-1.4865,-1.7948,-1.5189,-1.3866,-1.2218,-0.8826,
+-0.9586,-0.7583,-0.5570,-0.3909,-0.1572)
+
+#Ahora calcularemos el estadistico de prueba
+A_2=-n-(sum(Qi))
+A_2
+
+#Ahora aplicaremos el ajuste correspondiente
+
+A_2ajust=(1+4/n+25/n^2)*A_2
+A_2ajust
+
+```
+Por la tabla auxiliar tenemos $A_{0.95}=0.751$, de esta manera se tiene que 0.751 = $A_{0.95} > A_{n}^2=0.1846$, como el valor crítico $A_{0.95}$ es mayor a comparación de $A_{n}^2=0.1846$, entonces no rechazamos $H_0$. Podemos concluir que a un nivel de significancia $\alpha$=0.05, no existe evidencia estadística suficiente para decir que la muestra no tiene distribución normal.
+
+Ahora podemos utilizar la prueba en R
+```{r}
+
+ad.test(X)   #Recordemos que la función no hace el ajuste
+```
+

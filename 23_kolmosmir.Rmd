@@ -1,0 +1,204 @@
+# Prueba Kolmogorov-Smirnov
+
+En ejercicios prácticos es muy difícil conocer la distribución de una muestra aleatoria, generalmente
+sólo se tiene la información; ésta hay que procesarla para averiguar si sigue una determinada distribución probabilística, en un primer intento se ajustó mediante la prueba de la Ji-cuadrada, sin embargo, al ser una de las pruebas más sencillas su **"potencia"** al estimar una determinada distribución es baja, es por ello, que se idearon otros métodos y uno de ello es la Prueba de Kolmogorov-Smirnov.
+
+La prueba de Kolmogorov presenta la ventaja de que los datos no deben ser categorizadas para poder realizar estimaciones en su distribución. Al igual que en la prueba de la Ji-Cuadrada, Kolmogorov-Smirnov trabaja con una distribución $F^*(x)$ totalmente especificada, es decir, se debe de tener sospecha de que la muestra aleatoria siga una determinada distribución. De esta manera el objeto de estudio es una muestra $X_{1},\ldots,X_{n}$ de variables aleatorias idénticamente distribuidas, las cuales siguen una distribución desconocida $F(X)$ y se tiene la sospecha de que la muestra sigue una distribución conocida $F^*(x)$.
+
+Para probar la suposición de la distribución $F^*(x)$ se realiza la siguiente contraste:
+
+## Hipótesis
+
+### Caso A (Prueba de 2 colas) 
+
+Solo será este caso
+
+$$\textbf{H}_0: \ F(x)=F^*(x) \ \ \ \ \forall \ \ x\ \  \mbox{de} \ \ -\infty \ \  \mbox{a} \ \  +\infty$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ F(x) \neq F^*(x) \ \ \ \ \mbox{para al menos un valor de} \  x.$$
+
+#### Regla de decisión {-}
+
+Rechazo $H_0$ a un nivel de significancia $\alpha$ si $D_{n}>W$. Donde $W$ es el cuantil $(1-\alpha)$, obtenido en la tabla correspondiente a nuestra prueba O para la prueba de 2 colas en las tablas de Kolmogorov.
+
+**Donde** $F^*(x)$ es una distribución completamente conocida, es decir además de conocer a la familia que pertenece también se conocen sus parámetros.
+
+
+Lo que se busca es poder medir las distancia entre $F(x)$, la distribución desconocida, con
+los datos que siguen la función de distribución propuesta y completamente conocida $F^*(x)$.
+Sin embargo, $F(x)$ al ser desconocida se recurre a la construcción de una distribución empírica
+la cual se define como:
+
+$$S_{n}(x)=\frac{ \sum_{i=1}^{n}número\ de\ valores\ muestrales\ \leq x}{n}$$
+
+Es decir, la función empírica mide el número de elementos menores o iguales a la observación
+$X$, puede observarse que en el caso continuo, al no haber **"empates"** la función empírica puede
+ser vista como:
+
+$$S_{n}(x)=\frac{i}{n} \ \ \ i=1,\ldots,n$$
+
+
+Al tener una distribución desconocida $F(x)$, la función empírica $S_{n}(x)$ puede ser usada
+como un estimador insesgado de $F(x)$ pues:
+
+
+$$\mathbb{E}(S_{n}(x))=F(x)$$
+La función empírica es de gran importancia ya que gracias al teorema de **Glivenko-Cantelli**
+se sabe que cuando el tamaño de la muestra tiende a infinito cualquier distribución empírica
+se aproxima a la distribución real de los datos, la cual, es una distribución completamente especificada. El teorema de **Glivenko-Cantelli**, menciona que al calcular las diferencias de la distribución real y la empírica éstas son cero en cada observación dada, el teorema que se enuncia como:
+
+Sea $X_{1},\ldots,X_{n}$ una muestra aleatoria de distribución $F(x)$ desconocida y sea $S_{n}(x)$ la función empírica entonces:
+
+$$\underset{x}{sup} \ |\ S_{n}(x)-F(x) \ | \ \longrightarrow \ 0$$
+
+
+Es decir, conforme mayor sea el tamaño de la muestra, $S_{n}(x)$ reproduce la verdadera
+distribución. De esta manera se establece el estadístico de Prueba $Dn$, el cual no depende de ningún
+parámetro desconocido, ya que engloba a la distribución empírica y a la distribución propuesta:
+
+$$D_{n}=\underset{x}{sup} \ | \ S_{n}(x)-F^*(x) \ |=max \  \{ \ max \{ \  S_{n}(X_{i-1})-F^*(X_{i}) \ \},max \{ \  S_{n}(X_{i})-F^*(X_{i}) \ \} \ \} \ \  \ \forall \ i$$
+y $$D_{n}= \ \underset{x}{sup} \ | \ S_{n}(x)-F^*(x) \ |=max \ \{ \  D^+,D^- \ \}$$
+
+Donde:
+
+$$D^+= max \ \{ \  S_{n}(X_{i})-F^*(X_{i}) \ \}$$
+$$D^-= max \  \{ \ S_{n}(X_{i-1})-F^*(X_{i}) \ \}$$
+
+Finalmente, se observa que si $H_0$ es cierta si $D_{n} \longrightarrow \ 0$ ya que las diferencias entre la diferencias entre la función empírica y la propuestas son mínimas, lo que cumple con el **Teorema de Glivenko-Cantelli** ; por lo que hay evidencia para rechazar $H_0$ cuando $D_{n} > W$ Donde $W$ es el cuantil que acumula el $1- \alpha$  de probabilidad de la distribución asociada a $D_{n}$ la cual puede obtenerse de la tablas correspondientes la cual muestra los cuantiles de la distribución
+Kolmogorov-Smirnov o la Tabla Kolmogorov para 2 colas.
+
+
+## Ejemplo
+
+Dada la siguiente muestra
+
+
+$$0.6379 \ \ 1.5299 \ \ 0.35005 \ \ 2.0505 \ \ 2.1906 \ \ 0.3459 \ \ 2.3214 \ \ 0.3128$$
+$$ 0.65482.4373 \ \ 1.803 \ \ 2.3674 \ \ 1.2716 \ \ 0.2566 \ \ 0.2513$$
+
+
+Se desea hacer el siguiente contraste:
+
+$$\textbf{H}_0: \ \mbox{Los datos} \  \sim  \ LogN(0,1)$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Los datos} \ \ \nsim \ LogN(0,1)$$ 
+
+
+Realice la prueba de Kolmogorov-Smirnov al 5% de significancia.
+
+
+**Paso 1** Prueba a utilizar **Prueba de Bondad de Ajuste Kolmogorov-Smirnov**
+
+
+**Paso 2** Planteamiento de Hipótesis 
+
+$$\textbf{H}_0: \ \mbox{Los datos} \ \sim  \ LogN(0,1)$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Los datos} \  \nsim \  LogN(0,1)$$ 
+
+
+**Paso 3** Estadístico de Prueba:
+
+$$D_{n}=\underset{x}{sup} \ | \ S_{n}(x)-F^*(x) \ |=max \ \{\ D^+,D^- \ \}$$
+
+
+
+**Paso 4** Procedimiento completo para el cálculo del Estadístico de Prueba:
+
+1) Se procede a ordenar nuestras observaciones de menor a mayor.
+
+2) Se calcula la función empírica, como no tenemos ningún valor repetido:
+
+$$S_{n}= \frac{i}{n}=\frac{1}{15},\frac{2}{15}, \ldots, 1.$$
+
+3) Se calcula la función empírica menos un valor, es decir,}
+$$S_{n}= \frac{i-1}{n}=\frac{0}{15},\frac{1}{15}, \ldots, \frac{14}{15}.$$
+
+4) Se calcula la distribución conocida, es decir, $F^*(x) \ \ \  LogN(0,1)$ 
+
+5) Se calcula $D^+$ que es el resultado de la resta de la distribución conocida menos la  distribución empírica, es decir:
+
+$$D^+= max \ \{\ S_{n}(X_{i})-F^*(X_{i}) \ \}$$
+
+6) Se calcula $D^-$ que es el resultado de la resta de la distribución empírica menos uno menos la distribución conocida, es decir:
+
+$$D^-= max \ \{\ S_{n}(X_{i-1})-F^*(X_{i}) \ \}$$
+
+7) Finalmente realizada la tabla, se calcula el máximo de las columnas $D^+$ y $D^-$ de ésta manera, se tiene la siguiente tabla:
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame("$i$" = 1:15, "$X$" = c(0.6379,1.5299,0.35005,2.0505,2.1906,0.3459,2.3214,0.3128,0.6548,2.4373,1.803,2.3674,1.2716,0.2566,0.2513),"$X_i$"= c(0.25130,0.25660,0.31280, 0.34590,0.35005,0.63790, 0.65480, 1.27160, 1.52990,1.80300, 2.05050, 2.19060, 2.32140, 2.36740,2.43730),"$S_n(X_i)$"=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1),"$S_n(X_{i-1})$"=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15),"$F^*(X_i)$"=c(0.0836,0.0869,0.1226,0.1442,0.1472,0.3265,0.3360,0.5949,0.6647,0.7222,0.7636,0.7835,0.8002,0.8056,0.8135),"$D^+=S_n(X_i)-F^*(X_i)$"=c(-0.0169,0.0464,0.0774,0.1224,0.1861,0.0735,0.1306,-0.0615,-0.0647,-0.0555, -0.0302,0.0165,0.0664,0.1277,0.1865),"$D^-=S_n(X_{i-1})-F^*(X_i)$"=c(-0.0836,-0.0202,0.0107,0.0558,0.1194,0.0068,
+0.0640,-0.1282,-0.1313,-0.1222,-0.0969,-0.0501,-0.0002,0.0610,0.1198)) %>% 
+ kable( booktabs = T, align=rep('c')) %>% kable_styling(bootstrap_options = "striped", full_width = F) %>%
+  scroll_box(width = "100%")
+
+```
+
+
+8) Entonces 
+
+$$ D^+= max\ \{\ S_{n}(X_{i})-F^*(X_{i}) \ \}= 0.1865 \ \ \ \ y\ \ \ \ D^-= max\ \{\ S_{n}(X_{i-1})-F^*(X_{i})\ \}=0.1198$$
+Por lo tanto:
+
+$$D_{n}=\underset{x}{sup}\ | \ S_{n}(x)-F^*(x) \ |=max \ \{ \ D^+,D^- \ \}=max \ \{ \  0.1865,0.1198 \ \}=0.1865$$
+
+**Paso 5** Regla de Decisión
+
+Este último resultado se compara con la tabla de valores críticos de la Tabla Kolmogorov-Smirnov, para un nivel de significancia $\alpha$ = 0.05
+$W_{0.05}$=0.338, de esta manera se tiene que 0.338 = $W_{0.05} > D_{n}$ = 0.1865, como el estadístico $W_{0.05}$ es mayor a comparación de $D_{n}$=0.1865.
+No Rechazamos $H_0$.
+
+**Paso 6** Conclusión
+
+Se acepta la prueba de lognormalidad con media 1 y varianza 0, con un nivel de significancia $\alpha$ = 0.05. Es decir, Los datos se distribuyen $LogN(0,1)$.
+
+
+```{r}
+i= 1:15
+X= c(0.6379,1.5299,0.35005,2.0505,2.1906,0.3459,2.3214,0.3128,0.6548,2.4373,
+               1.803,2.3674,1.2716,0.2566,0.2513)
+X_i=c(0.25130,0.25660,0.31280, 0.34590,0.35005,0.63790, 0.65480, 1.27160, 
+               1.52990,1.80300, 2.05050, 2.19060, 2.32140, 2.36740,2.43730)
+
+Sn=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1)
+Sn_1=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15)
+F_=c(0.0836,0.0869,0.1226,0.1442,0.1472,0.3265,0.3360,0.5949,
+                    0.6647,0.7222,0.7636,0.7835,0.8002,0.8056,0.8135)
+D_mas=c(-0.0169,0.0464,0.0774,0.1224,0.1861,0.0735,0.1306,-0.0615,-0.0647,-0.0555,
+                -0.0302,0.0165,0.0664,0.1277,0.1865)
+D_menos=c(-0.0836,-0.0202,0.0107,0.0558,0.1194,0.0068,0.0640,-0.1282,
+          -0.1313,-0.1222,-0.0969,-0.0501,-0.0002,0.0610,0.1198)
+
+Tabla=cbind(i,X_i,Sn,Sn_1,F_,D_mas,D_menos)                                                                                                                                                      
+Tabla
+
+EstdPrueba = max(D_mas,D_menos)
+EstdPrueba
+                                                                                                                                                                                                                
+```
+Por lo tanto:
+
+$$D_{n}=\underset{x}{sup} \ | \ S_{n}(x)-F^*(x)\ |=max\ \{\ D^+,D^- \ \}=max \ \{ \ 0.1865,0.1198 \ \}=0.1865$$
+
+Lo comparamos con la tabla de valores críticos de la **Tabla Kolmogorov-Smirnov**, para un nivel de significancia $\alpha$ = 0.05
+$W_{0.05}$=0.338, de esta manera se tiene que 0.338 = $W_{0.05} > D_{n}$ = 0.1865, como el estadístico $W_{0.05}$ es mayor a comparación de $D_{n}$=0.1865.
+No Rechazamos $H_0$.
+
+Podemos concluir aceptando la prueba de lognormalidad con media 1 y varianza 0, con un nivel de significancia $\alpha$ = 0.05. Es decir, Los datos se distribuyen $LogN(0,1)$.
+ 
+
+```{r}
+                                                                                                                                                                                               
+#Ahora podemos utilizar la prueba en R
+ks.test(F_,Sn,alternative = "two.sided")
+```

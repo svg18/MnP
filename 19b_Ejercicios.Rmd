@@ -1,0 +1,96 @@
+# Ejercicios
+
+**1.** Queremos probar si la selección de cierto deporte es independienye del género. Para ellos se les pregunto a 100 hombres y 100 mujeres que deporte entre arquería, boxeo y ciclismo preferian practicar y en la siguiente tabla se resume las respuestas que dieron:
+
+$$
+\begin{array}{|c ||c |c |c|c|}
+\hline 
+\mbox{Género} & \mbox{Arquería}&\mbox{Boxeo} &\mbox{Ciclismo}& \mbox{Total} \\
+\hline 
+\mbox{Mujer} & 35 &  15 & 50&\textbf{100}\\
+ \hline 
+\mbox{Varon}& 10 & 30 &60&\textbf{100}\\ 
+\hline 
+\mbox{Total}&\textbf{45}&\textbf{45}&\textbf{110}&\textbf{200}\\
+\hline 
+\end{array}
+$$
+
+**2.** En un estudio, llevado a cabo por el INE, se tomó una muestra aleatoria de ciudadanos registrados en el Padrón Electoral. Se obtuvo información sobre el partido por el que votaron para Presidente y si tenían o no estudios universitarios.
+
+$$
+\begin{array}{|c|c c c c c c c|}
+\hline
+X_{2}&X_{1}&&&&&&\\
+ \hline
+SI & PRI & PRI & PRI & PRI & PRI & PRI & PRI\\
+NO & PRI & PRI & PRI & PRI & PRI & PRI & PRI\\
+ \hline
+SI & PRI & PAN & PAN & PAN & PAN & PAN &PAN\\
+NO & PRI & PAN & PAN & PAN & PAN & PAN & PAN\\
+ \hline
+SI & PAN & PAN & PAN & PAN & PAN & PAN & PAN\\
+NO & PAN & PAN & PAN & PAN & PAN & PAN&\\
+ \hline
+\end{array}
+$$
+Considere $X_{1}$= Partido por el cual votó, $X_{2}$=tiene o no estudios universitarios.
+
+
+Se desea probar si existe asociación entre el partido por el cual votó y si tienen o no estudios universitarios. Plantee, en el contexto del problema, las hipótesis, estadística de prueba y obtenga su conclusión con un nivel de significancia del  $5\%$
+
+**3.** En una encuesta telefónica se preguntó a los participantes hasta que grado estaban de acuerdo
+con la proposición: “se debe prohibir fumar en lugares públicos”. Con base en los datos recabados se desea saber si existen diferencias significativas en el grado en el que están de acuerdo hombres y mujeres con respecto a prohibir fumar en lugares públicos.
+
+$$
+\begin{array}{||c |c |c |c| c | c ||}
+\hline 
+\mbox{Sexo} & \mbox{Muy de acuerdo}& \mbox{De acuerdo} & \mbox{Neutral} & \mbox{En desacuerdo} &  \mbox{En total desacuerdo}\\
+\hline 
+\mbox{Mujer} & 41 &  16 & 28 & 27 & 31\\
+ \hline 
+\mbox{Varon} & 22 & 40 & 14 & 39 & 41 \\
+\hline 
+\end{array}
+$$
+**4.** ¿Qué tan bueno es el servicio que dan las líneas aéreas a sus clientes? En un estudio las evaluaciones dadas por los clientes fueron las siguientes: 3 excelente, 28 bueno, 45 aceptable y 24 malo (BusinessWeek, 11 de septiembre de 2000). En otro estudio sobre las empresas de servicio telefónico, en una muestra de 400 adultos las evaluaciones fueron las siguientes: 24 excelente, 124 bueno, 172 aceptable y 80 malo. ¿La distribución de las evaluaciones a las empresas telefónicas difiere de la distribución de las evaluaciones a las líneas aéreas? Emplee $\alpha=5\%$ ¿Cuál es su conclusión?
+
+
+**5.** Estamos interesados en estudiar la fiabilidad de cierto componente informático con relación al distribuidor que nos lo suministra. Para realizar esto, tomamos una muestra de 100 componentes de cada uno de los tres distribuidores que nos sirven el producto comprobando el número de defectuosos en cada lote. La siguiente tabla muestra el número de defectuosos para cada uno de los distribuidores. 
+
+$$
+\begin{array}{|c | c| c|}
+\hline
+&\mbox{Componentes Defectuosos}& \mbox{Componentes Correctos}\\
+   \hline
+\mbox{Distribuidor 1}& 16& 94  \\
+  \hline
+\mbox{ Distribuidor 2}&24&76\\
+ \hline
+\mbox{Distribuidor 3}&9&81\\
+    \hline
+\end{array}
+$$
+
+Plantea la hipótesis correspondiente  y concluye de acuerdo al contexto.
+
+**6.** Durante las primeras 13 semanas, se registraron las proporciones siguientes de televidentes los sábados de 8 a 9 de la noche: ABC $29\%$, CBS $28\%$, NBC $25\%$ e independientes $18\%$. Dos semanas después en una muestra de 300 hogares se obtuvieron las audiencias siguientes en sábado por la noche: ABC 95 hogares, CBS 70 hogares, NBC 89 hogares e independientes 46 hogares. Use $\alpha=5\%$ para determinar si han variado las proporciones en la audiencia de televidentes.
+
+
+**7.** En el campo de entrenamiento 100 reclutas son asignados aleatoriamente en cuatro regimientos con 4 diferentes sargentos. Al final del entrenamiento sólo quedarón 84 reclutas y sus tiempos en el ejercicio de obstáculos fue medido para todos ellos. Los resultados fueron, para el sargento Adams 11 de sus 20 reclutas tuvieron tiempos por arriba de la mediana, para el sargento Baker 8 de sus 22 reclutas tuvieron tiempos por arriba de la mediana, el sargento Callahan 8 de sus 20 reclutas tuvieron tiempos por encima de la mediana y del sargento Davis 15 de 22 tuvieron tiempos arriba de la mediana. Se puede decir con un nivel de significancia del $5\%$ que existe una diferencia significativa en los tiempos en los ejercicios de obstáculos entre cada uno de los regimientos?
+
+**8.** Se subastaron varios contratos de explotación de petróleo al mejor postor. Para cada contrato se recibieron una o más ofertas selladas. Pruebe la hipótesis de que los contratos que eventualmente se convirtieron en productores de petróleo tuvieron la misma mediana de ofertas que los contratos que no produjeron petróleo. A continuación se muestra una muestra aleatoria de cada tipo de contrato.
+
+$$
+\begin{array}{|c | c |}
+\hline
+&\mbox{Número de ofertas en cada contrato de arrendamiento} \\
+   \hline
+\mbox{Productores}& 6, 3, 1, 14, 8, 9, 12, 1, 3, 2, 1, 7  \\
+  \hline
+\mbox{No  productores}&6, 2, 1, 1, 3, 1, 2, 4, 8, 1, 2\\
+    \hline
+\end{array}
+$$
+
+

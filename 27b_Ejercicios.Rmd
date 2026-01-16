@@ -1,0 +1,98 @@
+# Ejercicios
+
+**1.** Se lanza un dado 600 veces se obtuvieron los siguientes resultados.
+
+$$
+\begin{array}{|c ||c |c |c|c|c|c|}
+\hline 
+\textbf{Número del dado} & 1& 2& 3&4&5&6 \\
+\hline 
+\textbf{Observaciones} & 87 &  96 &108&89&122&98 \\
+ \hline 
+\end{array}
+$$
+
+¿El dado está balanceado (es decir, los datos tienen distribución uniforme con proba 1/6)? Use $\alpha=0.10$
+
+**2.** Cierto banco otorga crédito a las personas con una tasa preferencial, de tal manera que los acreditados pueden pagar en cualquier momento desde que piden el préstamo hasta 8 semanas posteriores para que les sea respetada la tasa preferencial. Se seleccionaron aleatoriamente a 1,000 personas y observó su comportamiento de pago, generando de esta manera la siguiente tabla de frecuencia:
+
+$$
+\begin{array}{|c|c|  }
+\hline
+\mbox{Semana}& \mbox{Créditos Pagados}\\
+\hline
+\mbox{Menos de 1  semana} &64\\
+1 \leq x < 2& 191\\
+2 \leq  x < 3 &283\\
+3 \leq  x < 4 &241\\
+4 \leq  x < 5 &140\\
+5 \leq  x < 6 &51\\
+6 \leq  x < 7 &25\\
+7 \leq  x < 8 &4\\
+\mbox{8 semanas o más} & 1\\
+\hline
+\end{array}
+$$
+
+Probar que el pago de estos créditos, sigue una distribución binomial con parámetros $n = 10$ y $p = 0.25$.
+
+**3.** Cinco niños de cuarto grado de primaria fueron seleccionados al azar de todos los niños de ese grado en la escuela "15 de septiembre", para participar en una carrera. Sus tiempos en segundos fueron: 6.3, 4.2, 4.7, 6.0, y 5.7. Probar con  la hipótesis de que los tiempos provienen de una distribución uniforme en el intervalo de 4 a 8 segundos. 
+
+**4.** La siguiente muestra aleatoria hace referencia a los rendimientos positivos de cierta acción a lo largo del tiempo. 
+
+
+0.2513, 0.2566, 0.3459, 0.6379, 2.0505, 1.803, 2.1906,1.5299, 
+0.35005, 0.3128, 1.2726, 2.3674, 2.3214, 2.4373, 0.6548. 
+
+
+¿Usted piensa que la anterior muestra sigue una distribución normal?
+
+Realizar la prueba correspondiente para verificar que su suposición es cierta con un nivel de confianza del $90\%$. 
+
+**5.** Se obtuvieron sesenta y dos observaciones de un experimento, y se plantea la pregunta de si dichas observaciones provienen de una distribución normal con media 12 y desviación estándar 3. Ninguna observación se encontró por debajo del cuartil inferior de la distribución, 35 estuvieron por arriba de cuartil superior, 22 tomaron valores menores a la mediana, y 5 estuvieron entre la mediana y el cuartil superior. ¿Es posible concluir que las observaciones provienen de la distribución mencionada?
+
+
+**6.** Dada la siguiente muestra
+
+  0.6379, 1.5299, 0.35005, 2.0505, 2.1906, 0.3459, 2.3214, 0.3128
+  0.6548, 2.4373, 1.803,   2.3674, 1.2716, 0.2566, 0.2513.
+
+Se desea hacer el siguiente contraste:
+
+$$\textbf{H}_0: \ \mbox{Los datos} \ \sim LogN(0,1) \ \ vs \ \ \textbf{H}_a: \ mbox{Los datos} \  \nsim \ LogN(0,1)$$
+
+
+Realice la prueba de Kolmogorov al $5\%$ de significancia.
+
+**7.** Se desea probar la hipótesis de que los tiempos entre las llegadas de los pacientes a un hospital con una emergencia se distribuyen exponencial con media $\bar{x}$. Para ello se registró el tiempo transcurrido entre las llegadas sucesivas de pacientes en una mañana. El tiempo en minutos es el siguiente:
+
+$$
+\begin{array}{c c c}
+14.3, & 38.0, & 3.8,  \\ 
+10.8, & 6.1,& 10.1, \\ 
+3.6, & 6.2, & 12.8, \\ 
+22.1, & 4.2, & 4.6,  \\ 
+1.5, & 3.3, & 1.2,  \\   
+20.0, & 7.1,& 8.1.\\
+\end{array}
+$$
+
+Pruebe la hipótesis con un nivel se significancia del $5\%$.
+
+**8.** Se desea probar la hipótesis de que las tasas de interés de un determinado producto financiero tiene el comportamiento de una variable aleatoria como función de distribución normal.
+
+
+9.1, 5, 7.3, 7.4, 5.5, 8.6, 7, 4.3, 4.7, 8,
+4,   8.5, 6.4,6.1, 5.8, 9.5, 5.2, 6.7, 8.3, 9.2.
+
+
+**9.** El gerente de una tienda quiere probar la hipótesis de que los clientes llegan aleatoriamente a su tienda, para ello registro el tiempo transcurrido entre las llegadas sucesivas de clientes en una mañana. El tiempo en minutos es el siguiente:
+
+ 3.6, 6.2,  12.9, 14.2,  38.0,  3.8,  
+10.8, 6.1,  10.1, 22.1,   4.2,  4.6,  
+1.4,  3.3,  8.2.  
+
+
+Pruebe la hipótesis nula de que el tiempo entre las llegadas de los clientes se distribuyen con función de distribución exponencial.
+
+

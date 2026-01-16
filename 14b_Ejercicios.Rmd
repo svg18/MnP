@@ -1,0 +1,202 @@
+# Ejercicios
+**1.** Siete estudiantes aprendieron álgebra utilizando el método actual y seis estudiantes aprendieron álgebra según un nuevo método.
+
+
+$$
+\begin{array}{|c| c c c c c c c c|} 
+\hline 
+\textbf{Método} &\textbf{Puntajes} &&&&& & & \\ 
+ \hline
+\mbox{Actual} & 68 & 72 & 79 & 69 & 84 & 80 & 78 &\\ 
+ \hline
+\mbox{Nuevo} & 64 & 60 & 68 & 73 & 72 & 70& & \\ 
+\hline
+\end{array}
+$$
+
+¿Con una $\alpha$ del 5% podría decir que la efectividad (medida con los punatjes) de ambos métodos es similar?
+
+**2.** En un laboratorio con entorno controlado, 10 hombres y 10 mujeres  fueron evaluados para determinar la temperatura ambiente que encontraron más cómoda. los resultados fueron los siguientes:
+
+$$
+\begin{array}{||c| |c||} 
+\hline 
+\textbf{Hombres} & \textbf{Mujeres} \\  
+ \hline
+74&75\\
+ \hline
+72&77\\
+ \hline
+77&78\\
+ \hline
+76&79\\
+ \hline
+76&77\\
+ \hline
+73&73\\
+ \hline
+75&78\\
+ \hline
+73&79\\
+ \hline
+74&78\\
+ \hline
+75&80\\
+  \hline
+\hline
+\end{array}
+$$
+
+
+Suponiendo que estas temperaturas son una muestra aleatoria de la población, ¿la temperatura promedio es la misma para hombres y mujeres?.
+
+**3.** Una muestra aleatoria de 5 diferentes marcas de focos son probados para medir la duración del foco, y los resultados fueron los siguientes:
+
+$$
+\begin{array}{||c| |c| |c| |c||c||} 
+\hline 
+A & B&C&D&E \\ 
+ \hline
+73&84&82&80&85\\
+ \hline
+64&80&79&85&82\\
+ \hline
+67&81&71&82&80\\
+ \hline
+62&77&75&86&\\
+ \hline
+70&&80&&\\
+\hline
+\hline
+\end{array}
+$$
+
+Los datos observados indican una diferencia significativa entre las marcas? De haber diferencia, que marcas parecen ser las diferentes? Use $\alpha=10\%$
+
+**4.** Tres maestros desean comparar las claificaciones que pusieron en el semestre pasado para ver si alguno tiende a dar calificaciones diferentes que los otros.
+
+$$
+\begin{array}{||c| |c| |c| |c||} 
+\hline 
+\mbox{Calificación} & A & B&C \\  
+ \hline
+10&4&10&6\\
+ \hline
+9&14&6&7\\
+ \hline
+8&17&9&8\\
+ \hline
+7&6&7&6\\
+ \hline
+6&2&6&1\\
+\hline
+\hline
+\end{array}
+$$
+
+Con los datos observados se puede corroborar la sospecha de que alguno de los maestros da calificaciones diferentes a los otros? Use $\alpha=5\%$
+
+**5.** El Hospital "Los Ángeles" realizó un estudio en 4 Dietas a un grupo de 20 individuos; cada Dieta se aplicó aleatoriamente a cada individio. Se registró la pérdida de peso en $kg$.
+Realiza la prueba correspondiente para poder concluir si, ¿Hay diferencia significativa entre la efectividad de las Dietas?
+
+$$
+\begin{array}{c c c c} 
+\textbf{Dieta 1} & \textbf{Dieta 2} & \textbf{Dieta 3} & \textbf{Dieta 4}\\
+6.1&5&7.6&6.2\\
+4.3&5.6&6.8&8\\
+4.5&7.3&3.9&7.4\\
+2.4&5.7&7.9&4.6\\
+9.1&2.1&5.9&7\\
+\end{array}
+$$
+
+**6.** Un banco de sangre mantuvo un registro de la frecuencia cardíaca de varios donadores de sangre.
+
+$$
+\begin{array}{||c| |c||} 
+\hline 
+\mbox{Hombres}& \mbox{Mujeres} \\  
+ \hline
+58&66\\
+ \hline
+76&74\\
+ \hline
+82&69\\
+ \hline
+74&76\\
+ \hline
+79&72\\
+ \hline
+65&73\\
+ \hline
+74&75\\
+ \hline
+86&67\\
+ \hline
+&68\\
+ \hline
+\hline
+\end{array}
+$$
+
+¿Es la variación entre los hombres significativamente mayor que la variación entre las mujeres? nivel de significancia $5\%$
+
+
+**7.** Se desea probar que las variaciones de las temperaturas altas en Des Moines son mayores que las variaciones de las temperaturas altas en Spokane, para ello se tomó una muestra de las temperaturas altas diarias durante el verano. Use nivel de significancia $10\%$
+
+$$
+\begin{array}{||c| |c||} 
+\hline 
+\mbox{Des Moines}& \mbox{Spokane} \\ 
+ \hline
+83&78\\
+ \hline
+91&82\\
+ \hline
+94&81\\
+ \hline
+89&77\\
+ \hline
+89&79\\
+ \hline
+96&81\\
+ \hline
+91&80\\
+ \hline
+92&81\\
+ \hline
+82&79\\
+ \hline
+93&80\\
+ \hline
+90&\\
+ \hline
+93&\\
+ \hline
+\hline
+\end{array}
+$$
+
+**8.** Una muestra aleatoria de 5 diferentes marcas de focos son probados para medir la duración del foco, y los resultados fueron los siguientes:
+
+$$
+\begin{array}{||c| |c| |c| |c||c||} 
+\hline 
+A & B&C&D&E \\ 
+ \hline
+73&84&82&80&85\\
+ \hline
+64&80&79&85&82\\
+ \hline
+67&81&71&82&80\\
+ \hline
+62&77&75&86&\\
+ \hline
+70&&80&&\\
+\hline
+\hline
+\end{array}
+$$
+
+Los datos observados indican una diferencia significativa entre las varianzas de las duraciones por marca? Use $\alpha=10\%$
+

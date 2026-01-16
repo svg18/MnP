@@ -1,0 +1,96 @@
+# Intervalo de confianza para la diferencia entre dos medias
+
+## Datos
+
+Los datos consisten en dos muestras aleatorias $X_{1}, \ldots, X_{n}$ y $Y_{1}, \ldots, Y_{m}$ de tamaño $n$ y $m$, respectivamente. Sea $X$ y $Y$ las variables aleatorias con la misma distribución que las $X_{i}$ y las $Y_{j}$, respectivamente.
+
+## Supuestos
+
+1) Ambas muestras son muestras aleatorias de sus respectivas poblaciones.
+
+2) Además de la independencia dentro de cada muestra, existe mutua independencia entre las dos muestras.
+
+3) Las dos funciones de distribución de la población son idénticas, excepto por una posible diferencia en los parámetros de ubicación. Es decir, hay una constante $d$ (por ejemplo) tal que $X$ tiene la misma función de distribución que $Y + d$.
+
+## Método
+
+Determine el cuantil $\alpha/2$ ($\omega_{\alpha/2}$) para $n$ y $m$ de las tablas correspondientes a **Prueba Mann-Whitney**, o si $n$ y $m$ son mayores a 20 se ocupa la aproximación del cuantil, donde $1-\alpha$ es el coeficiente de confianza.Note que esto se puede utilizar incluso si hay muchos empates.
+
+Luego calcule $k$, dado por:
+
+$$k= \omega_{\alpha/2}-n(n+1)/2$$
+
+Para todos los pares posibles ($X_{i},Y_{j}$), encuentre las $k$ diferencias más grandes $X_{i}-Y_{j}$ y encontrar las $k$ diferencias más pequeñas.  
+
+Para encontrar las diferencias más grandes y más pequeñas, es conveniente ordenar primero cada muestra, de menor a mayor, y luego formar una matriz de diferencias $X_{i}-Y_{j}$ usando las $X_s$ como filas y las $Y_s$ como columnas. 
+
+La k-ésima diferencia más grande es el límite superior $U$ y la $k-ésima$ diferencia más pequeña es el límite inferior $L$. 
+
+Entonces el intervalo de confianza es obtenido por:
+
+$$\mathbf{P}[L\leq \mathbf{E}(X)-\mathbf{E}(Y)\leq U]\geq 1-\alpha$$
+
+Ahora haremos un ejemplo para ilustrar la teoría:
+
+## Ejemplo
+
+Se desea mezclar una masa de pastel hasta que se alcance una consistencia específica. Se mezclan cinco lotes de la mezcla usando la batidora A, y los otros cinco lotes se mezclan usando la batidora B. Los tiempos requeridos para mezclar se dan de la siguinte manera (en minutos):
+
+$$
+\begin{array}{c c}
+\textbf{Batidora A} & \textbf{Batidora A} \\
+7.3 & 7.4 \\
+6.9 & 6.8  \\
+7.2 & 6.9 \\
+7.8 & 6.7 \\
+7.2 & 7.1 \\
+\end{array}
+$$
+Se busca un intervalo de confianza del 95% para la diferencia de medias en los tiempos de mezcla, más específicamente para $\mathbf{E}(X)-\mathbf{E}(Y)$, donde $X$ se refiere a la $batidora\ A$ y $Y$ se refiere a la $batidora\ B$.
+
+**Paso 1**
+
+Encontrar cuantil $\alpha/2$ ($\omega_{\alpha/2}$), para nuestro ejemplo $n$=5, $m$=5, $\alpha=0.05$, y buscando en la **Tabla Mann-Whitney** tenemos $\omega_{\alpha/2}=\omega_{0.025}=18$
+
+**Paso 2**
+
+Calculamos $k$, dado por:
+
+$$k= \omega_{\alpha/2}-n(n+1)/2$$
+
+$$k=18-(5)(6)/2=3$$
+
+**Paso 3**
+
+Ordenamos las muestras de menor a mayor, las $X_s$ las usaremos como filas y las $Y_s$ las usaremos como columnas para formar la matriz de diferencias $X_{i}-Y_{j}$:
+
+$$
+\begin{array}{|l| r r r r r|}
+\hline
+X_{i} \ Y_{j} & 6.7 & 6.8 & 6.9 & 7.1 & 7.4 \\
+\hline
+6.9 & 0.2 & 0.1 & 0.0 & -0.2 & -0.5 \\
+7.2 & 0.5 & 0.4 & 0.3 &  0.1 & -0.2 \\
+7.2 & 0.5 & 0.4 & 0.3 &  0.1 & -0.2 \\
+7.3 & 0.6 & 0.5 & 0.4 &  0.2 & -0.1 \\
+7.8 & 1.1 & 1.0 & 0.9 &  0.7 &  0.4 \\
+\hline
+\end{array}
+$$
+
+**Paso 4**
+
+Entonces las más grandes y las más pequeñas diferencias son encontradas:
+
+$$
+\begin{array}{c c c c}
+\mbox{Diferencias Pequeñas} & & \mbox{ Diferencias Grandes} \\
+6.9 - 7.4 = -0.5 & & 7.8 - 6.7 = 1.1\\
+6.9 - 7.1 = -0.2 & & 7.8 - 6.8 = 1.0\\
+7.2 - 7.4 = -0.2 = \textbf{L} & & 7.8 - 6.9 = 0.9 = \textbf{U}\\
+\end{array}
+$$
+
+**Paso 5**
+
+El intervalo de confianza del 95% $(L,U)$ para la diferencia de medias, es decir, $\mathbf{E}(X)-\mathbf{E}(Y)$ es $(-0.2,0.9)$.

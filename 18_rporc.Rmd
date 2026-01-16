@@ -1,0 +1,247 @@
+# Tablas de Contingecia de $r \times c$
+
+
+Como una generalización inmediata de la tabla de contingencia $2 \times 2$ mencionadas anteriormente, tenemos la tabla de contingencia con $r$ renglones y $c$ columnas, llamada **tablas de contingencia de $r \times c$**.
+Éstas tablas de contingencia pueden usarse, como en la sección anterior, para presentar una tabulación de los datos contenidos en varias muestras, donde los datos representan al menos una escala de medición nominal, y para probar la hipótesis de que las probabilidades no difieren de muestra en muestra.
+
+## Prueba de $\chi^2$ para Tablas de Contingencia (Proporciones) {-}
+
+## Datos
+
+Hay $r$ poblaciones en total, y se extrae una muestra aleatoria de cada población. Supongamos que $n_{i}$ representa el número de observaciones en la muestra $i-ésima$ (de la población $i-ésima$) para $1 \leq i \leq r$. Cada observación en cada muestra es clasificada en una de las $C$ diferentes categorías.
+
+Sea $O_{ij}$ el número de observaciones de la $i-ésima$ muestra de la categoría $j$:
+
+$$n_{i}= O_{i1}+O_{i2}+\cdots+O_{ic}\ \ \ \ \ \ \ \ \   \forall \ \ i.$$
+Los datos se organizan en la siguiente tabla de contingencia de $r \times c$:
+
+$$
+\begin{array}{|c|c|c|c|c|c|}
+\hline
+ & \textbf{Clase 1}  & \textbf{Clase 2}    & \cdots & \textbf{Clase c} &\textbf{Total}     \\
+\hline
+\textbf{Población 1} & O_{11} & O_{12} & \cdots & O_{1c} & n_{1}   \\
+\hline
+\textbf{Población 2} & O_{21} & O_{22} & \cdots & O_{2c} & n_{2}\\
+\hline
+\cdots    & \cdots & \cdots & \cdots & \cdots & \cdots\\
+\hline
+\textbf{Población r} &O_{r1} & O_{r2} & \cdots & O_{rc} & n_{r}\\
+\hline
+\textbf{Total}       & C_{1}  & C_{2}  & \cdots & C_{c}  & N \\
+\hline
+\end{array}
+$$
+
+El número total de observaciones de todas las muestras es denotado por $N$:
+
+$$N=n_{1}+n_{2}+\cdots+n_{r}.$$
+
+El número de observaciones en la $j-ésima$ columna denotada como $C_{j}$. Esto es, $C_{j}$ es el número total de observaciones en la $j-ésima$ categoría, o clase, de todas las muestras combinadas.
+
+$$C_{j}=O_{1j}+O_{2j}+\cdots+O_{rj}, \ \ \ \ \ para\ \ j= 1,2,\ldots,c. $$
+
+## Supuestos
+
+* Cada muestra es una muestra aleatoria.
+
+* Los resultados de las diversas muestras son mutuamente independientes (particularmente entre las muestras, porque la independencia dentro de las muestras es parte del primer supuesto).
+
+* Cada observación puede clasificarse en exactamente una de las categorías o clases $C$.
+
+## Estadístico de Prueba
+
+El estadístico de prueba $T$ es obtenido de la siguiente manera:
+
+$$T=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}, \ \ \ Donde\ \ E_{ij}=\frac{n_{i}C_{j}}{N}$$
+
+Mientas el término $O_{ij}$ representa el número de observaciones en la celda $(i,j)$, el término $E_{ij}$ representa el número de observaciones esperadas en la celda $(i,j)$. Si $H_0$ es realmente verdadera, es decir, si $H_0$ es cierta el número de observaciones en la celda $(i,j)$ podrían estar cerca a la $i$-ésima muestra de tamaño $n_{i}$ multiplicado por la proporción $\frac{C_{j}}{N}$ de todas las observaciones en la categoría $j$. 
+
+**NOTA:**
+
+En el caso de $2 \times 2$ el estadístico $T$ es equivalente a $T^2$ visto anteriormente, porque solo se considera la hipótesis alternativa de dos colas.
+
+Una expresión equivalente para $T$, mas adecuado para el uso de su calculadora es:
+
+$$T=\sum_{i=1}^{r}\sum_{j=1}^{c}\frac{O_{ij}^{2}}{E_{ij}}-N$$
+
+**Distribución de T**
+
+La distribución nula de T es obtenida aproximadamente por la Distribución $\chi^2$ con $(r-1)\times(c-1)$  grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+Es decir,
+
+$$T\sim \chi^2_{(r-1)(c-1)}$$
+
+## Hipótesis
+
+Sea la probabilidad de que un valor seleccionado aleatoriamente de la i-ésima población se clasifique en la $j$-ésima clase, denotado por $p_{ij}$ para $i= 1, 2,\ldots,r$ y  $j=1,2,\ldots,c.$
+
+$$\textbf{H}_0: \ \mbox{Todas las probabilidades en la misma columna son iguales entre sí.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{Al menos dos de las probabilidades en la misma columna no son iguales entre sí.}$$
+en otros términos:
+
+$$\textbf{H}_0: \ p_{1j}=p_{2j}= \cdots=p_{rj} \ \ \ \ \  \forall\  j.$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ p_{ij} \ \neq \  p_{kj} \ \ \mbox{para algún par} \ \  i \ \ \mbox{y} \ \ k.$$
+
+
+#### Regla de decisión {-}
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ con $(r-1)\times(c-1)$ grados de libertad, cuyos cuantiles se encuentran en las tablas de dicha distribución. 
+
+Ahora aplicaremos los conocimientos en el próximo ejemplo:
+
+## Ejercicio
+
+Una muestra de estudiantes seleccionados aleatoriamente de escuelas secundarias privadas recibió pruebas de rendimiento estandarizadas con los siguientes resultados:
+
+$$
+\begin{array}{ |c|cc c c c c|}
+\hline
+&\textbf{Puntaje de Prueba}&&&&\\
+\hline
+&\textbf{0-275}	& \textbf{276-350} & \textbf{351-425} & \textbf{426-500} & \textbf{Totales} \\
+\hline
+\textbf{Escuela Privada} & 6	& 14 & 17 & 9 & 46 \\
+\hline
+\textbf{Escuela Pública} & 30	& 32 & 17 & 3 & 82 \\
+\hline
+\textbf{Totales} & 36	& 46 & 34 & 12 & 128 \\
+\hline
+\end{array}
+$$
+
+**Paso 1** Prueba a utilizar: **Tablas de Contingencia de $r\times c$**
+
+**Paso 2** Plantear hipótesis:
+
+$$\textbf{H}_0: \ \mbox{La distribución del puntaje de los estudiantes en la prueba es la misma para la escuela}$$
+$$\mbox{privada como para la escuela pública.}$$
+
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La distribución del puntaje de los estudiantes en la prueba es distinta para la escuela}$$
+$$\mbox{privada como para la escuela pública.}$$
+
+
+Para poder calcular nuestro estadístico de prueba podemos auxiliarnos de una pequeña tablita para
+
+* $E_{ij}:$
+
+$$
+\begin{array}{ |c|cccc|  }
+\hline
+&\textbf{Columnas} & & &\\
+\hline
+&\textbf{1}	& \textbf{2} & \textbf{3} & \textbf{4} \\
+\hline
+\textbf{Renglón 1} & 12.9	& 16.5 & 12.2 & 4.3 \\
+\hline
+\textbf{Renglón 2} & 23.1	& 29.5 & 21.8 & 7.7 \\
+\hline
+\end{array}
+$$
+
+
+**Paso 3** Estadístico de Prueba
+
+Para la celda en el $renglón\ 1$, $columna\ 1$ tenemos:
+
+$$\frac{(O_{ij}-E_{ij})^2}{E_{ij}}= \frac{(O_{11}-E_{11})^2}{E_{11}}=\frac{(6-12.9)^2}{12.9}=\frac{47.61}{12.9}=3.69$$
+
+
+Si hacemos los calculos celda por celda el resultado es:
+
+$$T=3.69+0.38+1.89+5.14+2.06+0.21+1.06+2.87=17.3$$
+
+**Paso 4** Procedimiento completo 
+
+Ahora buscaremos el cuantil: $\chi^2(1-\alpha)_{(r-1)(c-1)}$ donde $(r-1)\times(c-1)=(2-1)\times(4-1)=3$
+entonces buscamos $\chi^2_{(3)}=7.815$
+
+**Paso 5** Regla de desición :
+
+Rechazo $H_0$ si $T> \chi^2(1-\alpha)$ y  $17.3> 7.815$ entonces Rechazo $H_0$.
+
+**Paso 6** Conclusión:
+
+Entonces la distribución del puntaje de los estudiantes en la prueba es distinta para la escuela privada como para la escuela pública.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r, warning=FALSE}
+data <- matrix(c(6,14,17,9,46,30,32,17,3,82,36,46,34,12,128),nrow=3,byrow=T, 
+               dimnames=list("Escuelas"=c("EscuelaPrivada","EscuelaPublica","Totales"), 
+                             "Puntajes"=c("cat1","cat2","cat3","cat4","Totales")))
+data
+
+#Datos
+
+O11=6
+O12=14
+O13=17
+O14=9
+O21=30
+O22=32
+O23=17
+O24=3
+n1=46
+n2=82
+C1=36
+C2=46
+C3=34
+C4=12
+N=n1+n2
+
+#Ahora calcularemos los Eij
+
+E11=n1*C1/N
+E12=n1*C2/N
+E13=n1*C3/N
+E14=n1*C4/N
+E21=n2*C1/N
+E22=n2*C2/N
+E23=n2*C3/N
+E24=n2*C4/N
+
+#Ahora calcularemos los (Oij-Eij)^2/Eij
+
+j1=(O11-E11)^2/E11
+j2=(O12-E12)^2/E12
+j3=(O13-E13)^2/E13
+j4=(O14-E14)^2/E14
+j5=(O21-E21)^2/E21
+j6=(O22-E22)^2/E22
+j7=(O23-E23)^2/E23
+j8=(O24-E24)^2/E24
+
+#Ahora calculamos el estadístico de prueba
+
+T=sum(j1,j2,j3,j4,j5,j6,j7,j8)
+T
+
+#El cuantil es de una distribución ji.cuadrada con (r-1)(c-1) grados de libertad en este caso serian 3 gl
+
+qchisq(0.95,3)
+
+```
+
+Observamos que la estadística de prueba tiene un valor de 17.28 y su correspondiente $p-value$ es menor a 0.05, por lo tanto con $\alpha=5\%$ rechazaremos $H_0$ y concluimos existe evidencia suficiente para suponer la distribución de los puntajes en la prueba es distinta entre las escuelas privadas y las escuelas públicas.
+
+Ahora podemos utilizar la prueba en R:
+
+```{r}
+
+tabla<-matrix(c(6,14,17,9,46,30,32,17,3,82),ncol=5,byrow=TRUE)
+tabla
+chisq.test(tabla)
+```
+

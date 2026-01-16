@@ -1,0 +1,256 @@
+# Prueba Mc Nemar
+
+El objetivo de esta prueba es ver el efecto que tuvo cierto "tratamiento" sobre un sujeto cuya "condición" se observa antes y después del mismo.
+Por ejemplo se puede usar para analizar el efecto que un debate tiene en la decisión de una asamblea. Para esto se puede hacer una encuesta para registrar la opinión de los miembros de la misma en categorías **a favor** o **en contra** de una propuesta y después de realizado el debate se les vuelve a preguntar su opinión sobre el tema. 
+Nos interesa estudiar a los individuos que cambiaron de opinión, es decir, los que antes estaban **a favor** y ahora están **en contra** y los que estaban **en contra** y ahora están **a favor**.
+
+La manera de estudiar esto es identificando a los individuos encuestados con parejas ordenadas de la forma (0,0),(0,1),(1,0) o (1,1) dónde la primera entrada representa la **postura** del individuo
+antes del debate y la segunda representa su postura después. ("0",por ejemplo, puede representar **en contra** y "1" **a favor**).
+Luego se ingresan estos datos en una tabla de contingencia de la siguiente forma:
+
+
+$$
+\begin{array}{ c| c| c }
+ & \textbf{ahora en contra}  & \textbf{ahora a favor}\\
+\hline
+\textbf{antes en contra} & Número\ de\ (0,0) & Número\ de\ (0,1) \\
+\hline
+\textbf{antes a favor} & Número\ de\ (1,0) & Número\ de\ (1,1) \\
+\end{array} 
+$$
+
+## Datos
+
+Los datos consisten en observaciones bivariadas aleatorias:  
+
+$$(X_{1},Y_{1}),(X_{2},Y_{2}),(X_{3},Y_{3}),\cdots,(X_{n'},Y_{n'})$$
+
+Dentro de cada par de datos en la muestra se tiene $X$ e $Y$ que sólo tomarán los valor $0$ y $1$.
+
+En general los datos se resumen en una tabla de contingencia de la forma:
+
+$$
+\begin{array}{ c| c| c }
+ & \textbf{después 0}  & \textbf{después 1}\\
+\hline
+\textbf{antes 0} & \textbf{a}=Número\ de\ (0,0) &\textbf{b}=Número\ de\ (0,1) \\
+\hline
+\textbf{antes 1} & \textbf{c}=Número\ de\ (1,0) &\textbf{d}=Número\ de\ (1,1) \\
+\end{array} 
+$$
+
+## Supuestos
+
+1) Cada pareja ($X_{i},Y_{i}$) son mutuamente independientes.
+
+2) La escala de medida es nominal con 2 categorías para toda $X_{i}$ y $Y_{i}$.
+
+3) La probabilidad de que se observe (0,1) es $\geq$ que la de (1,0) o la de (1,0) es $\geq$ (0,1) para todos los elementos de la muestra.
+
+## Estadístico de Prueba
+
+$$T_{1}=\frac{(b-c)^2}{(b+c)} \ \thickapprox \ \chi^{2}_{(1)}$$
+Es decir, la distribución de $T_{1}$ es aproximadamente $\chi^{2}_{(1)}$.
+
+Por otro lado, si $b+c\leq20$, es preferible utilizar el siguiente estadístico:
+
+$$T_{2}=b\sim Bin(b+c,p)$$
+
+Es decir, la distribución de $T_{2}$ es exactamente  $Bin(b+c,p)$
+
+
+Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis:
+
+
+## Hipótesis
+
+### Caso A (Prueba de dos colas) {-}
+
+$$\textbf{H}_0: \mathbf{P}[X_{i}=0,Y_{i}=1]= \mathbf{P}[X_{i}=1,Y_{i}=0]$$ 
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[X_{i}=0,Y_{i}=1]\neq \mathbf{P}[X_{i}=1,Y_{i}=0]$$
+
+
+Es decir, se quiere ver si la probabilidad de que el individuo pase de 0 a 1 es la misma que la probabilidad de que pase de 1 a 0. En otras palabras, se quiere comprobar si el efecto del tratamiento fue neutro o si hay alguna tendencia tras el mismo.
+
+#### Regla de decisión {-}
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T_{2} \leq t \ \ \   o \ \ \ T_{2}>n-t$$
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t$ tal que 
+
+$$\mathbf{P}[Y \leq t]=\alpha/2$$ 
+
+
+Donde $Y \sim Bin (b+c,1/2)$.
+
+
+Por otro lado, si $b+c>20$ 
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si 
+
+$$T_{1} > t_{1-\alpha}$$ 
+
+
+Elegimos $\alpha$, el tamaño de la prueba y debemos encontrar $t_{1-\alpha}$ tal que 
+
+
+
+Donde $t_{1-\alpha}$  se encuentra en la tabla correspondiente ya que $T_{1} \sim \chi^{2}_{(1)}$. 
+
+y calculamos el $p-value$ de la siguiente manera:
+
+$$p-value=2*min\{\mathbf{P}[Y\leq T_{2}],\mathbf{P}[Y\geq T_{2}]\}$$
+
+Ahora aplicaremos lo anterior en un ejemplo ilustrativo:
+
+## Ejemplo
+
+May y Johnson (1997) publicaron el resultado de un estudio en el cual los investigadores querían determinar el efecto de la hipnosis en reducir el dolor asociado con la venopunción en pacientes juveniles de cáncer. Los datos se observan en la siguiente tabla:
+
+$$
+\begin{array}{ c| c c| c }
+                     & Después\ de\ la\ hipnosis &            & \\
+\hline
+Antes\ de\ la hipnosis & \textbf{Sin Dolor}     & \textbf{Con Dolor}& Total\\
+\hline
+\textbf{Sin Dolor} & \textbf{a}=18                     & \textbf{b}=4  & 22   \\
+\hline
+\textbf{Con Dolor} & \textbf{c}=12                     & \textbf{d}=5 & 17\\
+\hline
+Total     & 30              & 9               & 39 \\
+\end{array} 
+$$
+
+
+**Paso 1** Escribimos la prueba a utilizar
+
+La prueba a utilizar **Prueba de Mc Nemar Caso A de dos colas**
+
+**Paso 2** Formulamos nuestras hipótesis en contexto al problema planteado
+
+
+$$\textbf{H}_0: \mathbf{P}[X_{i}=0,Y_{i}=1]= \mathbf{P}[X_{i}=1,Y_{i}=0]$$ 
+
+$$vs$$
+
+$$\textbf{H}_a: \mathbf{P}[X_{i}=0,Y_{i}=1]\neq \mathbf{P}[X_{i}=1,Y_{i}=0]$$
+
+es decir,
+
+$$\textbf{H}_0: \ \mbox{Se mantiene el sentir dolor después de la hipnosis.}$$
+
+$$vs$$
+
+$$\textbf{H}_a:\ \mbox{Hay un cambio considerable al no sentir dolor después de la hipnosis.}$$
+
+**Paso 3** Estadístico de prueba
+
+
+Recordando que $b+c=4+12$  entonces $b+c=16\leq20$ entonces utilizaremos el estadístico:
+
+$$T_{2}=b=4$$
+$$T_{2}\sim Bin(16,1/2)$$
+
+
+**Paso 4** Procedimiento completo 
+
+**Supuestos**
+
+1. Muestra aleatoria de tamaño n=16.
+
+* Tomaremos $\alpha$= 5% =0.05 el nivel de significancia.
+
+* $n=6$ tamaño de la muestra
+
+* $p$=1/2
+
+**Paso 5** Regla de decisión
+
+Rechazamos $H_0$ a un nivel de significancia $\alpha$ si $T_{2} \leq t$ o $T_{2}>n-t$
+
+Debemos encontrar $t$ tal que 
+
+$$\mathbf{P}[Y \leq t]=\alpha/2=0.025$$
+
+$$T_{2}=4 \leq 5=t  \ \ \ \ \   o  \ \ \ \ \      5>16-4  $$
+$$T_{2}=4 \nleq 5=t   \ \ \ \ \   y   \ \ \ \ \      5\ngtr12$$
+ 
+$\therefore$ Rechazamos $H_0$
+
+**Paso 6** Conclusión
+ 
+
+Existe evidencia suficiente para decir que hay un cambio considerable a no sentir dolor después de recibir hipnosis.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+Veamos que $b+c=4+12=16\leq 20$ por lo tanto el estadístico de prueba será
+
+$T_2=b=4$
+$T_2\sim Bin(16,1/2)$
+
+
+Tomaremos $\alpha=5\%$
+```{r,echo=FALSE}
+data=matrix(c(18,4,12,5),nrow=2,byrow=T, 
+       dimnames=list("Antes hipnosis"=c("Sin dolor","dolor"), 
+       "Despues hipnosis"=c("Sin dolor","dolor")))
+data
+```
+
+
+```{r}
+
+#Datos
+
+T_2=4                    #Es la posición b
+n=16                     #Tamaño de la muestra
+alpha=0.05               #Nivel de significancia
+p=0.5                    #Para la prueba Mc nemar p es 1/2
+```
+Según el planteamiento de las hipótesis, este es un Caso A (dos colas), por lo que siguiendo la regla de decisión tenemos que rechazaremos $H_0$ si $T_2 \leq t$ o $T_2>n-t$ donde $t$ será en cuantil que acumule 5% en la distribución binomial
+
+Podemos graficar la función de distribución:
+
+```{r,echo=FALSE}
+z=0:16
+plot(z,dbinom(z,16,0.5),type="h",lwd=8,xlab=" ",col= "deeppink4",ylab=" ",main="Función de distribución de una variable Binomial(16,0.5)")
+```
+
+Calculamos $t$ y el $p-value$:
+
+```{r}
+t=qbinom(.05,n,p)       #Valor con el que vamos a comparar el estadístico
+t
+pvalue=2*min(c(pbinom(T_2,n,p), pbinom(T_2,n,p,lower.tail = F)))   #P-value
+pvalue
+```
+Tenemos que como $T_2=4\leq 5 =t$, entonces se rechaza $H_0$ como ya rechazamos en la cola inferior no es necesario probar la cola superior, pero si NO hubieramos rechazado con la primer ecuación debemos probar si $T_2>n-t$.
+
+Por lo tanto se concluye que hay información suficiente para decir que hay un cambio considerable al no sentir dolor después de la hipnosis.
+
+Finalmente utilizaremos la función en R:
+
+```{r}
+binom.test(4,n,p,"t")
+
+
+#En el caso de tener una n mayor a 20 utilizamos la siguiente
+#prueba
+```
+Con corrección por continuidad:
+```{r}
+mcnemar.test(data, correct = TRUE) #CON CORRECCION POR CONTINUIDAD
+```
+
+Sin correción por continuidad:
+```{r}
+mcnemar.test(data, correct = FALSE) #SIN CORRECCION POR CONTINUIDAD
+```
+

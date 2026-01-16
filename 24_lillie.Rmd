@@ -1,0 +1,216 @@
+# Prueba Lilliefors para Normalidad
+
+La prueba de bondad de ajuste de Kolmogorov presentada anteriormente es una buena prueba para ver si una muestra aleatoria tiene alguna función de distribución especificada. La prueba de Kolmogorov está diseñada para usarse solo cuando la función de distribución hipotética está completamente especificada, es decir, cuando no hay parámetros desconocidos que deben estimarse a partir de la muestra.
+La prueba de bondad de ajuste Ji-cuadrada es lo suficientemente flexible como para permitir que algunos parámetros se estimen a partir de los datos.Simplemente se resta un grado de libertad para cada parámetro estimado descrita anteriormente.
+
+Sin embargo, la prueba de Ji-cuadrada requiere que los datos se agrupen, y dicha agrupación de datos suele ser arbitraria. Además, la distribución del estadístico de prueba se conoce solo aproximadamente, y a veces el poder de la prueba de Ji-cuadrada no es muy bueno. Por estas razones, se buscan otras pruebas de bondad de ajuste, especialmente para distribuciones probadas con frecuencia.
+
+La prueba de Kolmogorov se ha modificado para permitir su uso en varias situaciones en las que los parámetros se estiman a partir de los datos. En realidad, el estadístico de prueba permanece sin cambios, pero se utilizan diferentes tablas de valores críticos. Estas tablas ya no son las mismas para todas las distribuciones; cambian de una distribución hipotética a otra. La prueba sigue siendo una prueba no paramétrica porque la validez de la prueba (el nivel  de $\alpha$) no depende de supuestos no probados con respecto a la distribución de la población; en cambio, la forma de distribución de la población es la hipótesis que se está probando.
+
+La primera modificación a la prueba de Kolmogorov es para probar la hipótesis compuesta de la normalidad. Es decir, la hipótesis nula establece que la población es una de la familia de distribuciones normales sin especificar la media o la varianza de la distribución normal. Ésta prueba fue presentada por primera vez por Hubert Lilliefors (1967). Una característica interesante de esta prueba es que este es uno de los primeros casos en que el compilador se utilizó para generar números aleatorios con el fin de obtener estimaciones precisas de los verdaderos cuantiles de la distribución exacta del estadístico de la prueba y además, aproximar a los parámetros a través del uso de los estimadores puntuales.
+
+## Datos
+
+Los datos consisten en una muestra aleatoria $X_{1},X_{2},\ldots,X_{n}$ de tamaño $n$ asociada con alguna función de distribución desconocida, denotada por $F(x)$.
+
+Calculando la media muestral
+
+$$\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}$$
+
+para usarla como una estimación puntual de $\mu$ 
+
+y calculando como una estimación de $\sigma$
+
+$$s=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^2}$$
+
+Después calcularemos los valores de muestra "normalizados" $Z_{i}$ definidos por:
+
+$$Z_{i}=\frac{X_{i}-\overline{X}}{s} \ \ \ \ i=1,2,\ldots,n$$
+
+El estadístico de prueba se calcula a partir de $Z_{i}s$ en lugar de a partir de la muestra aleatoria. original
+
+
+## Supuestos
+
+1) La muestra es una muestra aleatoria.
+
+
+## Hipótesis
+
+$$\textbf{H}_0: \ \mbox{La muestra aleatoria proviene de una población con distribución normal,}$$
+$$\mbox{con media y desviación estándar desconocidas.}$$
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La función de distribución de las} \ \ X_{i}s \ \  \mbox{no es normal.}$$
+
+## Estadístico de Prueba
+
+Normalmente, el estadístico de prueba es el mismo para la prueba de Kolmogorov de dos colas, definida como la distancia vertical máxima entre la función de distribución empírica de $X_{i}s$ y la función de distribución normal con media $\mu=\overline{X}$  y desviación estándar $\sigma=s$.
+Sin embargo, el siguiente método para calcular el estadístico de prueba es un poco más fácil, ya que es equivalente al método indicado. Es decir, el cálculo del estadístico $T_{1}$ será en función de la $Z_{i}s$.
+
+$$T_{1}=\underset{x}{sup}|F^*(x)-S(x)|$$
+
+#### Regla de Decisión {-}
+
+Rechazo $H_0$ a un nivel de significancia $\alpha$ si $T_{1}> W_{1-\alpha}$ donde $W_{1-\alpha}$ es el cuantil obtenido en las tablas correspondientes a nuestra prueba.
+
+
+## Ejemplo
+
+Los siguientes datos, corresponden a una muestra aleatoria en la que mide la pérdida y ganancia de peso en $KG$ de un grupo después de vacaciones.
+
+$$0.6822,\ 3.994,\ -0.9705,\ -0.5575,\ -2.1532,\ 0.0829,\ 2.9224,\ 0.2425$$
+$$-0.4962,\ -0.1621,\ 0.449,\ -0.8827,\ -0.8368,\ -1.5805,\ 0.386.$$
+
+Se desea probar si los datos provienen de una distribución normal con $\mu$ y $\sigma$ desconocidas. 
+Realizar la prueba a un nivel de significancia del $95\%.$
+
+**Paso 1** Prueba a utilizar **Prueba de Bondad de Ajuste Lilliefors para Normalidad**
+
+**Paso 2** Planteamiento de Hipótesis 
+
+$$\textbf{H}_0: \ \mbox{La muestra} \ \ \sim \ \  N(\mu,\sigma^2).$$
+$$vs$$
+
+$$\textbf{H}_a: \ \mbox{La muestra}  \ \nsim \  N(\mu,\sigma^2).$$
+
+
+**Paso 3** Estadístico de Prueba
+
+$$T_{1}=\underset{z}{sup} \ | \ F^*(z)-S(z) \ |$$
+
+**Paso 4** Procedimiento completo para el cálculo del Estadístico de Prueba:
+
+
+1) Se procede a ordenar nuestras observaciones de menor a mayor.
+
+
+2) Se obtienen los estimadores puntuales de distribución normal con los datos de la muestra,
+
+$\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_{i}= 0.07463333$ y $s=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^2}=1.590808$
+
+
+3) Después calcularemos los valores de muestra "normalizados" $Z_{i}$ definidos por:
+
+$$Z_{i}=\frac{X_{i}-\overline{X}}{s} \ \ \ \ i=1,2,\ldots,15$$
+4) Se calcula la función empírica, como no tenemos ningún valor repetido:
+
+$$S_{n}= \frac{i}{n}=\frac{1}{15},\frac{2}{15}, \ldots, 1. $$
+
+5) Se calcula la función empírica menos un valor, es decir,
+$$S_{n}= \frac{i-1}{n}=\frac{0}{15},\frac{1}{15}, \ldots, \frac{14}{15}.$$
+
+6) Se calcula $D^+$ que es el resultado de la resta de la distribución conocida menos la  distribución empírica, es decir:
+
+$$D^+= max\ \{ \ S_{n}(Z_{i})-F^*(Z_{i}) \ \}$$
+
+
+7) Se calcula $D^-$ que es el resultado de la resta de la distribución empírica menos uno menos la distribución conocida, es decir:
+
+$$D^-= max\ \{\ S_{n}(Z_{i-1})-F^*(Z_{i}) \ \}$$
+
+
+8) Finalmente realizada la tabla, se calcula el máximo de las columnas $D^+$ y $D^-$ de ésta manera, se tiene la siguiente tabla:
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame("$i$" = 1:15, "$X$" = c(0.6822, 3.994, -0.9705, -0.5575, -2.1532, 0.0829, 2.9224, 0.2425,-0.4962, -0.1621, 0.449, -0.8827, -0.8368, -1.5805, 0.386),"$X_i$"=c(-2.1532,-1.5805,-0.9705,-0.8827,-0.8368,
+-0.5575,-0.4962, -0.1621,  0.0829,  0.2425,0.3860, 0.4490,  0.6822,2.9224,3.9940),"$Z_i=\\frac{x_i-\\bar{x}}{s}$"=c(-1.4004, -1.0404,-0.6569,-0.6017,-0.5729,-0.3973,-0.3588,-0.1488,0.0051,0.1055,0.1957,0.2353,0.3819,1.7901,  2.4637), "$S_n(Z_i)$"=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1), "$S_n(Z_{i-1})$"=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15),"$F^*(Z_i)$"=c(0.0806, 0.1490,0.2555,0.2736,0.2833,0.3455,0.3598,0.4408,0.5020,0.5420,0.5775,0.5930,0.6487,0.9632, 0.9931),"$D^+=S_n(Z_i)-F^*(Z_i)$"=c(-0.0139,-0.0156,-0.0555,-0.0069,0.0500,0.0545,0.1068,0.0925,0.0980,0.1246, 0.1558,0.2070,0.2179,-0.0298,0.0069),"$D^-=S_n(Z_{i-1})-F^*(Z_i)$"=c(-0.0806,-0.0823,-0.1221,-0.0736,-0.0166,-0.0121,0.0402,0.0258,0.0313,
+  0.0580,0.0891,0.1403,0.1513,-0.0965,-0.0597)) %>% 
+  kable( booktabs = T, align=rep('c')) %>% kable_styling(bootstrap_options = "striped", full_width = F) %>%
+  scroll_box(width = "100%")
+```
+
+
+9) Entonces 
+
+$$ D^+= max\ \{\ S_{n}(Z_{i})-F^*(Z_{i}) \ \}= 0.2179 \ \ \ \ y\ \ \ \ D^-= max\ \{ \ S_{n}(Z_{i-1})-F^*(Z_{i}) \ \}=0.1513 $$
+Por lo tanto:
+
+$$T_{1}=\underset{x}{sup}\ | \ S_{n}(z)-F^*(z) \ |=max \ \{\ D^+,D^- \ \}=max \ \{ \  0.2179,0.1513 \ \}=0.2179 $$
+
+
+**Paso 5** Regla de Decisión
+
+Este último resultado se compara con la tabla de valores críticos de la Tabla Lilliefors para Normalidad, para un nivel de significancia $\alpha$ = 0.05 $W_{0.05}$=0.2190, de esta manera se tiene que 0.2190 = $W_{0.05} > T_{1}$ = 0.2179, como el cuantil $W_{0.05}$ es mayor a comparación de $T_{1}$=0.2179.
+
+No Rechazamos $H_0$.
+
+**Paso 6** Conclusión
+
+Podemos concluir que a un nivel de significancia $\alpha$ =0.05, no existe evidencia estadística suficiente para decir que la muestra no tiene distribución normal.
+
+## Ejemplo en R-Studio
+
+Ahora haremos la réplica en R.
+
+```{r}
+
+#Datos
+
+i= 1:15
+X=c(0.6822, 3.994, -0.9705, -0.5575, -2.1532, 0.0829, 2.9224,
+    0.2425,-0.4962, -0.1621, 0.449, -0.8827, -0.8368, -1.5805, 0.386)
+X_i=c(-2.1532,-1.5805,-0.9705,-0.8827,-0.8368,-0.5575,-0.4962, -0.1621,  0.0829,  0.2425,
+      0.3860, 0.4490,  0.6822,2.9224,3.9940)
+Z_i=c(-1.4004, -1.0404,-0.6569,-0.6017,-0.5729,-0.3973,-0.3588,-0.1488,0.0051,
+0.1055,0.1957,0.2353,0.3819,1.7901,  2.4637) #Calculado xi-xbarra/s
+Sn_Zi=c(1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15,1)
+Sn_Zi_1=c(0/15,1/15,2/15,3/15,4/15,5/15,6/15,7/15,8/15,9/15,10/15,11/15,12/15,13/15,14/15)
+F_Zi=c(0.0806, 0.1490,0.2555,0.2736,0.2833,0.3455,0.3598,0.4408,0.5020,0.5420,0.5775,0.5930,
+       0.6487,0.9632, 0.9931)
+D_mas=c(-0.0139,-0.0156,-0.0555,-0.0069,0.0500,0.0545,0.1068,0.0925,0.0980,0.1246, 0.1558,
+        0.2070,0.2179,-0.0298,0.0069)    #Sn(Zi)-F*(Zi)
+D_menos=c(-0.0806,-0.0823,-0.1221,-0.0736,-0.0166,-0.0121,0.0402,0.0258,0.0313, 
+          0.0580,0.0891,0.1403,0.1513,-0.0965,-0.0597)   #Sn(Zi-1)-F*(Zi)
+
+Tabla=cbind(i,X_i,Z_i,Sn_Zi,Sn_Zi_1,F_Zi,D_mas,D_menos)
+Tabla
+
+EstdPrueba=max(D_mas,D_menos)
+EstdPrueba
+
+```
+Por lo tanto:
+
+$$T_{1}=\underset{x}{sup} \ | \ S_{n}(z)-F^*(z)\ |=max \ \{\ D^+,D^- \ \}=max \ \{ \  0.2179,0.1513 \ \}=0.2179 $$
+
+Lo vamos a comparar con la tabla de valores críticos de la Tabla Lilliefors para Normalidad, para un nivel de significancia $\alpha$ = 0.05 $W_{0.05}$=0.2190, de esta manera se tiene que 0.2190 = $W_{0.05} > T_{1}$ = 0.2179, como el cuantil $W_{0.05}$ es mayor a comparación de $T_{1}$=0.2179.
+Entonces no Rechazamos $H_0$ y podemos concluir que a un nivel de significancia $\alpha$ =0.05, no existe evidencia estadística suficiente para decir que la muestra no tiene distribución normal.
+
+Ahora podemos utilizar la prueba en R
+```{r}
+
+
+library(nortest) #prueba lilliefors
+lillie.test(X)
+```
+
+##Otro ejemplo en R
+En R fije la semilla 2020, y genere 250 observaciones distribuidas como una $N(0, 1)$ y con ella realice:
+\begin{enumerate}
+\item Grafique la función de distribución empírica de las observaciones generadas.
+\item Agregar sobre esa misma gráfica, la curva de la distribución verdadera $N(0,1)$. 
+\item Realizar la prueba Lilliefors de bondad de ajuste para probar que la muestra proviene de una distribución $N(0,1)$.
+\end{enumerate}
+```{r}
+#Semilla y simulación
+set.seed(2020)
+x=rnorm(50,0,1)
+#Gráfico de la función de distribución empírica
+plot.ecdf(x,col="blue",verticals = TRUE, do.points = FALSE, lwd=2, main="")
+#Gráfico de la distribución verdadera $N(0,1)$
+curve(pnorm,add=TRUE, col="red", lty="dashed", lwd=2)
+legend("topleft", c("Normal(0,1)","S(x)"), cex=0.8, col=c("red","blue"), pch=c(16,16))
+
+#Prueba
+library(nortest) 
+T1<-lillie.test(x)
+T1
+
+```
+Observamos que la estadística de prueba tiene un valor de 0.08739 y su correspondiente p-value es $44.36\%$, por lo tanto no rechazaremos $H_0$ y concluimos no existe evidencia suficiente para suponer que la distribución de la muestra no es $N(0,1)$. Esperabamos que la prueba diera ese resultado ya que por construcción la muestra proviene de una distribucion $N(0,1)$.
