@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 11 Prueba de Igualdad de Varianzas | Modelos no paramétricos</title>
+  <meta name="description" content="Material para el curso modelos no paramétricos y de regresión en la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 11 Prueba de Igualdad de Varianzas | Modelos no paramétricos" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/svg18/MNP" />
+  
+  <meta property="og:description" content="Material para el curso modelos no paramétricos y de regresión en la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="github-repo" content="svg18/MNP" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 11 Prueba de Igualdad de Varianzas | Modelos no paramétricos" />
+  
+  <meta name="twitter:description" content="Material para el curso modelos no paramétricos y de regresión en la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  
+
+<meta name="author" content="Sofía Villers Gómez" />
+<meta name="author" content="Dulce María Reyes Varela" />
+<meta name="author" content="Carlos Fernando Vásquez Guerra" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="prueba-de-kruskal-wallis.html"/>
+<link rel="next" href="prueba-para-más-de-dos-muestras.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modelos no paramétricos y de Regresión</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefacio</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i>Objetivos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Introducción</b></span></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="1" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html"><i class="fa fa-check"></i><b>1</b> Escalas de Medición</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#variables-categóricas"><i class="fa fa-check"></i><b>1.1</b> Variables categóricas</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#escala-nominal"><i class="fa fa-check"></i><b>1.1.1</b> Escala nominal:</a></li>
+<li class="chapter" data-level="1.1.2" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#escala-ordinal"><i class="fa fa-check"></i><b>1.1.2</b> Escala ordinal:</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#variables-cuantitativas"><i class="fa fa-check"></i><b>1.2</b> Variables cuantitativas</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#escala-de-intervalo"><i class="fa fa-check"></i><b>1.2.1</b> Escala de intervalo:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="escalas-de-medición.html"><a href="escalas-de-medición.html#escala-de-razón"><i class="fa fa-check"></i><b>1.2.2</b> Escala de razón:</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Pruebas Binomiales</b></span></li>
+<li class="chapter" data-level="" data-path="introducción-1.html"><a href="introducción-1.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="2" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html"><i class="fa fa-check"></i><b>2</b> Prueba de Proporciones</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#datos"><i class="fa fa-check"></i><b>2.1</b> Datos</a></li>
+<li class="chapter" data-level="2.2" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#supuestos"><i class="fa fa-check"></i><b>2.2</b> Supuestos</a></li>
+<li class="chapter" data-level="2.3" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#estadístico-de-prueba"><i class="fa fa-check"></i><b>2.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="2.4" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#hipótesis"><i class="fa fa-check"></i><b>2.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#caso-a-prueba-de-dos-colas"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#caso-b-prueba-de-cola-inferior"><i class="fa fa-check"></i>Caso B (Prueba de cola inferior)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#caso-c-prueba-de-cola-superior"><i class="fa fa-check"></i>Caso C (Prueba de cola superior)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>2.5</b> Intervalos de Confianza</a></li>
+<li class="chapter" data-level="2.6" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#ejemplo"><i class="fa fa-check"></i><b>2.6</b> Ejemplo</a></li>
+<li class="chapter" data-level="2.7" data-path="prueba-de-proporciones.html"><a href="prueba-de-proporciones.html#ejemplo-en-r-studio"><i class="fa fa-check"></i><b>2.7</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html"><i class="fa fa-check"></i><b>3</b> Prueba de Cuantiles</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#datos-1"><i class="fa fa-check"></i><b>3.1</b> Datos</a></li>
+<li class="chapter" data-level="3.2" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#supuestos-1"><i class="fa fa-check"></i><b>3.2</b> Supuestos</a></li>
+<li class="chapter" data-level="3.3" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#estadístico-de-prueba-1"><i class="fa fa-check"></i><b>3.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="3.4" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#hipótesis-1"><i class="fa fa-check"></i><b>3.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#caso-a-prueba-de-dos-colas-1"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#caso-b-prueba-de-cola-inferior-1"><i class="fa fa-check"></i>Caso B (Prueba de cola inferior)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#caso-c-prueba-de-cola-supeior"><i class="fa fa-check"></i>Caso C (Prueba de cola supeior)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#ejemplo-1"><i class="fa fa-check"></i><b>3.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="3.6" data-path="prueba-de-cuantiles.html"><a href="prueba-de-cuantiles.html#ejemplo-en-r-studio-1"><i class="fa fa-check"></i><b>3.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html"><i class="fa fa-check"></i><b>4</b> Prueba de Signos</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#datos-2"><i class="fa fa-check"></i><b>4.1</b> Datos</a></li>
+<li class="chapter" data-level="4.2" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#supuestos-2"><i class="fa fa-check"></i><b>4.2</b> Supuestos</a></li>
+<li class="chapter" data-level="4.3" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#estadístico-de-prueba-2"><i class="fa fa-check"></i><b>4.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="4.4" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#hipótesis-2"><i class="fa fa-check"></i><b>4.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#caso-a-prueba-de-dos-colas-2"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#caso-b-prueba-de-cola-inferior-2"><i class="fa fa-check"></i>Caso B (Prueba de cola inferior)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#caso-c-prueba-de-cola-superior-1"><i class="fa fa-check"></i>Caso C (Prueba de cola superior)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#ejemplo-2"><i class="fa fa-check"></i><b>4.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="4.6" data-path="prueba-de-signos.html"><a href="prueba-de-signos.html#ejemplo-en-r-studio-2"><i class="fa fa-check"></i><b>4.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html"><i class="fa fa-check"></i><b>5</b> Prueba Mc Nemar</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#datos-3"><i class="fa fa-check"></i><b>5.1</b> Datos</a></li>
+<li class="chapter" data-level="5.2" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#supuestos-3"><i class="fa fa-check"></i><b>5.2</b> Supuestos</a></li>
+<li class="chapter" data-level="5.3" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#estadístico-de-prueba-3"><i class="fa fa-check"></i><b>5.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="5.4" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#hipótesis-3"><i class="fa fa-check"></i><b>5.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#caso-a-prueba-de-dos-colas-3"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#ejemplo-3"><i class="fa fa-check"></i><b>5.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="5.6" data-path="prueba-mc-nemar.html"><a href="prueba-mc-nemar.html#ejemplo-en-r-studio-3"><i class="fa fa-check"></i><b>5.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html"><i class="fa fa-check"></i><b>6</b> Prueba de Cox Stuart</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#datos-4"><i class="fa fa-check"></i><b>6.1</b> Datos</a></li>
+<li class="chapter" data-level="6.2" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#supuestos-4"><i class="fa fa-check"></i><b>6.2</b> Supuestos</a></li>
+<li class="chapter" data-level="6.3" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#estadístico-de-prueba-4"><i class="fa fa-check"></i><b>6.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="6.4" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#hipótesis-4"><i class="fa fa-check"></i><b>6.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#caso-a-prueba-de-dos-colas-4"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#caso-b-prueba-de-cola-inferior-3"><i class="fa fa-check"></i>Caso B (Prueba de cola inferior)</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#caso-c-prueba-de-cola-superior-2"><i class="fa fa-check"></i>Caso C (Prueba de cola superior)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#ejemplo-4"><i class="fa fa-check"></i><b>6.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="6.6" data-path="prueba-de-cox-stuart.html"><a href="prueba-de-cox-stuart.html#ejemplo-en-r-studio-4"><i class="fa fa-check"></i><b>6.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ejercicios.html"><a href="ejercicios.html"><i class="fa fa-check"></i><b>7</b> Ejercicios</a></li>
+<li class="part"><span><b>III Prueba de Rango</b></span></li>
+<li class="chapter" data-level="" data-path="introducción-2.html"><a href="introducción-2.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="8" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html"><i class="fa fa-check"></i><b>8</b> Prueba U-Mann y Witney</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#datos-5"><i class="fa fa-check"></i><b>8.1</b> Datos</a></li>
+<li class="chapter" data-level="8.2" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#supuestos-5"><i class="fa fa-check"></i><b>8.2</b> Supuestos</a></li>
+<li class="chapter" data-level="8.3" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#estadístico-de-prueba-5"><i class="fa fa-check"></i><b>8.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="8.4" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#hipótesis-5"><i class="fa fa-check"></i><b>8.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#caso-a-prueba-de-dos-colas-5"><i class="fa fa-check"></i>Caso A (Prueba de dos colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#caso-b-prueba-de-cola-inferior-4"><i class="fa fa-check"></i>Caso B (Prueba de cola inferior)</a></li>
+<li class="chapter" data-level="" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#caso-c-prueba-de-cola-superior-3"><i class="fa fa-check"></i>Caso C (Prueba de cola superior)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#ejemplo-5"><i class="fa fa-check"></i><b>8.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="8.6" data-path="prueba-u-mann-y-witney.html"><a href="prueba-u-mann-y-witney.html#ejemplo-en-r-studio-5"><i class="fa fa-check"></i><b>8.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><a href="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><i class="fa fa-check"></i><b>9</b> Intervalo de confianza para la diferencia entre dos medias</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><a href="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html#datos-6"><i class="fa fa-check"></i><b>9.1</b> Datos</a></li>
+<li class="chapter" data-level="9.2" data-path="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><a href="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html#supuestos-6"><i class="fa fa-check"></i><b>9.2</b> Supuestos</a></li>
+<li class="chapter" data-level="9.3" data-path="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><a href="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html#método"><i class="fa fa-check"></i><b>9.3</b> Método</a></li>
+<li class="chapter" data-level="9.4" data-path="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html"><a href="intervalo-de-confianza-para-la-diferencia-entre-dos-medias.html#ejemplo-6"><i class="fa fa-check"></i><b>9.4</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html"><i class="fa fa-check"></i><b>10</b> Prueba de Kruskal-Wallis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#datos-7"><i class="fa fa-check"></i><b>10.1</b> Datos</a></li>
+<li class="chapter" data-level="10.2" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#supuestos-7"><i class="fa fa-check"></i><b>10.2</b> Supuestos</a></li>
+<li class="chapter" data-level="10.3" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#hipótesis-6"><i class="fa fa-check"></i><b>10.3</b> Hipótesis</a></li>
+<li class="chapter" data-level="10.4" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#estadístico-de-prueba-6"><i class="fa fa-check"></i><b>10.4</b> Estadístico de prueba</a></li>
+<li class="chapter" data-level="10.5" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#regla-de-decisión-16"><i class="fa fa-check"></i><b>10.5</b> Regla de decisión</a></li>
+<li class="chapter" data-level="10.6" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#ejemplo-7"><i class="fa fa-check"></i><b>10.6</b> Ejemplo</a></li>
+<li class="chapter" data-level="10.7" data-path="prueba-de-kruskal-wallis.html"><a href="prueba-de-kruskal-wallis.html#ejemplo-en-r-studio-6"><i class="fa fa-check"></i><b>10.7</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html"><i class="fa fa-check"></i><b>11</b> Prueba de Igualdad de Varianzas</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#prueba-de-igualdad-de-varianzas-para-2-poblaciones"><i class="fa fa-check"></i>Prueba de Igualdad de Varianzas para 2 poblaciones</a></li>
+<li class="chapter" data-level="11.1" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#datos-8"><i class="fa fa-check"></i><b>11.1</b> Datos</a></li>
+<li class="chapter" data-level="11.2" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#supuestos-8"><i class="fa fa-check"></i><b>11.2</b> Supuestos</a></li>
+<li class="chapter" data-level="11.3" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#estadístico-de-prueba-7"><i class="fa fa-check"></i><b>11.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="11.4" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#hipótesis-7"><i class="fa fa-check"></i><b>11.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#caso-a-prueba-de-dos-colas-6"><i class="fa fa-check"></i>Caso A Prueba de dos colas</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#caso-b-prueba-de-cola-inferior-5"><i class="fa fa-check"></i>Caso B Prueba de cola inferior</a></li>
+<li class="chapter" data-level="" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#caso-c-prueba-de-cola-superior-4"><i class="fa fa-check"></i>Caso C Prueba de cola superior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#ejemplo-8"><i class="fa fa-check"></i><b>11.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="11.6" data-path="prueba-de-igualdad-de-varianzas.html"><a href="prueba-de-igualdad-de-varianzas.html#ejemplo-en-r-studio-7"><i class="fa fa-check"></i><b>11.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html"><i class="fa fa-check"></i><b>12</b> Prueba para más de dos Muestras</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#datos-9"><i class="fa fa-check"></i><b>12.1</b> Datos</a></li>
+<li class="chapter" data-level="12.2" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#hipótesis-8"><i class="fa fa-check"></i><b>12.2</b> Hipótesis</a></li>
+<li class="chapter" data-level="12.3" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#estadístico-de-prueba-8"><i class="fa fa-check"></i><b>12.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="12.4" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#regla-de-decisión-20"><i class="fa fa-check"></i><b>12.4</b> Regla de decisión</a></li>
+<li class="chapter" data-level="12.5" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#comparación-múltiple"><i class="fa fa-check"></i><b>12.5</b> Comparación múltiple</a></li>
+<li class="chapter" data-level="12.6" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#ejemplo-9"><i class="fa fa-check"></i><b>12.6</b> Ejemplo</a></li>
+<li class="chapter" data-level="12.7" data-path="prueba-para-más-de-dos-muestras.html"><a href="prueba-para-más-de-dos-muestras.html#ejemplo-en-r-studio-8"><i class="fa fa-check"></i><b>12.7</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ejercicios-1.html"><a href="ejercicios-1.html"><i class="fa fa-check"></i><b>13</b> Ejercicios</a></li>
+<li class="part"><span><b>IV Tablas de Contingencia</b></span></li>
+<li class="chapter" data-level="" data-path="introducción-3.html"><a href="introducción-3.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="14" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html"><i class="fa fa-check"></i><b>14</b> Tablas de Contingencia de 2x2</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#datos-10"><i class="fa fa-check"></i><b>14.1</b> Datos</a></li>
+<li class="chapter" data-level="14.2" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#supuestos-9"><i class="fa fa-check"></i><b>14.2</b> Supuestos</a></li>
+<li class="chapter" data-level="14.3" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#estadístico-de-prueba-9"><i class="fa fa-check"></i><b>14.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="14.4" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#hipótesis-9"><i class="fa fa-check"></i><b>14.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#caso-a-prueba-de-dos-colas-7"><i class="fa fa-check"></i>Caso A Prueba de dos colas</a></li>
+<li class="chapter" data-level="" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#caso-b-prueba-de-cola-inferior-6"><i class="fa fa-check"></i>Caso B Prueba de cola inferior</a></li>
+<li class="chapter" data-level="" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#caso-c-prueba-de-cola-superior-5"><i class="fa fa-check"></i>Caso C Prueba de cola superior</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#ejemplo-10"><i class="fa fa-check"></i><b>14.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="14.6" data-path="tablas-de-contingencia-de-2x2.html"><a href="tablas-de-contingencia-de-2x2.html#ejemplo-en-r-studio-9"><i class="fa fa-check"></i><b>14.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html"><i class="fa fa-check"></i><b>15</b> Prueba de Independencia</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#datos-11"><i class="fa fa-check"></i><b>15.1</b> Datos</a></li>
+<li class="chapter" data-level="15.2" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#supuestos-10"><i class="fa fa-check"></i><b>15.2</b> Supuestos</a></li>
+<li class="chapter" data-level="15.3" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#estadístico-de-prueba-10"><i class="fa fa-check"></i><b>15.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="15.4" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#hipótesis-10"><i class="fa fa-check"></i><b>15.4</b> Hipótesis</a></li>
+<li class="chapter" data-level="15.5" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#ejercicio"><i class="fa fa-check"></i><b>15.5</b> Ejercicio</a></li>
+<li class="chapter" data-level="15.6" data-path="prueba-de-independencia.html"><a href="prueba-de-independencia.html#ejemplo-en-r-studio-10"><i class="fa fa-check"></i><b>15.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html"><i class="fa fa-check"></i><b>16</b> Tablas de Contingecia de <span class="math inline">\(r \times c\)</span></a>
+<ul>
+<li><a href="tablas-de-contingecia-de-r-times-c.html#prueba-de-chi2-para-tablas-de-contingencia-proporciones">Prueba de <span class="math inline">\(\chi^2\)</span> para Tablas de Contingencia (Proporciones)</a></li>
+<li class="chapter" data-level="16.1" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#datos-12"><i class="fa fa-check"></i><b>16.1</b> Datos</a></li>
+<li class="chapter" data-level="16.2" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#supuestos-11"><i class="fa fa-check"></i><b>16.2</b> Supuestos</a></li>
+<li class="chapter" data-level="16.3" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#estadístico-de-prueba-11"><i class="fa fa-check"></i><b>16.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="16.4" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#hipótesis-11"><i class="fa fa-check"></i><b>16.4</b> Hipótesis</a></li>
+<li class="chapter" data-level="16.5" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#ejercicio-1"><i class="fa fa-check"></i><b>16.5</b> Ejercicio</a></li>
+<li class="chapter" data-level="16.6" data-path="tablas-de-contingecia-de-r-times-c.html"><a href="tablas-de-contingecia-de-r-times-c.html#ejemplo-en-r-studio-11"><i class="fa fa-check"></i><b>16.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html"><i class="fa fa-check"></i><b>17</b> Prueba de la Mediana</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#datos-13"><i class="fa fa-check"></i><b>17.1</b> Datos</a></li>
+<li class="chapter" data-level="17.2" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#supuestos-12"><i class="fa fa-check"></i><b>17.2</b> Supuestos</a></li>
+<li class="chapter" data-level="17.3" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#estadístico-de-prueba-12"><i class="fa fa-check"></i><b>17.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="17.4" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#hipótesis-12"><i class="fa fa-check"></i><b>17.4</b> Hipótesis</a></li>
+<li class="chapter" data-level="17.5" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#comparación-múltiple-1"><i class="fa fa-check"></i><b>17.5</b> Comparación Múltiple</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#ejemplo-11"><i class="fa fa-check"></i><b>17.5.1</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="prueba-de-la-mediana.html"><a href="prueba-de-la-mediana.html#ejemplo-en-r-studio-12"><i class="fa fa-check"></i><b>17.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ejercicios-2.html"><a href="ejercicios-2.html"><i class="fa fa-check"></i><b>18</b> Ejercicios</a></li>
+<li class="part"><span><b>V Bondad de Ajuste</b></span></li>
+<li class="chapter" data-level="" data-path="introducción-4.html"><a href="introducción-4.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="19" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html"><i class="fa fa-check"></i><b>19</b> Prueba de la Ji-cuadrada</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html#datos-14"><i class="fa fa-check"></i><b>19.1</b> Datos</a></li>
+<li class="chapter" data-level="19.2" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html#hipótesis-13"><i class="fa fa-check"></i><b>19.2</b> Hipótesis</a></li>
+<li class="chapter" data-level="19.3" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html#estadístico-de-prueba-13"><i class="fa fa-check"></i><b>19.3</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="19.4" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html#ejemplo-12"><i class="fa fa-check"></i><b>19.4</b> Ejemplo</a></li>
+<li class="chapter" data-level="19.5" data-path="prueba-de-la-ji-cuadrada.html"><a href="prueba-de-la-ji-cuadrada.html#ejemplo-en-r-studio-13"><i class="fa fa-check"></i><b>19.5</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html"><i class="fa fa-check"></i><b>20</b> Prueba Kolmogorov</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#datos-15"><i class="fa fa-check"></i><b>20.1</b> Datos</a></li>
+<li class="chapter" data-level="20.2" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#supuestos-13"><i class="fa fa-check"></i><b>20.2</b> Supuestos</a></li>
+<li class="chapter" data-level="20.3" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#estadístico-de-prueba-14"><i class="fa fa-check"></i><b>20.3</b> Estadístico de Prueba</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-a-prueba-de-2-colas"><i class="fa fa-check"></i>Caso A (Prueba de 2 colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-b-prueba-de-1-cola"><i class="fa fa-check"></i>Caso B (Prueba de 1 cola)</a></li>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-c-prueba-de-1-cola"><i class="fa fa-check"></i>Caso C (Prueba de 1 cola)</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#hipótesis-14"><i class="fa fa-check"></i><b>20.4</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-a-prueba-de-2-colas-1"><i class="fa fa-check"></i>Caso A (Prueba de 2 colas)</a></li>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-b-prueba-de-1-cola-1"><i class="fa fa-check"></i>Caso B (Prueba de 1 cola)</a></li>
+<li class="chapter" data-level="" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#caso-c-prueba-de-1-cola-1"><i class="fa fa-check"></i>Caso C (Prueba de 1 cola)</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#ejemplo-13"><i class="fa fa-check"></i><b>20.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="20.6" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#ejemplo-en-r-studio-14"><i class="fa fa-check"></i><b>20.6</b> Ejemplo en R-Studio</a></li>
+<li class="chapter" data-level="20.7" data-path="prueba-kolmogorov.html"><a href="prueba-kolmogorov.html#otro-ejemplo-en-r"><i class="fa fa-check"></i><b>20.7</b> Otro ejemplo en R</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="prueba-kolmogorov-smirnov.html"><a href="prueba-kolmogorov-smirnov.html"><i class="fa fa-check"></i><b>21</b> Prueba Kolmogorov-Smirnov</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="prueba-kolmogorov-smirnov.html"><a href="prueba-kolmogorov-smirnov.html#hipótesis-15"><i class="fa fa-check"></i><b>21.1</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="prueba-kolmogorov-smirnov.html"><a href="prueba-kolmogorov-smirnov.html#caso-a-prueba-de-2-colas-2"><i class="fa fa-check"></i><b>21.1.1</b> Caso A (Prueba de 2 colas)</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="prueba-kolmogorov-smirnov.html"><a href="prueba-kolmogorov-smirnov.html#ejemplo-14"><i class="fa fa-check"></i><b>21.2</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html"><i class="fa fa-check"></i><b>22</b> Prueba Lilliefors para Normalidad</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#datos-16"><i class="fa fa-check"></i><b>22.1</b> Datos</a></li>
+<li class="chapter" data-level="22.2" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#supuestos-14"><i class="fa fa-check"></i><b>22.2</b> Supuestos</a></li>
+<li class="chapter" data-level="22.3" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#hipótesis-16"><i class="fa fa-check"></i><b>22.3</b> Hipótesis</a></li>
+<li class="chapter" data-level="22.4" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#estadístico-de-prueba-15"><i class="fa fa-check"></i><b>22.4</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="22.5" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#ejemplo-15"><i class="fa fa-check"></i><b>22.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="22.6" data-path="prueba-lilliefors-para-normalidad.html"><a href="prueba-lilliefors-para-normalidad.html#ejemplo-en-r-studio-15"><i class="fa fa-check"></i><b>22.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html"><i class="fa fa-check"></i><b>23</b> Pueba de Lilliefors Exponencial</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#datos-17"><i class="fa fa-check"></i><b>23.1</b> Datos</a></li>
+<li class="chapter" data-level="23.2" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#supuestos-15"><i class="fa fa-check"></i><b>23.2</b> Supuestos</a></li>
+<li class="chapter" data-level="23.3" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#hipótesis-17"><i class="fa fa-check"></i><b>23.3</b> Hipótesis</a></li>
+<li class="chapter" data-level="23.4" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#estadistico-de-prueba"><i class="fa fa-check"></i><b>23.4</b> Estadistico de Prueba</a></li>
+<li class="chapter" data-level="23.5" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#ejemplo-16"><i class="fa fa-check"></i><b>23.5</b> Ejemplo</a></li>
+<li class="chapter" data-level="23.6" data-path="pueba-de-lilliefors-exponencial.html"><a href="pueba-de-lilliefors-exponencial.html#ejemplo-en-r-studio-16"><i class="fa fa-check"></i><b>23.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html"><i class="fa fa-check"></i><b>24</b> Prueba Anderson-Darling</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#datos-18"><i class="fa fa-check"></i><b>24.1</b> Datos</a></li>
+<li class="chapter" data-level="24.2" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#supuestos-16"><i class="fa fa-check"></i><b>24.2</b> Supuestos</a></li>
+<li class="chapter" data-level="24.3" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#hipótesis-18"><i class="fa fa-check"></i><b>24.3</b> Hipótesis</a>
+<ul>
+<li class="chapter" data-level="" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#caso-a-prueba-de-2-colas-solo-será-este-caso"><i class="fa fa-check"></i>Caso A (Prueba de 2 colas) Solo será este caso</a></li>
+</ul></li>
+<li class="chapter" data-level="24.4" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#estadístico-de-prueba-16"><i class="fa fa-check"></i><b>24.4</b> Estadístico de Prueba</a></li>
+<li class="chapter" data-level="24.5" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#regla-de-decisión-34"><i class="fa fa-check"></i><b>24.5</b> Regla de Decisión</a>
+<ul>
+<li class="chapter" data-level="24.5.1" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#ejemplo-17"><i class="fa fa-check"></i><b>24.5.1</b> Ejemplo</a></li>
+</ul></li>
+<li class="chapter" data-level="24.6" data-path="prueba-anderson-darling.html"><a href="prueba-anderson-darling.html#ejemplo-en-r-studio-17"><i class="fa fa-check"></i><b>24.6</b> Ejemplo en R-Studio</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="otras-estadísticas.html"><a href="otras-estadísticas.html"><i class="fa fa-check"></i><b>25</b> Otras estadísticas</a></li>
+<li class="chapter" data-level="26" data-path="ejercicios-3.html"><a href="ejercicios-3.html"><i class="fa fa-check"></i><b>26</b> Ejercicios</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Hecho con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos no paramétricos</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="prueba-de-igualdad-de-varianzas" class="section level1" number="11">
+<h1><span class="header-section-number">Capítulo 11</span> Prueba de Igualdad de Varianzas</h1>
+<p>Usualmente para comparar varias poblaciones nos basamos en las medias u otras medidas de ubicación de las poblaciones, en algunas situaciones las varianzas podrían ser nuestro campo de interés. Por ejemplo, se ha afirmado que el efecto de sembrar nubes con yoduro de plata podría aumentar la varianza de la lluvia resultante.</p>
+<div id="prueba-de-igualdad-de-varianzas-para-2-poblaciones" class="section level2 unnumbered">
+<h2>Prueba de Igualdad de Varianzas para 2 poblaciones</h2>
+</div>
+<div id="datos-8" class="section level2" number="11.1">
+<h2><span class="header-section-number">11.1</span> Datos</h2>
+<p>Consiste en dos muestras aleatorias</p>
+<p><span class="math display">\[\mbox{Sea} \ \ x_{1},x_{2},x_{3},\cdots,x_{n} \ \ \mbox{una muestra aleatoria de tamaño} \  n  \ \mbox{de la} \ población \ 1.\]</span></p>
+<p><span class="math display">\[\mbox{Sea} \ \ y_{1},y_{2},y_{3},\cdots,y_{m} \ \ \mbox{una muestra aleatoria de tamaño} \ m \  \mbox{de la} \ poblacion\ 2.\]</span></p>
+</div>
+<div id="supuestos-8" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> Supuestos</h2>
+<ol style="list-style-type: decimal">
+<li><p>Ambas muestras son aleatorias de su respectiva población.</p></li>
+<li><p>Además de la independencia dentro de cada muestra, existe una independencia mutua entre las dos muestras.</p></li>
+<li><p>La escala de medida es al menos intervalo.</p></li>
+</ol>
+<p><strong>Asignación de Rangos</strong></p>
+<p>Modificaremos cada <span class="math inline">\(X_{i}\)</span> y <span class="math inline">\(Y_{j}\)</span> con el valor absoluto de la desviación de la media utilizando :</p>
+<p><span class="math display">\[U_{i} = |X_{i}-\mu_{1}| \ , \ \ \ i=1,\cdots,n\]</span></p>
+<p><span class="math display">\[y\]</span></p>
+<p><span class="math display">\[V_{j} = |Y_{j}-\mu_{2}|\  ,\ \ \ j=1,\cdots,m\]</span></p>
+<p>donde <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\mu_{2}\)</span> son las medias de las poblaciones 1 y 2 respectivamente.</p>
+<p>Si <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\mu_{2}\)</span> son desconocidas, se usará <span class="math inline">\(\overline{X}\)</span> para <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\overline{Y}\)</span> para <span class="math inline">\(\mu_{2}\)</span>.</p>
+<p>Asignamos los rangos 1 al <span class="math inline">\(n + m\)</span> a la muestra combinada de <span class="math inline">\(U\)</span> y <span class="math inline">\(V\)</span> de la manera habitual.
+Si varios valores de <span class="math inline">\(U\)</span> y/o <span class="math inline">\(V\)</span> son exactamente iguales entre sí (empatados), asigne a cada uno el promedio de los rangos que se les habrían asignado si no hubiera habido empates.</p>
+<p>Sean <span class="math inline">\(R(U_{i})\)</span> y <span class="math inline">\(R(V_{j})\)</span> los rangos así asignados.</p>
+</div>
+<div id="estadístico-de-prueba-7" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Estadístico de Prueba</h2>
+<ul>
+<li><strong>Si no hay empates</strong></li>
+</ul>
+<p>Si no hay empates de la población <span class="math inline">\(U\)</span> con la población <span class="math inline">\(V\)</span> ocupamos:</p>
+<p><span class="math display">\[T=\sum_{i=1}^{n}[R(U_{i})]^2\]</span></p>
+<p>La suma de los cuadrados de los rangos asignados a la <span class="math inline">\(población \ 1\)</span>.</p>
+<ul>
+<li><strong>Si hay empates</strong></li>
+</ul>
+<p><span class="math display">\[T_{1} = \frac{T-n\overline{R^2}}{\left[\frac{nm}{N(N-1)}\sum_{i=1}^{N}R_{i}^4-\frac{nm}{N-1}(\overline{R^2})^2\right]^\frac{1}{2}}\]</span></p>
+<p>Donde <span class="math inline">\(N= n+m\)</span>, <span class="math inline">\(\overline{R^2}\)</span> representa el promedio de los cuadrados de los rangos de ambas muestras combinadas:</p>
+<p><span class="math display">\[\overline{R^2}= \frac{1}{N}\left(\sum_{i=1}^{n}[R(U_{i})]^2+\sum_{j=1}^{m}[R(V_{j})]^2\right)\]</span>
+y <span class="math inline">\(\sum R_{i}^4\)</span> representa la suma de los rangos elevados a la cuarta potencia:</p>
+<p><span class="math display">\[ \sum_{i=1}^{N}R_{i}^4= \sum_{i=1}^{n}[R(U_{i})]^4+\sum_{j=1}^{m}[R(V_{j})]^4\]</span>
+Los cuantiles exactos de la distribución nula de <span class="math inline">\(T\)</span> se obtienen de las tablas correspondientes de la prueba para los casos de no tener empates y <span class="math inline">\(n \leq 10\)</span>, <span class="math inline">\(m \leq 10\)</span>.</p>
+<p>Para muestras de tamaño mayor a 10 utilizamos la siguiente aproximación, basada en la estandarización normal de cuantiles <span class="math inline">\(z_p\)</span>, obtenidas de la tabla de la distribución normal, puede ser usado la aproximación obtenida de cuantiles <span class="math inline">\(\omega_p\)</span> para <span class="math inline">\(T\)</span>.</p>
+<p><span class="math display">\[\omega_p= \frac{n(N+1)(2N+1)}{6}+z_{p}\sqrt{\frac{mn(N+1)(2N+1)(8N+11)}{180}}\]</span>
+Donde <span class="math inline">\(N= n+m\)</span></p>
+<p>Dependiendo del planteamiento de nuestro problema a resolver se formulan las hipótesis:</p>
+</div>
+<div id="hipótesis-7" class="section level2" number="11.4">
+<h2><span class="header-section-number">11.4</span> Hipótesis</h2>
+<div id="caso-a-prueba-de-dos-colas-6" class="section level3 unnumbered">
+<h3>Caso A Prueba de dos colas</h3>
+<p><span class="math display">\[\textbf{H}_0: \ X \ \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}\]</span></p>
+<p><span class="math display">\[vs\]</span></p>
+<p><span class="math display">\[\textbf{H}_a: \ Var(x) \neq  Var(Y)\]</span></p>
+<div id="regla-de-decisión-17" class="section level4 unnumbered">
+<h4>Regla de decisión</h4>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si:</p>
+<p><span class="math display">\[T&gt;t_{1-\frac{\alpha}{2}} \ \ \   o \ \ \  T&lt;t_{\frac{\alpha}{2}}\]</span></p>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si <span class="math inline">\(T\)</span> (o <span class="math inline">\(T_1\)</span> en caso de tener empates) es mayor que el cuantil <span class="math inline">\(1-\frac{\alpha}{2}\)</span> o menor al cuantil <span class="math inline">\(\frac{\alpha}{2}\)</span> encontrados en las tablas correspodientes a la prueba (tablas de rangos al cuadrado). Y en el caso de <span class="math inline">\(T_{1}\)</span> en la tabla de distribución normal estándar.</p>
+<p>Y calculamos el <span class="math inline">\(p-value\)</span></p>
+<p><span class="math display">\[p-value= 2*(el \ menor\ p-value\ de\ una\ cola)\]</span></p>
+<p>donde</p>
+<p>el <span class="math inline">\(p-value\)</span> de la cola inferior es aproximadamente:</p>
+<p><span class="math display">\[ p-value=\mathbf{P}\left[Z\leq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]\]</span></p>
+<p>y el <span class="math inline">\(p-value\)</span> de la cola superior es aproximadamente:</p>
+<p><span class="math display">\[p-value=\mathbf{P}\left[Z\geq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]\]</span></p>
+</div>
+</div>
+<div id="caso-b-prueba-de-cola-inferior-5" class="section level3 unnumbered">
+<h3>Caso B Prueba de cola inferior</h3>
+<p><span class="math display">\[\textbf{H}_0: \ X \  \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}\]</span></p>
+<p><span class="math display">\[vs\]</span></p>
+<p><span class="math display">\[\textbf{H}_a: \ Var(x) &lt; Var(Y)\]</span></p>
+<div id="regla-de-decisión-18" class="section level4 unnumbered">
+<h4>Regla de decisión</h4>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si:</p>
+<p><span class="math inline">\(T&lt;t_\alpha\)</span> (o <span class="math inline">\(T_1\)</span> en caso de tener empates) donde, <span class="math inline">\(t_\alpha\)</span> es el cuantil que se busca en tablas de la prueba. Y en el caso de <span class="math inline">\(T_{1}\)</span> en la tabla de distribución normal estándar.</p>
+<p>y el <span class="math inline">\(p-value\)</span> se calcula:</p>
+<p><span class="math display">\[ p-value= \mathbf{P}\left[Z\leq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]\]</span></p>
+</div>
+</div>
+<div id="caso-c-prueba-de-cola-superior-4" class="section level3 unnumbered">
+<h3>Caso C Prueba de cola superior</h3>
+<p><span class="math display">\[\textbf{H}_0: \ X \  \mbox{e} \  Y \ \mbox{son identicamente distribuidas, excepto por medias diferentes.}\]</span></p>
+<p><span class="math display">\[vs\]</span></p>
+<p><span class="math display">\[\textbf{H}_a: \ Var(x) &gt; Var(Y)\]</span></p>
+<div id="regla-de-decisión-19" class="section level4 unnumbered">
+<h4>Regla de decisión</h4>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si:</p>
+<p><span class="math inline">\(T&gt;t_{1-\alpha}\)</span>(o <span class="math inline">\(T_1\)</span> en caso de tener empates) donde, <span class="math inline">\(t_{1-\alpha}\)</span> es el cuantil que se busca en tablas de la prueba. Y en el caso de <span class="math inline">\(T_{1}\)</span> en la tabla de distribución normal estándar.</p>
+<p>y el <span class="math inline">\(p-value\)</span> se calcula:</p>
+<p><span class="math display">\[p-value=\mathbf{P}\left[Z\geq\frac{T-n(N+1)(2N+1)/6}{\sqrt{mn(N+1)(2N+1)(8N+11)/180}}\right]\]</span></p>
+<p>Ahora vamos a resolver un ejemplo:</p>
+</div>
+</div>
+</div>
+<div id="ejemplo-8" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Ejemplo</h2>
+<p>Una cuenca hidrográfica particular se ha construido extensivamente en los últimos años, con desarrollos de vivienda, represas, etc. una muestra aleatoria de las tasas de flujo de la corriente (pies cúbicos por minuto) para una corriente en esa cuenca hidrográfica se compara con una muestra de las tasas de tiempos anteriores para ver si la variabilidad ha cambiado.</p>
+<p><span class="math display">\[
+\begin{array}{c c c} 
+\textbf{Tasas Actuales} &amp;  &amp; \textbf{Tasas Pasadas} \\
+32 &amp; &amp; 39 \\
+36 &amp; &amp; 21 \\
+41 &amp; &amp; 58 \\
+27 &amp; &amp; 46 \\
+35 &amp; &amp; 30 \\
+48 &amp; &amp; 22 \\
+31 &amp; &amp; 17 \\
+28 &amp; &amp; 19 \\
+\end{array}
+\]</span></p>
+<p>Es significativa la diferencia en las varianzas? Utiliza <span class="math inline">\(\alpha\)</span>=0.05</p>
+<p><strong>Paso 1</strong> Prueba a utilizar <strong>Prueba de Igualdad de Varianzas</strong></p>
+<p><strong>Paso 2</strong> Formulamos las hipótesis</p>
+<p><span class="math display">\[\textbf{H}_0: \mbox{Las tasas actuales y las tasas pasadas son idénticamente distribuidas.}\]</span></p>
+<p><span class="math display">\[vs\]</span></p>
+<p><span class="math display">\[\textbf{H}_a: \ Var(\mbox{tasas pasadas}) \ \neq  \ Var(\mbox{tasas actuales})\]</span></p>
+<p><strong>Paso 4</strong> Procedimiento completo</p>
+<p>Primero como <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\mu_{2}\)</span> son desconocidas se usará <span class="math inline">\(\overline{X}\)</span> para <span class="math inline">\(\mu_{1}\)</span> y <span class="math inline">\(\overline{Y}\)</span> para <span class="math inline">\(\mu_{2}\)</span>.</p>
+<p><span class="math display">\[
+\begin{array}{c c c c c c c c }
+\mbox{Medidas} &amp; \mbox{Originales} &amp; \mbox{Desviación} &amp; \mbox{Absoluta} &amp; \mbox{Rangos} &amp; \mbox{Rangos} &amp; \mbox{Rangos} &amp; \mbox{Al Cuadrado} \\
+\mbox{Tasas Actuales} &amp; \mbox{Tasas Pasadas} &amp; \mbox{Actuales} &amp; \mbox{Pasadas} &amp; \mbox{Actuales} &amp; \mbox{Pasadas}&amp; \mbox{Actuales} &amp; \mbox{Pasadas} \\
+\textbf{(X)} &amp; \textbf{(Y)} &amp; \textbf{(U)}   &amp; \textbf{(V)}  &amp;     &amp;               &amp;     &amp;         \\
+32  &amp; 39  &amp; 2.75  &amp; 7.5  &amp;  4  &amp;  8            &amp; 16  &amp;  64         \\
+36  &amp; 21  &amp; 1.25  &amp; 10.5 &amp;  2  &amp;  11           &amp;  4  &amp;  121    \\
+41  &amp; 58  &amp; 6.25  &amp; 26.5 &amp;  6 &amp;   16           &amp; 36  &amp;  256       \\
+27  &amp; 46  &amp; 7.75  &amp; 14.5 &amp;  9  &amp;  14.5(\mbox{Empate})&amp; 81  &amp;  210.25       \\
+35  &amp; 30  &amp; 0.25  &amp; 1.5  &amp;  1  &amp;  3            &amp; 1   &amp;  9     \\
+48  &amp; 22  &amp; 13.25 &amp; 9.5  &amp;  13 &amp;  10           &amp; 169 &amp;  100    \\
+31  &amp; 17  &amp; 3.75  &amp; 14.5 &amp;  5  &amp;  14.5(\mbox{Empate})&amp; 25  &amp;  210.25     \\
+28  &amp; 19  &amp; 6.75  &amp; 12.5 &amp;  7  &amp;  12           &amp; 49  &amp;  144   \\
+\hline
+\overline{X}= 34.75 &amp; \overline{Y}= 31.5 &amp; &amp; &amp; &amp; &amp; T=381
+\end{array}
+\]</span></p>
+<p><span class="math inline">\(T\)</span>= Sumas del cuadrado de los rangos (Actuales) = 381</p>
+<p><span class="math inline">\(\overline{R^2}= \frac{1}{16}\left(16+4+36+\cdots+210.25+144\right)\)</span>=93.46</p>
+<p><span class="math inline">\(\sum_{i=1}^{N}R_{i}^4= (16)^2+(4)^2+\cdots+(210.25)^2+(144)^2\)</span>= 243217.125</p>
+<p><strong>Paso 3</strong> Estadístico de Prueba</p>
+<p>Debido a que encontramos empates utilizaremos el estadístico <span class="math inline">\(T_{1}\)</span>:</p>
+<p><span class="math display">\[T_{1} = \frac{T-n\overline{R^2}}{\left[\frac{nm}{N(N-1)}\sum_{i=1}^{N}R_{i}^4-\frac{nm}{N-1}(\overline{R^2})^2\right]^\frac{1}{2}}\]</span></p>
+<p>Entonces tenemos:</p>
+<p><span class="math display">\[T_{1} = \frac{381-8(93.46)}{\left[\frac{(8)(8)}{16(15)}(243217.125)-\frac{(8)(8)}{15}(93.46)^2\right]^\frac{1}{2}}\]</span></p>
+<p><span class="math display">\[T_{1} = \frac{381-747.68}{\left[\frac{64}{240}(243217.125)-\frac{64}{15}(93.46)^2\right]^\frac{1}{2}}\]</span></p>
+<p><span class="math display">\[T_{1} = \frac{-366.68}{[64857.9-37268.35]^\frac{1}{2}}\]</span></p>
+<p><span class="math display">\[T_{1} = \frac{-366.68}{\sqrt{27589.55}}\]</span>
+<span class="math display">\[T_{1} = \frac{-366.68}{166.10}\]</span>
+<span class="math display">\[T_{1}= -2.208282\]</span></p>
+<p><strong>Paso 5</strong> Regla de Decisión</p>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si:</p>
+<p><span class="math display">\[T_{1}&gt;t_{1-\frac{\alpha}{2}} \ \ \ \ \  o  \ \ \ \ \ T_{1}&lt;t_{\frac{\alpha}{2}}\]</span></p>
+<p>Rechazamos <span class="math inline">\(H_0\)</span> al nivel de significancia <span class="math inline">\(\alpha\)</span> si <span class="math inline">\(T_{1}\)</span> (ya que tuvimos empates) es mayor que el cuantil <span class="math inline">\(1-\frac{\alpha}{2}\)</span> o menor al cuantil <span class="math inline">\(\frac{\alpha}{2}\)</span> encontrados en las tablas correspodientes a la distribución normal estándar.</p>
+<p>Regresando a nuestro ejemplo:</p>
+<p><span class="math display">\[T_{1}&gt;t_{0.975} \ \ \ \ \  o \ \ \ \ \ T_{1}&lt;t_{.025}\]</span></p>
+<p><span class="math display">\[-2.2082 \ngtr 1.96  \ \ \ \ \   o  \ \ \ \ \  -2.2082 &lt; -1.96\]</span></p>
+<p><span class="math inline">\(\therefore\)</span> Entonces Rechazo <span class="math inline">\(H_0\)</span>.</p>
+<p><strong>Paso 6</strong> Conclusión</p>
+<p>Entonces podemos concluir que existe evidencia estadística suficiente para decir que existe diferencia significativa en las varianzas.</p>
+</div>
+<div id="ejemplo-en-r-studio-7" class="section level2" number="11.6">
+<h2><span class="header-section-number">11.6</span> Ejemplo en R-Studio</h2>
+<p>Ahora haremos la réplica en R.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="prueba-de-igualdad-de-varianzas.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb63-2"><a href="prueba-de-igualdad-de-varianzas.html#cb63-2" aria-hidden="true" tabindex="-1"></a>TasasActuales <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">32</span>,<span class="dv">36</span>,<span class="dv">41</span>,<span class="dv">27</span>,<span class="dv">35</span>,<span class="dv">48</span>,<span class="dv">31</span>,<span class="dv">28</span>)</span>
+<span id="cb63-3"><a href="prueba-de-igualdad-de-varianzas.html#cb63-3" aria-hidden="true" tabindex="-1"></a>TasasPasadas <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">39</span>,<span class="dv">21</span>,<span class="dv">58</span>,<span class="dv">46</span>,<span class="dv">30</span>,<span class="dv">22</span>,<span class="dv">17</span>,<span class="dv">19</span>)</span>
+<span id="cb63-4"><a href="prueba-de-igualdad-de-varianzas.html#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="prueba-de-igualdad-de-varianzas.html#cb63-5" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="fu">length</span>(TasasActuales)  <span class="co">#Tamaño de TasasActuales</span></span>
+<span id="cb63-6"><a href="prueba-de-igualdad-de-varianzas.html#cb63-6" aria-hidden="true" tabindex="-1"></a>m<span class="ot">=</span><span class="fu">length</span>(TasasPasadas)   <span class="co">#Tamaño de TasasPasadas</span></span>
+<span id="cb63-7"><a href="prueba-de-igualdad-de-varianzas.html#cb63-7" aria-hidden="true" tabindex="-1"></a>N<span class="ot">=</span>n<span class="sc">+</span>m                    <span class="co">#Tamaño Total</span></span>
+<span id="cb63-8"><a href="prueba-de-igualdad-de-varianzas.html#cb63-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-9"><a href="prueba-de-igualdad-de-varianzas.html#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de TasasActuales y TasasPasadas</span></span>
+<span id="cb63-10"><a href="prueba-de-igualdad-de-varianzas.html#cb63-10" aria-hidden="true" tabindex="-1"></a>datos<span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(TasasActuales,TasasPasadas), <span class="at">byrow=</span><span class="cn">FALSE</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb63-11"><a href="prueba-de-igualdad-de-varianzas.html#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(datos)<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;TasasActuales: X&quot;</span>, <span class="st">&quot;TasasPasadas: Y&quot;</span>)</span>
+<span id="cb63-12"><a href="prueba-de-igualdad-de-varianzas.html#cb63-12" aria-hidden="true" tabindex="-1"></a>datos</span></code></pre></div>
+<pre><code>     TasasActuales: X TasasPasadas: Y
+[1,]               32              39
+[2,]               36              21
+[3,]               41              58
+[4,]               27              46
+[5,]               35              30
+[6,]               48              22
+[7,]               31              17
+[8,]               28              19</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="prueba-de-igualdad-de-varianzas.html#cb65-1" aria-hidden="true" tabindex="-1"></a>alpha<span class="ot">=</span><span class="fl">0.05</span>  <span class="co">#Nivel de significancia </span></span>
+<span id="cb65-2"><a href="prueba-de-igualdad-de-varianzas.html#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="prueba-de-igualdad-de-varianzas.html#cb65-3" aria-hidden="true" tabindex="-1"></a>Xbarra<span class="ot">=</span><span class="fu">mean</span>(TasasActuales)</span>
+<span id="cb65-4"><a href="prueba-de-igualdad-de-varianzas.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Media muestral de X: &quot;</span>, Xbarra, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Media muestral de X:  34.75 </code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="prueba-de-igualdad-de-varianzas.html#cb67-1" aria-hidden="true" tabindex="-1"></a>Ybarra<span class="ot">=</span><span class="fu">mean</span>(TasasPasadas)</span>
+<span id="cb67-2"><a href="prueba-de-igualdad-de-varianzas.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Media muestral de Y: &quot;</span>, Ybarra, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Media muestral de Y:  31.5 </code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="prueba-de-igualdad-de-varianzas.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores absolutos de la desviacion de la media de X</span></span>
+<span id="cb69-2"><a href="prueba-de-igualdad-de-varianzas.html#cb69-2" aria-hidden="true" tabindex="-1"></a>desvX<span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb69-3"><a href="prueba-de-igualdad-de-varianzas.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb69-4"><a href="prueba-de-igualdad-de-varianzas.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  desvX[i]<span class="ot">=</span><span class="fu">abs</span>(TasasActuales[i] <span class="sc">-</span> Xbarra)</span>
+<span id="cb69-5"><a href="prueba-de-igualdad-de-varianzas.html#cb69-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb69-6"><a href="prueba-de-igualdad-de-varianzas.html#cb69-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-7"><a href="prueba-de-igualdad-de-varianzas.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Valores absolutos de la desviacion de la media de Y</span></span>
+<span id="cb69-8"><a href="prueba-de-igualdad-de-varianzas.html#cb69-8" aria-hidden="true" tabindex="-1"></a>desvY <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb69-9"><a href="prueba-de-igualdad-de-varianzas.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb69-10"><a href="prueba-de-igualdad-de-varianzas.html#cb69-10" aria-hidden="true" tabindex="-1"></a>  desvY[i] <span class="ot">=</span> <span class="fu">abs</span>(TasasPasadas[i] <span class="sc">-</span> Ybarra)</span>
+<span id="cb69-11"><a href="prueba-de-igualdad-de-varianzas.html#cb69-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb69-12"><a href="prueba-de-igualdad-de-varianzas.html#cb69-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-13"><a href="prueba-de-igualdad-de-varianzas.html#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos la matriz U, V</span></span>
+<span id="cb69-14"><a href="prueba-de-igualdad-de-varianzas.html#cb69-14" aria-hidden="true" tabindex="-1"></a>desviacion <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(desvX,desvY), <span class="at">byrow=</span> <span class="cn">FALSE</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb69-15"><a href="prueba-de-igualdad-de-varianzas.html#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(desviacion) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;U&quot;</span>,<span class="st">&quot;V&quot;</span>)</span>
+<span id="cb69-16"><a href="prueba-de-igualdad-de-varianzas.html#cb69-16" aria-hidden="true" tabindex="-1"></a>desviacion</span></code></pre></div>
+<pre><code>         U    V
+[1,]  2.75  7.5
+[2,]  1.25 10.5
+[3,]  6.25 26.5
+[4,]  7.75 14.5
+[5,]  0.25  1.5
+[6,] 13.25  9.5
+[7,]  3.75 14.5
+[8,]  6.75 12.5</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="prueba-de-igualdad-de-varianzas.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignamos los rangos</span></span>
+<span id="cb71-2"><a href="prueba-de-igualdad-de-varianzas.html#cb71-2" aria-hidden="true" tabindex="-1"></a>rang <span class="ot">=</span> <span class="fu">rank</span>(desviacion)</span>
+<span id="cb71-3"><a href="prueba-de-igualdad-de-varianzas.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co">#rang</span></span>
+<span id="cb71-4"><a href="prueba-de-igualdad-de-varianzas.html#cb71-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-5"><a href="prueba-de-igualdad-de-varianzas.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Los acomodamos en una nueva matriz U, V</span></span>
+<span id="cb71-6"><a href="prueba-de-igualdad-de-varianzas.html#cb71-6" aria-hidden="true" tabindex="-1"></a>rangos <span class="ot">=</span> <span class="fu">matrix</span>(rang, <span class="at">byrow=</span><span class="cn">FALSE</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb71-7"><a href="prueba-de-igualdad-de-varianzas.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(rangos) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Rangos U&quot;</span>, <span class="st">&quot;Rangos V&quot;</span>)</span>
+<span id="cb71-8"><a href="prueba-de-igualdad-de-varianzas.html#cb71-8" aria-hidden="true" tabindex="-1"></a>rangos</span></code></pre></div>
+<pre><code>     Rangos U Rangos V
+[1,]        4      8.0
+[2,]        2     11.0
+[3,]        6     16.0
+[4,]        9     14.5
+[5,]        1      3.0
+[6,]       13     10.0
+[7,]        5     14.5
+[8,]        7     12.0</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="prueba-de-igualdad-de-varianzas.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rangos de U al cuadrado</span></span>
+<span id="cb73-2"><a href="prueba-de-igualdad-de-varianzas.html#cb73-2" aria-hidden="true" tabindex="-1"></a>rangosU2 <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb73-3"><a href="prueba-de-igualdad-de-varianzas.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb73-4"><a href="prueba-de-igualdad-de-varianzas.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  rangosU2[i] <span class="ot">=</span> (rangos[i,<span class="dv">1</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb73-5"><a href="prueba-de-igualdad-de-varianzas.html#cb73-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-6"><a href="prueba-de-igualdad-de-varianzas.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co">#rangosU2</span></span>
+<span id="cb73-7"><a href="prueba-de-igualdad-de-varianzas.html#cb73-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="prueba-de-igualdad-de-varianzas.html#cb73-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Rangos de V al cuadrado</span></span>
+<span id="cb73-9"><a href="prueba-de-igualdad-de-varianzas.html#cb73-9" aria-hidden="true" tabindex="-1"></a>rangosV2 <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb73-10"><a href="prueba-de-igualdad-de-varianzas.html#cb73-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb73-11"><a href="prueba-de-igualdad-de-varianzas.html#cb73-11" aria-hidden="true" tabindex="-1"></a>  rangosV2[i] <span class="ot">=</span> (rangos[i,<span class="dv">2</span>])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb73-12"><a href="prueba-de-igualdad-de-varianzas.html#cb73-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb73-13"><a href="prueba-de-igualdad-de-varianzas.html#cb73-13" aria-hidden="true" tabindex="-1"></a><span class="co">#rangosV2</span></span>
+<span id="cb73-14"><a href="prueba-de-igualdad-de-varianzas.html#cb73-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-15"><a href="prueba-de-igualdad-de-varianzas.html#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Suma de los rangos al cuadrado de U</span></span>
+<span id="cb73-16"><a href="prueba-de-igualdad-de-varianzas.html#cb73-16" aria-hidden="true" tabindex="-1"></a>sumarangosU2 <span class="ot">=</span> <span class="fu">sum</span>(rangosU2)</span>
+<span id="cb73-17"><a href="prueba-de-igualdad-de-varianzas.html#cb73-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-18"><a href="prueba-de-igualdad-de-varianzas.html#cb73-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Suma de los rangos al cuadrado de V</span></span>
+<span id="cb73-19"><a href="prueba-de-igualdad-de-varianzas.html#cb73-19" aria-hidden="true" tabindex="-1"></a>sumarangosV2 <span class="ot">=</span> <span class="fu">sum</span>(rangosV2)</span>
+<span id="cb73-20"><a href="prueba-de-igualdad-de-varianzas.html#cb73-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-21"><a href="prueba-de-igualdad-de-varianzas.html#cb73-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Nueva matriz con los rangos^2</span></span>
+<span id="cb73-22"><a href="prueba-de-igualdad-de-varianzas.html#cb73-22" aria-hidden="true" tabindex="-1"></a>rangos2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(rangosU2,rangosV2), <span class="at">byrow=</span><span class="cn">FALSE</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb73-23"><a href="prueba-de-igualdad-de-varianzas.html#cb73-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(rangos2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Rangos al cuadrado U&quot;</span>, <span class="st">&quot;Rangos al cuadrado V&quot;</span>)</span>
+<span id="cb73-24"><a href="prueba-de-igualdad-de-varianzas.html#cb73-24" aria-hidden="true" tabindex="-1"></a>rangos2</span></code></pre></div>
+<pre><code>     Rangos al cuadrado U Rangos al cuadrado V
+[1,]                   16                64.00
+[2,]                    4               121.00
+[3,]                   36               256.00
+[4,]                   81               210.25
+[5,]                    1                 9.00
+[6,]                  169               100.00
+[7,]                   25               210.25
+[8,]                   49               144.00</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="prueba-de-igualdad-de-varianzas.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Promedio de los rangos^2</span></span>
+<span id="cb75-2"><a href="prueba-de-igualdad-de-varianzas.html#cb75-2" aria-hidden="true" tabindex="-1"></a>promrangos2 <span class="ot">=</span> (sumarangosU2<span class="sc">+</span> sumarangosV2)<span class="sc">/</span>N</span>
+<span id="cb75-3"><a href="prueba-de-igualdad-de-varianzas.html#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="prueba-de-igualdad-de-varianzas.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Rangos de U^4</span></span>
+<span id="cb75-5"><a href="prueba-de-igualdad-de-varianzas.html#cb75-5" aria-hidden="true" tabindex="-1"></a>rangosU4 <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb75-6"><a href="prueba-de-igualdad-de-varianzas.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb75-7"><a href="prueba-de-igualdad-de-varianzas.html#cb75-7" aria-hidden="true" tabindex="-1"></a>  rangosU4[i] <span class="ot">=</span> (rangosU2[i])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb75-8"><a href="prueba-de-igualdad-de-varianzas.html#cb75-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb75-9"><a href="prueba-de-igualdad-de-varianzas.html#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#rangosU4</span></span>
+<span id="cb75-10"><a href="prueba-de-igualdad-de-varianzas.html#cb75-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-11"><a href="prueba-de-igualdad-de-varianzas.html#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Rangos de V^4</span></span>
+<span id="cb75-12"><a href="prueba-de-igualdad-de-varianzas.html#cb75-12" aria-hidden="true" tabindex="-1"></a>rangosV4 <span class="ot">=</span> <span class="fu">c</span>()</span>
+<span id="cb75-13"><a href="prueba-de-igualdad-de-varianzas.html#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb75-14"><a href="prueba-de-igualdad-de-varianzas.html#cb75-14" aria-hidden="true" tabindex="-1"></a>  rangosV4[i] <span class="ot">=</span> (rangosV2[i])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb75-15"><a href="prueba-de-igualdad-de-varianzas.html#cb75-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb75-16"><a href="prueba-de-igualdad-de-varianzas.html#cb75-16" aria-hidden="true" tabindex="-1"></a><span class="co">#rangosV4</span></span>
+<span id="cb75-17"><a href="prueba-de-igualdad-de-varianzas.html#cb75-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-18"><a href="prueba-de-igualdad-de-varianzas.html#cb75-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Nueva matriz con los rangos^4</span></span>
+<span id="cb75-19"><a href="prueba-de-igualdad-de-varianzas.html#cb75-19" aria-hidden="true" tabindex="-1"></a>rangos4 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="fu">c</span>(rangosU4,rangosV4), <span class="at">byrow=</span><span class="cn">FALSE</span>, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb75-20"><a href="prueba-de-igualdad-de-varianzas.html#cb75-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(rangos4) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Rangos a la cuarta U&quot;</span>, <span class="st">&quot;Rangos a la cuarta V&quot;</span>)</span>
+<span id="cb75-21"><a href="prueba-de-igualdad-de-varianzas.html#cb75-21" aria-hidden="true" tabindex="-1"></a>rangos4</span></code></pre></div>
+<pre><code>     Rangos a la cuarta U Rangos a la cuarta V
+[1,]                  256              4096.00
+[2,]                   16             14641.00
+[3,]                 1296             65536.00
+[4,]                 6561             44205.06
+[5,]                    1                81.00
+[6,]                28561             10000.00
+[7,]                  625             44205.06
+[8,]                 2401             20736.00</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="prueba-de-igualdad-de-varianzas.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Suma de los rangos a la cuarta^4</span></span>
+<span id="cb77-2"><a href="prueba-de-igualdad-de-varianzas.html#cb77-2" aria-hidden="true" tabindex="-1"></a>sumarangos4 <span class="ot">=</span> <span class="fu">sum</span>(rangosU4) <span class="sc">+</span> <span class="fu">sum</span>(rangosV4)</span>
+<span id="cb77-3"><a href="prueba-de-igualdad-de-varianzas.html#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-4"><a href="prueba-de-igualdad-de-varianzas.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Calculamos el estadístico de prueba T1 porque tenemos empates</span></span>
+<span id="cb77-5"><a href="prueba-de-igualdad-de-varianzas.html#cb77-5" aria-hidden="true" tabindex="-1"></a>T1<span class="ot">=</span>(sumarangosU2 <span class="sc">-</span> (n<span class="sc">*</span>promrangos2))<span class="sc">/</span>(<span class="fu">sqrt</span>(((      ((n<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(N<span class="dv">-1</span>))<span class="sc">/</span>N)<span class="sc">*</span>sumarangos4 )<span class="sc">-</span>(((n<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(N<span class="dv">-1</span>))<span class="sc">*</span>(promrangos2<span class="sc">^</span><span class="dv">2</span>))))</span>
+<span id="cb77-6"><a href="prueba-de-igualdad-de-varianzas.html#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href="prueba-de-igualdad-de-varianzas.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;T1 = &quot;</span>, T1, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>T1 =  -2.208273 </code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="prueba-de-igualdad-de-varianzas.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regla de decision</span></span>
+<span id="cb79-2"><a href="prueba-de-igualdad-de-varianzas.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co">#cat(&quot;Rechazamos H_0 a un nivel de significancia alpha=&quot;, alpha, &quot;si T1&gt;t1 o T1&lt;t2, en donde t1 y t2 son #los cuantiles de la Normal estándar \n&quot;)</span></span>
+<span id="cb79-3"><a href="prueba-de-igualdad-de-varianzas.html#cb79-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-4"><a href="prueba-de-igualdad-de-varianzas.html#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos los cuantiles t1 y t2 </span></span>
+<span id="cb79-5"><a href="prueba-de-igualdad-de-varianzas.html#cb79-5" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">=</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>(alpha<span class="sc">/</span><span class="dv">2</span>),<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb79-6"><a href="prueba-de-igualdad-de-varianzas.html#cb79-6" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">=</span> <span class="fu">qnorm</span>(alpha<span class="sc">/</span><span class="dv">2</span>,<span class="at">mean=</span><span class="dv">0</span>,<span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb79-7"><a href="prueba-de-igualdad-de-varianzas.html#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-8"><a href="prueba-de-igualdad-de-varianzas.html#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="co">#cat(&quot;t1 = &quot;, t1, &quot;\n&quot;)</span></span>
+<span id="cb79-9"><a href="prueba-de-igualdad-de-varianzas.html#cb79-9" aria-hidden="true" tabindex="-1"></a><span class="co">#cat(&quot;t2 = &quot;, t2, &quot;\n&quot;)</span></span>
+<span id="cb79-10"><a href="prueba-de-igualdad-de-varianzas.html#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="prueba-de-igualdad-de-varianzas.html#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>((T1<span class="sc">&gt;</span>t1) <span class="sc">||</span> (T1<span class="sc">&lt;</span>t2)) {</span>
+<span id="cb79-12"><a href="prueba-de-igualdad-de-varianzas.html#cb79-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Rechazamos H_0&quot;</span>)</span>
+<span id="cb79-13"><a href="prueba-de-igualdad-de-varianzas.html#cb79-13" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb79-14"><a href="prueba-de-igualdad-de-varianzas.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;No rechazamos H_0&quot;</span>)</span>
+<span id="cb79-15"><a href="prueba-de-igualdad-de-varianzas.html#cb79-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;Rechazamos H_0&quot;</code></pre>
+<p>Ya que utilizamos la estadística <span class="math inline">\(T_1\)</span>, entonces el cuantil que hay que buscar es en una distribución normal. Con <span class="math inline">\(\alpha=0.05\)</span>,hace que <span class="math inline">\(\frac{\alpha}{2}=0.025\)</span> y <span class="math inline">\(1-\frac{\alpha}{2}=0.975\)</span></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="prueba-de-igualdad-de-varianzas.html#cb81-1" aria-hidden="true" tabindex="-1"></a>t1<span class="ot">=</span><span class="fu">qnorm</span>(.<span class="dv">025</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb81-2"><a href="prueba-de-igualdad-de-varianzas.html#cb81-2" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div>
+<pre><code>[1] -1.959964</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="prueba-de-igualdad-de-varianzas.html#cb83-1" aria-hidden="true" tabindex="-1"></a>t2<span class="ot">=</span><span class="fu">qnorm</span>(.<span class="dv">975</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb83-2"><a href="prueba-de-igualdad-de-varianzas.html#cb83-2" aria-hidden="true" tabindex="-1"></a>t2</span></code></pre></div>
+<pre><code>[1] 1.959964</code></pre>
+<p>Como <span class="math inline">\(T_1=-2.21\leq -1.96 =t_1\)</span> entonces se cumple la regla de decisión y rechazamos <span class="math inline">\(H_0\)</span> a un nivel <span class="math inline">\(\alpha=5\%\)</span>. Concluimos que existe evidencia suficiente para decir que las varianzas de las tasas de flujo de la corriente son diferentes.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="prueba-de-igualdad-de-varianzas.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span><span class="fu">min</span>(<span class="fu">pnorm</span>(T1,<span class="dv">0</span>,<span class="dv">1</span>),(<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(T1,<span class="dv">0</span>,<span class="dv">1</span>)))</span>
+<span id="cb85-2"><a href="prueba-de-igualdad-de-varianzas.html#cb85-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div>
+<pre><code>[1] 0.02722523</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="prueba-de-kruskal-wallis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="prueba-para-más-de-dos-muestras.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "github", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
